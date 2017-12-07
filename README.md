@@ -8,7 +8,7 @@ This course focused on web crawling, indexing data for fast retrieval, query pro
 
 ### Projects
 
-- searchEngine: 
+- [searchEngine:](https://github.com/joemehltretter/USC/tree/master/CSCI%20572/searchEngine) 
   - Search engine created with Django and Solr. Solr was used to index Wall Street Journal urls.
 - Crawler: 
   - Create a crawler to crawl a given url, stop at maximum number of link, create summary statistic (url types, url status code, etc).
