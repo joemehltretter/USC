@@ -1,0 +1,97 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang = "en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %} MySearch {% endblock %}</title> 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  </head>
+  <body>
+    <div class="jumbotron text-center">
+      <h1 align = center>Welcome to MySearch </h1>
+        <form method = "GET">
+        <div class = "ui-widget">
+          <input id= "q" type = "text" size = 50 name="item_text"  placeholder = "What's on your mind?"/>
+        </div>
+        <div class = "button1" align = center>
+          <button name = "action" id = "newQuery" value = "Solr">Solr Rank</button>
+          <button name = "action" id = "newQuery" value = "Netx">NetX Rank</button>
+        </div>
+
+      </form>
+        <script>
+          $(function() {
+            var URL_PREFIX = "http://localhost:8983/solr/assign4/suggest?q=";
+            var URL_SUFFIX = "&wt=json&indent=true";
+            $("#q").autocomplete({
+                source : function(request, response) {
+                    var lastword = $("#q").val().toLowerCase().split(" ").pop(-1);
+                    var URL = URL_PREFIX + lastword + URL_SUFFIX;
+                    $.ajax({
+                        url : URL,
+                        success : function(data) {
+                            var lastword = $("#q").val().toLowerCase().split(" ").pop(-1);
+                            var suggestions = data.suggest.suggest[lastword].suggestions;
+                            suggestions = $.map(suggestions, function (value, index) {
+                                var prefix = "";
+                                var query = $("#q").val();
+                                var queries = query.split(" ");
+                                if (queries.length > 1) {
+                                    var lastIndex = query.lastIndexOf(" ");
+                                    prefix = query.substring(0, lastIndex + 1).toLowerCase();
+                                }
+                                if (prefix == "" && isStopWord(value.term)) {
+                                    return null;
+                                }
+                                if (!/^[0-9a-zA-Z]+$/.test(value.term)) {
+                                    return null;
+                                }
+                                return prefix + value.term;
+                            });
+                            response(suggestions.slice(0, 5));
+                        },
+                        dataType : 'jsonp',
+                        jsonp : 'json.wrf'
+                    });
+                },
+                minLength : 1
+            });
+        });
+        function isStopWord(word)
+        {
+            var regex = new RegExp("\\b"+word+"\\b","i");
+            return stopWords.search(regex) < 0 ? false : true;
+        }
+        var stopWords = "a,able,about,above,abst,accordance,according,accordingly,across,act,actually,added,adj";
+       </script>
+
+    </div>
+    <div class = "container">
+      <div class = "row">
+        <div class="col-sm-4">
+
+          <h3>Past Queries</h3>
+          <a href="/delete/">Clear HIstory</a>
+          <table id="queries_made">
+          {% for query in queries reversed %}
+            <tr><td>{{ query.query }}</td></tr>
+          {% endfor %}
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+<body>
+

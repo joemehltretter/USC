@@ -1,0 +1,60 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang = "en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}NetworkX Page {% endblock %} </title>
+  </head>
+
+  <body>
+    <div class="jumbotron text-center">
+      <h1 align = center>Welcome to MySearch </h1>
+      <form method = "GET">
+        <input size = 50 name="item_text" id="newQuery" placeholder = "What's on your mind?"/>
+
+        <div class = "button1" align = center>
+          <button name = "action" id = "newQuery" value = "Solr">Solr Rank</button>
+          <button name = "action" id = "newQuery" value = "Netx">NetX Rank</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="searchResults">
+
+      {% block content %}
+
+        {% if query in query %}
+          <h3 align = center>{{ total }} Search Results for "{{ query}}"</h3>
+
+          <div class = "container">
+            {% for result in results %}
+              <h4><a href={{ result.og_url  }}>{{ result.title}} </a></h4>
+              <p>{{  result.og_url  }}</p>
+              <p>{{result.description}}</p>
+              {% empty %}<p>Sorry, there are no results for that search. </p>
+            {% endfor %}
+          </div>
+        {% endif %}
+          <div class="text-center">
+            <ul class="pagination" style="text-align:center; list-style-position:inside;">
+              <li class = "page-item"><a class = "page-link" href="#">Previous</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">1</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">2</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">3</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">4</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">5</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>
+

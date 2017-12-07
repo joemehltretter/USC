@@ -1,0 +1,137 @@
+{% load bootstrap3 %}
+{% load highlight %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang = "en"> 
+
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Solr Page {% endblock %} </title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+ </head>
+  
+  <body>
+    <div class="jumbotron text-center">
+      <h1 align = center>Welcome to MySearch </h1>
+      <form method = "GET">
+        <input size = 50 name="item_text" id="q" placeholder = "What's on your mind?"/>
+
+        <div class = "button1" align = center>
+          <button name = "action" id = "newQuery" value = "Solr">Solr Rank</button>
+          <button name = "action" id = "newQuery" value = "Netx">NetX Rank</button>
+        </div>
+
+      </form>
+      <script>
+        $(function() {
+            var URL_PREFIX = "http://localhost:8983/solr/assign4/suggest?q=";
+            var URL_SUFFIX = "&wt=json";
+            $("#q").autocomplete({
+                source : function(request, response) {
+                    var lastword = $("#q").val().toLowerCase().split(" ").pop(-1);
+                    var URL = URL_PREFIX + lastword + URL_SUFFIX;
+                    $.ajax({
+                        url : URL,
+                        success : function(data) {
+                            var lastword = $("#q").val().toLowerCase().split(" ").pop(-1);
+                            var suggestions = data.suggest.suggest[lastword].suggestions;
+                            suggestions = $.map(suggestions, function (value, index) {
+                                var prefix = "";
+                                var query = $("#q").val();
+                                var queries = query.split(" ");
+                                if (queries.length > 1) {
+                                    var lastIndex = query.lastIndexOf(" ");
+                                    prefix = query.substring(0, lastIndex + 1).toLowerCase();
+                                }
+                                if (prefix == "" && isStopWord(value.term)) {
+                                    return null;
+                                }
+                                if (!/^[0-9a-zA-Z]+$/.test(value.term)) {
+                                    return null;
+                                }
+                                return prefix + value.term;
+                            });
+                            response(suggestions.slice(0, 5));
+                        },
+                        dataType : 'jsonp',
+                        jsonp : 'json.wrf'
+                    });
+                },
+                minLength : 1
+            });
+        });
+        function isStopWord(word)
+        {
+            var regex = new RegExp("\\b"+word+"\\b","i");
+            return stopWords.search(regex) < 0 ? false : true;
+        }
+        var stopWords = "a,able,about,above,abst,accordance,according,accordingly,across,act,actually,added,adj";
+      </script>   
+    </div>
+
+    <div class="searchResults">
+
+      {% block content %}
+          {% if suggestWord %}
+            <ul class = "list-inline text-center">
+              <h4 align = center>Did you mean:</h4>
+              {% for word in suggestWord %}
+                <li>{{ word }} </li>
+              {% endfor %}
+            </ul>
+            <h3 align = center>"{{query}}" Not Found. Instead {{total}} Results for "{{ newQuery}}"</h3>
+
+          <div class = "container">
+            {% for result in results %}
+              <h4><a href={{ result.og_url  }}>{{ result.title}} </a></h4>         
+              <p>{{  result.og_url  }}</p>
+              <p>{% highlight result.snippet with query %}</p>
+              {% empty %}<p>Sorry, there are no results for that search. </p>
+            {% endfor %}
+          </div>
+       
+          <div class="text-center"> 
+            <ul class="pagination" style="text-align:center; list-style-position:inside;">
+              <li class = "page-item"><a class = "page-link" href="#">Previous</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">1</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">2</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">3</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">4</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">5</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+
+          {% elif not suggestWord %}        
+          <h3 align = center>{{ total }} Search Results for "{{ query}}"</h3>
+
+          <div class = "container">
+            {% for result in results %}
+              <h4><a href={{ result.og_url  }}>{{ result.title}} </a></h4>         
+              <p>{{  result.og_url  }}</p>
+              <p>{% highlight result.snippet with query %}</p>
+              {% empty %}<p>Sorry, there are no results for that search. </p>
+            {% endfor %}
+          </div>
+       
+          <div class="text-center"> 
+            <ul class="pagination" style="text-align:center; list-style-position:inside;">
+              <li class = "page-item"><a class = "page-link" href="#">Previous</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">1</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">2</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">3</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">4</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">5</a></li>
+              <li class = "page-item"><a class = "page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+          {% endif %}
+      {% endblock %}    
+    </div>
+  </body>
+</html>
