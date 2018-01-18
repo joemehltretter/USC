@@ -4,7 +4,7 @@ import queue
 import urllib.request
 
 url = 'https://motherboard.vice.com/en_us/article/mg79v4/hacking-glossary'
-filePath = "/Users/jmehl/Documents/Github/USC/CSCI 572/Crawler/words.txt"
+filePath = "~/Desktop/USC/CSCI 572/Crawler/words.txt"
 
 req = urllib.request.Request(url)
 html = urllib.request.urlopen(req).read()

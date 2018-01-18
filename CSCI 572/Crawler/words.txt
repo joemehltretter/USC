@@ -1,9 +1,12 @@
 Attribution
+Authentication
 Backdoor
 Black hat
 Botnet
 Brute force
 Bug
+Bugs
+Bypass
 Cracking
 Crypto
 Chip-off
@@ -17,14 +20,19 @@ End-to-end encryption
 Evil maid attack
 Exploit
 Forensics
+Flaw
 GCHQ
 Hacker
+Hacking
+Hackers
+Hacked
 Hacktivist
 Hashing
 HTTPS
 SSL
 TLS
 Infosec
+Infected
 Jailbreak
 Keys
 Lulz
