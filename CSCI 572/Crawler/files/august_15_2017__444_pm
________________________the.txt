@@ -1,0 +1,74 @@
+SEI InsightsHome > CERT/CC Blog > The CERT Guide to Coordinated Vulnerability Disclosure
+        Vulnerability InsightsPosted on
+                        
+                            August 15, 2017
+                        
+
+We are happy to announce the release of the CERT® Guide to Coordinated Vulnerability Disclosure (CVD). The guide provides an introduction to the key concepts, principles, and roles necessary to establish a successful CVD process. It also provides insights into how CVD can go awry and how to respond when it does so.
+We are happy to announce the release of the CERT® Guide to Coordinated Vulnerability Disclosure (CVD). The guide provides an introduction to the key concepts, principles, and roles necessary to establish a successful CVD process. It also provides insights into how CVD can go awry and how to respond when it does so.
+As a process, CVD is intended to minimize adversary advantage while an information security vulnerability is being mitigated. And it is important to recognize that CVD is a process, not an event. Releasing a patch or publishing a document are important events within the process, but do not define it.
+CVD participants can be thought of as repeatedly asking these questions: What actions should I take in response to knowledge of this vulnerability in this product? Who else needs to know what, and when do they need to know it? The CVD process for a vulnerability ends when the answers to these questions are nothing, and no one.
+If we have learned anything in nearly three decades of coordinating vulnerability reports at the CERT/CC, it is that there is no single right answer to many of the questions and controversies surrounding the disclosure of information about software and system vulnerabilities. The CERT Guide to CVD is a summary of what we know about a complex social process that surrounds humans trying to make the software and systems they use more secure. It's about what to do (and what not to) when you find a vulnerability, or when you find out about a vulnerability. It's written for vulnerability analysts, security researchers, developers, and deployers; it's for both technical staff and their management alike. While we discuss a variety of roles that play a part in the process, we intentionally chose not to focus on any one role; instead we wrote for any party that might find itself engaged in coordinating a vulnerability disclosure.
+In a sense, this report is a travel guide for what might seem a foreign territory. Maybe you've passed through once or twice. Maybe you've only heard about the bad parts. You may be uncertain of what to do next, nervous about making a mistake, or even fearful of what might befall you. If you count yourself as one of those individuals, we want to reassure you that you are not alone; you are not the first to experience events like these or even your reaction to them. We're locals. We've been doing this for a while. Here's what we know.
+Abstract
+Security vulnerabilities remain a problem for vendors and deployers of software-based systems alike. Vendors play a key role by providing fixes for vulnerabilities, but they have no monopoly on the ability to discover vulnerabilities in their products and services. Knowledge of those vulnerabilities can increase adversarial advantage if deployers are left without recourse to remediate the risks they pose. Coordinated Vulnerability Disclosure (CVD) is the process of gathering information from vulnerability finders, coordinating the sharing of that information between relevant stakeholders, and disclosing the existence of software vulnerabilities and their mitigations to various stakeholders including the public. The CERT Coordination Center has been coordinating the disclosure of software vulnerabilities since its inception in 1988. This document is intended to serve as a guide to those who want to initiate, develop, or improve their own CVD capability. In it, the reader will find an overview of key principles underlying the CVD process, a survey of CVD stakeholders and their roles, and a description of CVD process phases, as well as advice concerning operational considerations and problems that may arise in the provision of CVD and related services.
+The CERT® Guide to Coordinated Vulnerability Disclosure is available in the SEI Digital Library.
+As a process, CVD is intended to minimize adversary advantage while an information security vulnerability is being mitigated. And it is important to recognize that CVD is a process, not an event. Releasing a patch or publishing a document are important events within the process, but do not define it.CVD participants can be thought of as repeatedly asking these questions: What actions should I take in response to knowledge of this vulnerability in this product? Who else needs to know what, and when do they need to know it? The CVD process for a vulnerability ends when the answers to these questions are nothing, and no one.If we have learned anything in nearly three decades of coordinating vulnerability reports at the CERT/CC, it is that there is no single right answer to many of the questions and controversies surrounding the disclosure of information about software and system vulnerabilities. The CERT Guide to CVD is a summary of what we know about a complex social process that surrounds humans trying to make the software and systems they use more secure. It's about what to do (and what not to) when you find a vulnerability, or when you find out about a vulnerability. It's written for vulnerability analysts, security researchers, developers, and deployers; it's for both technical staff and their management alike. While we discuss a variety of roles that play a part in the process, we intentionally chose not to focus on any one role; instead we wrote for any party that might find itself engaged in coordinating a vulnerability disclosure.In a sense, this report is a travel guide for what might seem a foreign territory. Maybe you've passed through once or twice. Maybe you've only heard about the bad parts. You may be uncertain of what to do next, nervous about making a mistake, or even fearful of what might befall you. If you count yourself as one of those individuals, we want to reassure you that you are not alone; you are not the first to experience events like these or even your reaction to them. We're locals. We've been doing this for a while. Here's what we know.Security vulnerabilities remain a problem for vendors and deployers of software-based systems alike. Vendors play a key role by providing fixes for vulnerabilities, but they have no monopoly on the ability to discover vulnerabilities in their products and services. Knowledge of those vulnerabilities can increase adversarial advantage if deployers are left without recourse to remediate the risks they pose. Coordinated Vulnerability Disclosure (CVD) is the process of gathering information from vulnerability finders, coordinating the sharing of that information between relevant stakeholders, and disclosing the existence of software vulnerabilities and their mitigations to various stakeholders including the public. The CERT Coordination Center has been coordinating the disclosure of software vulnerabilities since its inception in 1988. This document is intended to serve as a guide to those who want to initiate, develop, or improve their own CVD capability. In it, the reader will find an overview of key principles underlying the CVD process, a survey of CVD stakeholders and their roles, and a description of CVD process phases, as well as advice concerning operational considerations and problems that may arise in the provision of CVD and related services.The CERT® Guide to Coordinated Vulnerability Disclosure is available in the SEI Digital Library.
+ Contact Allen Householder
+     
+     
+     
+Visit the SEI Digital Library for other publications by Allen
+           
+
+     View other blog posts by Allen HouseholderPhone: 412-268-5800
+                    Toll Free: 888-201-4479
+                    Fax: 412-268-6257Contact Us
+4500 Fifth Avenue
+                    Pittsburgh, PA 15213-2612
+                    U.S.A.Directions
+CERT/CC
+
+Insider Threat
+
+SATURN
+
+SEI Blog
+
+DevOps
+   CERT/CC
+
+  Insider Threat
+
+  SATURN
+
+  SEI Blog
+
+  DevOps
+SEI Digital Library
+
+SEI Podcast Series
+
+SEI Webinar Series
+ SEI Overview
+
+Director's Message
+
+Our Organization
+
+Our People
+
+Year in Review
+
+Terms of Use
+
+Posted on
+                            
+                                January 15, 2018
+                            
+                            by 
+              Satya Venneti
+              
+Micro-expressions--involuntary, fleeting facial movements that reveal true emotions--hold valuable information for scenarios ranging from security interviews and interrogations to media analysis. They occur on various regions of the face, last only a fraction of a second, and are universal across...Terms of Use | Privacy Statement | Intellectual Property
+© 2016 Carnegie Mellon University.The Software Engineering Institute (SEI) is a federally funded research and development center (FFRDC) sponsored by the U.S. Department of Defense (DoD).
+It is operated by Carnegie Mellon University.

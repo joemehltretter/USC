@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+<html class="chekov" lang="en"><head><script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script><meta charset="utf-8"><meta content="kmX9LFG7Do2s40t08TaFP7vxXNche4pr8SCGMBs6CuY6MTUxNjUxNDIzNDk4MTM4MA" name="xsrf_token"/><link href="https://source.android.com/security/bulletin/pixel/2017-11-01" rel="canonical"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01" hreflang="en" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01?hl=ru" hreflang="ru" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01?hl=zh-cn" hreflang="zh-Hans" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01?hl=ko" hreflang="ko" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01?hl=ja" hreflang="ja" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01?hl=zh-tw" hreflang="zh-Hant" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01" hreflang="en-cn" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01?hl=ru" hreflang="ru-cn" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01?hl=zh-cn" hreflang="zh-Hans-cn" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01?hl=ko" hreflang="ko-cn" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01?hl=ja" hreflang="ja-cn" rel="alternate"><link href="https://source.android.google.cn/security/bulletin/pixel/2017-11-01?hl=zh-tw" hreflang="zh-Hant-cn" rel="alternate"><link href="https://source.android.com/security/bulletin/pixel/2017-11-01" hreflang="x-default" rel="alternate"><link href="https://source.android.com/_static/407853721c/images/android/favicon.png" rel="shortcut icon"><link href="https://source.android.com/_static/407853721c/images/android/touchicon-180.png" rel="apple-touch-icon"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700|Material+Icons" rel="stylesheet"><link href="https://source.android.com/_static/407853721c/css/devsite-android-green.css" rel="stylesheet"><link href="https://source.android.com/s/opensearch.xml" rel="search" title="Android Open Source Project" type="application/opensearchdescription+xml"><script src="https://source.android.com/_static/407853721c/js/jquery-bundle.js"></script><meta content="Android Open Source Project" property="og:site_name"><meta content="website" property="og:type"><meta content="https://source.android.com/security/bulletin/pixel/2017-11-01" property="og:url"><meta content="en" property="og:locale"><script>
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'en';
+  </script><title>Pixel&amp;hairsp;/&amp;hairsp;Nexus Security Bulletin—November 2017  |  Android Open Source Project</title><meta content="Pixel / Nexus Security Bulletin—November 2017  |  Android Open Source Project" property="og:title"/></meta></meta></meta></meta></link></link></link></meta></link></link></link></link></link></link></link></link></link></link></link></link></link></link></link></link></meta></head><body class=" devsite-doc-page devsite-header-no-lower-tabs" id="top_of_page"><div class="devsite-wrapper"><div class="devsite-top-section-wrapper "><header class="devsite-top-section nocontent"><div class="devsite-top-logo-row-wrapper-wrapper"><div class="devsite-top-logo-row-wrapper"><div class="devsite-top-logo-row devsite-full-site-width"><button class="devsite-expand-section-nav devsite-header-icon-button button-flat material-icons gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Hamburger menu" type="button"></button><div class="devsite-product-name-wrapper"><a class="devsite-site-logo-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Site logo" href="https://source.android.com/"><img alt="Android Open Source Project" class="devsite-site-logo" src="https://source.android.com/_static/407853721c/images/androidsource/lockup.svg"><span class="devsite-site-name devsite-product-name">Android Open Source Project</span></img></a></div><div class="devsite-header-upper-tabs"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll"><li class="devsite-doc-set-nav-tab-container"><a class=" devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Setup" href="https://source.android.com/setup/">
+        Setup
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a class="devsite-doc-set-nav-active devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Security" href="https://source.android.com/security/">
+        Security
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a class=" devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Porting" href="https://source.android.com/devices/">
+        Porting
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a class=" devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Tuning" href="https://source.android.com/devices/tech/">
+        Tuning
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a class=" devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Compatibility" href="https://source.android.com/compatibility/">
+        Compatibility
+      </a></li><li class="devsite-doc-set-nav-tab-container"><a class=" devsite-doc-set-nav-tab gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Reference" href="https://source.android.com/reference/">
+        Reference
+      </a></li></ul></nav></div><form action="https://source.android.com/s/results/" class="devsite-search-form" id="top-search" method="GET" search-placeholder="Search"><div class="devsite-searchbox" id="searchbox"><input autocomplete="off" class="devsite-search-field devsite-search-query" name="q" placeholder="Search" type="text" value=""><div class="devsite-search-image material-icons"></div></input></div><input data-project-name="Android Open Source Project" data-project-path="/" data-query-match="" id="search_project" name="p" type="hidden" value="/"><input class="suggest-project" type="hidden" value="Android Open Source Project"/><div class="suggest-project-metadata" data-home_url="/" data-name="Android Developers" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Android Open Source Project" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Google Cloud Platform" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Dialogflow" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Firebase" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Link.app" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="Nest Developers" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="OpenThread" data-path="/"></div><div class="suggest-project-metadata" data-home_url="/" data-name="TensorFlow" data-path="/"></div></input></form><a class="devsite-header-link devsite-top-button button gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Site header link" href="//android-review.googlesource.com/" track-metadata-position="nav" track-name="go to code" track-type="navigateTo"><div class="devsite-header-link-label">Go to Code</div></a><button class="devsite-search-button devsite-header-icon-button button-flat material-icons" type="button"></button></div></div></div><div class="devsite-collapsible-section"><div class="devsite-header-background devsite-full-site-width"><div class="devsite-product-id-row devsite-full-site-width"><div class="devsite-product-description-row"><ul class="devsite-breadcrumb-list"><li class="devsite-breadcrumb-item">
+    
+    
+    
+      Security
+    
+    
+  </li></ul></div></div></div></div></header><script>
+    if (window.jQuery) {
+      $(document).ready(function() {
+        if (window.devsite && window.devsite.search) {
+          
+          window.devsite.search.init('en')
+        }
+      });
+    }
+  </script></div><div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article"><input class="google-analytics-id-json" type="hidden" value='{"dimensions": {"dimension6": "en", "dimension4": "Android Open Source Project", "dimension5": "en", "dimension3": false, "dimension1": "Signed out", "dimension8": null}, "gaid": "UA-45455297-1"}'><script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "US", "language": {"requested": "en", "served": "en"}, "projectName": "Android Open Source Project", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+<div class="devsite-site-mask"></div>
+<nav class="devsite-nav-responsive devsite-nav nocontent" tabindex="0">
+<div class="devsite-nav-responsive-tabs-panel">
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+<ul class="devsite-nav-list">
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Setup" href="https://source.android.com/setup/?nav=true">
+        Setup
+      </a>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<span class="devsite-nav-responsive-forward devsite-nav-responsive-tab devsite-nav-title devsite-nav-active gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Security" tabindex="0">
+        Security
+      </span>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Porting" href="https://source.android.com/devices/?nav=true">
+        Porting
+      </a>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Tuning" href="https://source.android.com/devices/tech/?nav=true">
+        Tuning
+      </a>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Compatibility" href="https://source.android.com/compatibility/?nav=true">
+        Compatibility
+      </a>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Reference" href="https://source.android.com/reference/?nav=true">
+        Reference
+      </a>
+</li>
+<li class="devsite-nav-item devsite-nav-item-heading">
+<a class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: go_to_code" href="//android-review.googlesource.com/">
+        Go to Code
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="devsite-nav-responsive-sidebar-panel">
+<div class="devsite-nav-responsive-back" tabindex="0"></div>
+<nav class="devsite-nav-responsive-sidebar">
+<ul class="devsite-nav-list devsite-nav-expandable"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/kernel-security" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Kernel Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/app-security" track-metadata-position="0" track-name="titleLink" track-type="leftNav">App Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/implement" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Implementing Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/updates-resources" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Updates and Resources</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Enhancements</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements80" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 8.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements70" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 7.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements60" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 6.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements50" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 5.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements44" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.4</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements43" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.3</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements42" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.2</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements41" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.1</a></li></ul></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/acknowledgements" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Acknowledgements</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Advisories</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/advisory/" track-metadata-position="2" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/advisory/2016-03-18" track-metadata-position="2" track-name="titleLink" track-type="leftNav">March 2016</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Android Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2018 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2018-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2018" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2017 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-07-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">July</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-06-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">June</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-05-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">May</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-04-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">April</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-03-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">March</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-02-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">February</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2016 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-07-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">July</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-06-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">June</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-05-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">May</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-04-02" track-metadata-position="3" track-name="titleLink" track-type="leftNav">April</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-03-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">March</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-02-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">February</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2015 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Pixel/Nexus Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/index" track-metadata-position="2" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2018 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2018-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2018" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2017 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item devsite-nav-active"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Application Signing</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/apksigning/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/apksigning/v2" track-metadata-position="1" track-name="titleLink" track-type="leftNav">APK Signature Scheme v2</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Authentication</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/fingerprint-hal" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Fingerprint HAL</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/gatekeeper" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Gatekeeper</a></li></ul></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/biometric/" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Biometric Unlock</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Keystore</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/features" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Features</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/attestation" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Key Attestation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/version-binding" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Version Binding</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/tags" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Authorization Tags</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/implementer-ref" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Functions</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Trusty TEE</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/trusty/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/trusty/trusty-ref" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Trusty API Reference</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Encryption</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/file-based" track-metadata-position="1" track-name="titleLink" track-type="leftNav">File-Based Encryption</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/full-disk" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Full-Disk Encryption</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">SELinux</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/concepts" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Concepts</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/implement" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Implementation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/customize" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Customization</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/validate" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Validation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/device-policy" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Writing Policy</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Verified Boot</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/verified-boot" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Verifying Boot</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/dm-verity" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Implementing dm-verity</a></li></ul></li></ul>
+</nav>
+</div>
+</nav>
+<div class="devsite-main-content clearfix">
+<nav class="devsite-section-nav devsite-nav nocontent">
+<ul class="devsite-nav-list devsite-nav-expandable"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/kernel-security" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Kernel Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/app-security" track-metadata-position="0" track-name="titleLink" track-type="leftNav">App Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/implement" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Implementing Security</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/updates-resources" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Updates and Resources</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Enhancements</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements80" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 8.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements70" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 7.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements60" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 6.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements50" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 5.0</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements44" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.4</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements43" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.3</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements42" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.2</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/enhancements/enhancements41" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Android 4.1</a></li></ul></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/overview/acknowledgements" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Acknowledgements</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Advisories</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/advisory/" track-metadata-position="2" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/advisory/2016-03-18" track-metadata-position="2" track-name="titleLink" track-type="leftNav">March 2016</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Android Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2018 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2018-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2018" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2017 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-07-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">July</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-06-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">June</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-05-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">May</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-04-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">April</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-03-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">March</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-02-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">February</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2017" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2016 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-07-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">July</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-06-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">June</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-05-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">May</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-04-02" track-metadata-position="3" track-name="titleLink" track-type="leftNav">April</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-03-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">March</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-02-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">February</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2016" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2015 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-09-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">September</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015-08-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">August</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/2015" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="1" track-name="expandNavSectionNoLink" track-type="leftNav">Pixel/Nexus Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="1" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/index" track-metadata-position="2" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2018 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2018-01-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">January</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2018" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="2" track-name="expandNavSectionNoLink" track-type="leftNav">2017 Bulletins</span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-metadata-position="2" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-12-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">December</a></li><li class="devsite-nav-item devsite-nav-active"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-11-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">November</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017-10-01" track-metadata-position="3" track-name="titleLink" track-type="leftNav">October</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/bulletin/pixel/2017" track-metadata-position="3" track-name="titleLink" track-type="leftNav">Index</a></li></ul></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Application Signing</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/apksigning/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/apksigning/v2" track-metadata-position="1" track-name="titleLink" track-type="leftNav">APK Signature Scheme v2</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Authentication</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/fingerprint-hal" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Fingerprint HAL</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/authentication/gatekeeper" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Gatekeeper</a></li></ul></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/biometric/" track-metadata-position="0" track-name="titleLink" track-type="leftNav">Biometric Unlock</a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Keystore</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/features" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Features</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/attestation" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Key Attestation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/version-binding" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Version Binding</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/tags" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Authorization Tags</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/keystore/implementer-ref" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Functions</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Trusty TEE</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/trusty/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/trusty/trusty-ref" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Trusty API Reference</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Encryption</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/file-based" track-metadata-position="1" track-name="titleLink" track-type="leftNav">File-Based Encryption</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/encryption/full-disk" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Full-Disk Encryption</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">SELinux</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/concepts" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Concepts</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/implement" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Implementation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/customize" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Customization</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/validate" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Validation</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/selinux/device-policy" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Writing Policy</a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" track-metadata-position="0" track-name="expandNavSectionNoLink" track-type="leftNav">Verified Boot</span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-metadata-position="0" track-name="expandNavSectionArrow" track-type="leftNav"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Overview</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/verified-boot" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Verifying Boot</a></li><li class="devsite-nav-item"><a class="devsite-nav-title gc-analytics-event" data-action="click" data-category="Site-Wide Custom Events" data-label="Left nav" href="https://source.android.com/security/verifiedboot/dm-verity" track-metadata-position="1" track-name="titleLink" track-type="leftNav">Implementing dm-verity</a></li></ul></li></ul>
+</nav>
+<nav class="devsite-page-nav devsite-nav"></nav>
+<article class="devsite-article">
+<article class="devsite-article-inner">
+<nav class="devsite-breadcrumb-nav devsite-nav">
+<ul class="devsite-breadcrumb-list">
+<li class="devsite-breadcrumb-item">
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1" href="https://source.android.com/">
+    
+    
+      AOSP
+    
+    
+    </a>
+</li>
+<li class="devsite-breadcrumb-item">
+<div class="devsite-breadcrumb-guillemet material-icons"></div>
+<a class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2" href="https://source.android.com/security/">
+    
+    
+      Security
+    
+    
+    </a>
+</li>
+</ul>
+</nav>
+<h1 class="devsite-page-title" itemprop="name">
+    Pixel&amp;hairsp;/&amp;hairsp;Nexus Security Bulletin—November 2017
+  </h1>
+<nav class="devsite-page-nav-embedded devsite-nav"></nav>
+<div class="devsite-article-body clearfix " itemprop="articleBody">
+<!--
+      Copyright 2017 The Android Open Source Project
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+          //www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+  -->
+<p><em>Published November 6, 2017 | Updated November 8, 2017</em></p>
+<p>
+The Pixel&amp;hairsp;/&amp;hairsp;Nexus Security Bulletin contains details of security vulnerabilities
+and functional improvements affecting <a href="//support.google.com/pixelphone/answer/4457705#pixel_phones&amp;nexus_devices">supported
+Google Pixel and Nexus devices</a> (Google devices).
+For Google devices, security patch levels of 2017-11-05 or later also address all
+issues in this bulletin. To learn how to check a device's security patch level, see <a href="//support.google.com/pixelphone/answer/4457705">Check and update your
+Android version</a>.
+</p>
+<p>
+All supported Google devices will receive an update to the 2017-11-05 patch
+level. We encourage all customers to accept these updates to their devices.
+</p>
+<p class="note">
+<strong>Note:</strong> The Google device firmware images are available on the <a href="//developers.google.com/android/nexus/images">Google Developer site</a>.
+</p>
+<h2 id="announcements">Announcements</h2>
+<p>
+In addition to the security vulnerabilities described in the <a href="https://source.android.com/security/bulletin/2017-11-01">November 2017 Android
+Security Bulletin</a>, Pixel and Nexus devices also contain patches for the
+security vulnerabilities described below. Partners were notified of these issues
+at least a month ago and may choose to incorporate them as part of their device
+updates.
+</p>
+<h2 id="security-patches">Security patches</h2>
+<p>
+Vulnerabilities are grouped under the component that they affect. There is a
+description of the issue and a table with the CVE, associated references, <a href="#type">type of vulnerability</a>, <a href="https://source.android.com/security/overview/updates-resources.html#severity">severity</a>,
+and updated Android Open Source Project (AOSP) versions (where applicable). When
+available, we link the public change that addressed the issue to the bug ID,
+like the AOSP change list. When multiple changes relate to a single bug,
+additional references are linked to numbers following the bug ID.
+</p>
+<h3 id="framework">Framework</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Updated AOSP versions</th>
+</tr>
+<tr>
+<td>CVE-2017-0845</td>
+<td><a href="https://android.googlesource.com/platform/frameworks/base/+/e5787fc13164856e39690e40e81d3d46839eea16">A-35028827</a></td>
+<td>DoS</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1, 6.0, 6.0.1, 7.0, 7.1.1, 7.1.2</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="media-framework">Media framework</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Updated AOSP versions</th>
+</tr>
+<tr>
+<td>CVE-2017-0838</td>
+<td><a href="https://android.googlesource.com/platform/frameworks/av/+/528c7dd7c2387ac634b23973d0c1120d0f3d7ee7">A-63522818</a></td>
+<td>EoP</td>
+<td>High</td>
+<td>7.0, 7.1.1, 7.1.2</td>
+</tr>
+<tr>
+<td>CVE-2017-0852</td>
+<td><a href="https://android.googlesource.com/platform/external/libhevc/+/5aee2541810f19aec67a1a9ea64973eb557aae9c">A-62815506</a></td>
+<td>DoS</td>
+<td>High</td>
+<td>5.0.2, 5.1.1, 6.0</td>
+</tr>
+<tr>
+<td>CVE-2017-0847</td>
+<td><a href="https://android.googlesource.com/platform/frameworks/av/+/d162b02aefa4d2039f377ba9a45d753cd84d75f6">A-65540999</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>8.0</td>
+</tr>
+<tr>
+<td>CVE-2017-0848</td>
+<td><a href="https://android.googlesource.com/platform/frameworks/av/+/2bec2c3b1fd778b35f45ff4f8b385ff9208fe692">A-64477217</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1, 6.0, 6.0.1, 7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>CVE-2017-0849</td>
+<td><a href="https://android.googlesource.com/platform/external/libavc/+/aa11ab9fdbb63766703a6280f4fc778f2f2c91ed">A-62688399</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>6.0, 6.0.1, 7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>CVE-2017-0850</td>
+<td>A-64836941<a href="#asterisk">*</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>7.0, 7.1.1, 7.1.2</td>
+</tr>
+<tr>
+<td>CVE-2017-0851</td>
+<td><a href="https://android.googlesource.com/platform/external/libhevc/+/8c5bb82f982e5949b3c2e3e0c80045cc5ff30ac8">A-35430570</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1, 6.0, 6.0.1, 7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td rowspan="2">CVE-2017-0853</td>
+<td rowspan="2"><a href="https://android.googlesource.com/platform/external/libmpeg2/+/dd89269aa283dd740fd16c6d7d3cf225b3623338">A-63121644</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>High</td>
+<td>6.0, 6.0.1</td>
+</tr>
+<tr>
+<td rowspan="2">CVE-2017-0854</td>
+<td rowspan="2"><a href="https://android.googlesource.com/platform/external/libmpeg2/+/8c0289c09cddd378cd9a321ccdb1c62e7b80f626">A-63873837</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>High</td>
+<td>6.0, 6.0.1</td>
+</tr>
+<tr>
+<td rowspan="2">CVE-2017-0857</td>
+<td rowspan="2"><a href="https://android.googlesource.com/platform/external/libavc/+/3eb692de916c3576a18990e3e4193fce93c016dc">A-65122447</a></td>
+<td>NSI</td>
+<td>NSI</td>
+<td>7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>High</td>
+<td>6.0, 6.0.1</td>
+</tr>
+<tr>
+<td rowspan="2">CVE-2017-0858</td>
+<td rowspan="2"><a href="https://android.googlesource.com/platform/external/libavc/+/208c74d62a3e1039dc87818306e057877760fbaa">A-64836894</a></td>
+<td>NSI</td>
+<td>NSI</td>
+<td>7.0, 7.1.1, 7.1.2, 8.0</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>High</td>
+<td>6.0, 6.0.1</td>
+</tr>
+<tr>
+<td rowspan="2">CVE-2017-0859</td>
+<td rowspan="2">A-36075131<a href="#asterisk">*</a></td>
+<td>NSI</td>
+<td>NSI</td>
+<td>7.0, 7.1.1, 7.1.2</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>High</td>
+<td>6.0, 6.0.1</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="runtime">Runtime</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Updated AOSP versions</th>
+</tr>
+<tr>
+<td>CVE-2016-2105</td>
+<td>A-63710022<a href="#asterisk">*</a></td>
+<td>RCE</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1</td>
+</tr>
+<tr>
+<td>CVE-2016-2106</td>
+<td>A-63709511<a href="#asterisk">*</a></td>
+<td>RCE</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1</td>
+</tr>
+<tr>
+<td>CVE-2017-3731</td>
+<td>A-63710076<a href="#asterisk">*</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="system">System</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Updated AOSP versions</th>
+</tr>
+<tr>
+<td>CVE-2017-0860</td>
+<td><a href="https://android.googlesource.com/platform/frameworks/native/+/5508ca2c191f8fdf29d8898890a58bf1a3a225b3">A-31097064</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>5.0.2, 5.1.1, 6.0, 6.0.1, 7.0, 7.1.1, 7.1.2</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="kernel-components">Kernel components</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Component</th>
+</tr>
+<tr>
+<td>CVE-2017-6001</td>
+<td>A-37901413<br/>
+<a href="//android-review.googlesource.com/#/c/438399/">Upstream
+kernel</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Core kernel</td>
+</tr>
+<tr>
+<td>CVE-2017-0861</td>
+<td>A-36006981<a href="#asterisk">*</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Audio driver</td>
+</tr>
+<tr>
+<td>CVE-2017-0862</td>
+<td>A-36006779<a href="#asterisk">*</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Kernel</td>
+</tr>
+<tr>
+<td>CVE-2017-11600</td>
+<td>A-64257838<br/>
+<a href="//git.kernel.org/pub/scm/linux/kernel/git/klassert/ipsec.git/commit/?id=7bab09631c2a303f87a7eb7e3d69e888673b9b7e">
+Upstream kernel</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Networking subsystem</td>
+</tr>
+<tr>
+<td>CVE-2017-0863</td>
+<td>A-37950620<a href="#asterisk">*</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Video driver</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="mediatek-components">MediaTek components</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Component</th>
+</tr>
+<tr>
+<td>CVE-2017-0864</td>
+<td>A-37277147<a href="#asterisk">*</a><br/>
+        M-ALPS03394571</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>IoCtl (Flashlight)</td>
+</tr>
+<tr>
+<td>CVE-2017-0865</td>
+<td>A-65025090<a href="#asterisk">*</a><br/>
+        M-ALPS02973195</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>SoC driver</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="nvidia-components">NVIDIA components</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Component</th>
+</tr>
+<tr>
+<td>CVE-2017-0866</td>
+<td>A-38415808<a href="#asterisk">*</a><br/>
+        N-CVE-2017-0866</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Direct rendering infrastructure</td>
+</tr>
+<tr>
+<td>CVE-2017-6274 </td>
+<td>A-34705801<a href="#asterisk">*</a><br/>
+        N-CVE-2017-6274</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Thermal driver</td>
+</tr>
+<tr>
+<td>CVE-2017-6275</td>
+<td>A-34702397<a href="#asterisk">*</a><br/>
+        N-CVE-2017-6275</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Thermal driver</td>
+</tr>
+</col></col></col></col></col></table>
+<h3 id="qualcomm-components">Qualcomm components</h3>
+<table>
+<col width="17%">
+<col width="19%">
+<col width="9%">
+<col width="14%">
+<col width="39%">
+<tr>
+<th>CVE</th>
+<th>References</th>
+<th>Type</th>
+<th>Severity</th>
+<th>Component</th>
+</tr>
+<tr>
+<td>CVE-2017-11073</td>
+<td>A-62084791<a href="#asterisk">*</a><br/>
+        QC-CR#2064767</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Networking subsystem</td>
+</tr>
+<tr>
+<td>CVE-2017-11035</td>
+<td>A-64431968<br/>
+<a href="//source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0/commit/?id=c5060da3e741577578d66dfadb7922d853da6156">
+QC-CR#2055659</a>
+       [<a href="//source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-2.0/commit/?id=cc1896424ae7a346090f601bc69c6ca51d9c3e04">2</a>]</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-11012</td>
+<td>A-64455446<br/>
+<a href="//source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0/commit/?id=7d0e40d328fa092c36b9585516ed29fc6041be55">
+QC-CR#2054760</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-11085</td>
+<td>A-62952032<a href="#asterisk">*</a><br/>
+        QC-CR#2077909</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Audio</td>
+</tr>
+<tr>
+<td>CVE-2017-11091</td>
+<td>A-37478866<a href="#asterisk">*</a><br/>
+        QC-CR#2064235</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Video driver</td>
+</tr>
+<tr>
+<td>CVE-2017-11026</td>
+<td>A-64453104<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/lk/commit/?id=88af13428d72d980003d99dd1dd0894ec3799a3e">QC-CR#1021460</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Linux boot</td>
+</tr>
+<tr>
+<td>CVE-2017-11038</td>
+<td>A-35888677<a href="#asterisk">*</a><br/>
+        QC-CR#2034087</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Memory subsystem</td>
+</tr>
+<tr>
+<td>CVE-2017-11032</td>
+<td>A-64431966<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-3.18/commit/?id=2720294757d0ad5294283c15dc837852f7b2329a">
+QC-CR#1051435</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Linux kernel</td>
+</tr>
+<tr>
+<td>CVE-2017-9719</td>
+<td>A-64438726<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-3.18/commit/?id=a491499c3490999555b7ccf8ad1a7d6455625807">
+QC-CR#2042697</a>
+       [<a href="//source.codeaurora.org/quic/la/kernel/msm-4.4/commit/?id=d815f54f15d765b5e0035a9d208d71567bcaace0">2</a>]</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>CVE-2017-11024</td>
+<td>A-64441352<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-3.10/commit/?id=f2a482422fefadfa0fa9b4146fc0e2b46ac04922">
+QC-CR#2031178</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Wired connectivity</td>
+</tr>
+<tr>
+<td>CVE-2017-11025</td>
+<td>A-64440043<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-3.10/commit/?id=95e72ae9281b77abc3ed0cc6a33c17b989241efa">
+QC-CR#2013494</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Audio</td>
+</tr>
+<tr>
+<td>CVE-2017-11023</td>
+<td>A-64434485<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-4.4/commit/?id=c36e61af0f770125d0061a8d988d0987cc8d116a">
+QC-CR#2029216</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Services</td>
+</tr>
+<tr>
+<td>CVE-2017-11029</td>
+<td>A-64433362<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-4.4/commit/?id=86f0d207d478e1681f6711b46766cfb3c6a30fb5">
+QC-CR#2025367</a>
+       [<a href="//source.codeaurora.org/quic/la/kernel/msm-3.18/commit/?id=74ab23917b82769644a3299da47b58e080aa63f2">2</a>]</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Camera</td>
+</tr>
+<tr>
+<td>CVE-2017-11018</td>
+<td>A-64441628<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm/commit/?id=1d718286c4c482502a2c4356cebef28aef2fb01f">
+QC-CR#897844</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Camera</td>
+</tr>
+<tr>
+<td>CVE-2017-9721</td>
+<td>A-64441353<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/lk/commit/?id=b40eb596bc96724a46bf00bfd9764e87775e7f1e">
+QC-CR#2039552</a></td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>CVE-2017-9702</td>
+<td>A-36492827<a href="#asterisk">*</a><br/>
+        QC-CR#2037398</td>
+<td>EoP</td>
+<td>Moderate</td>
+<td>Camera</td>
+</tr>
+<tr>
+<td>CVE-2017-11089</td>
+<td>A-36819059<a href="#asterisk">*</a><br/>
+        QC-CR#2055013</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-8239</td>
+<td>A-36251230<a href="#asterisk">*</a><br/>
+        QC-CR#1091603</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Camera</td>
+</tr>
+<tr>
+<td>CVE-2017-11090</td>
+<td>A-36818836<a href="#asterisk">*</a><br/>
+        QC-CR#2061676</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-11093</td>
+<td>A-37625232<a href="#asterisk">*</a><br/>
+        QC-CR#2077623</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>HDMI</td>
+</tr>
+<tr>
+<td>CVE-2017-8279</td>
+<td>A-62378962<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/msm-4.4/commit/?id=f09aee50c2ee6b79d94cb42eafc82413968b15cb">
+QC-CR#2015227</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Services</td>
+</tr>
+<tr>
+<td>CVE-2017-9696</td>
+<td>A-36232584<a href="#asterisk">*</a><br/>
+        QC-CR#2029867</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Kernel</td>
+</tr>
+<tr>
+<td>CVE-2017-11058</td>
+<td>A-37718081<br/>
+<a href="//source.codeaurora.org/quic/la//platform/vendor/qcom-opensource/wlan/qcacld-2.0/commit/?id=4d9812973e8b12700afd8c3d6f36a94506ffb6fc">
+QC-CR#2061251</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-11022</td>
+<td>A-64440918<br/>
+<a href="//source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-2.0/commit/?id=1379bfb6c09ee2ad5969db45c27fb675602b4ed0">QC-CR#1086582</a>
+       [<a href="//source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0/commit/?id=f41e3dbc92d448d3d56cae5517e41a4bafafdf3f">2</a>]</td>
+<td>ID</td>
+<td>Moderate</td>
+<td>WLAN</td>
+</tr>
+<tr>
+<td>CVE-2017-9701</td>
+<td>A-63868730<br/>
+<a href="//source.codeaurora.org/quic/la//kernel/lk/commit/?id=60a6821ca7723f84067faba64fb883d94357df16">
+QC-CR#2038992</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Linux boot</td>
+</tr>
+<tr>
+<td>CVE-2017-11027</td>
+<td>A-64453534<br/>
+<a href="//source.codeaurora.org/quic/la/kernel/lk/commit/?id=393e5d1cc9e216e1d37bf25be6c376b395882f29">
+QC-CR#2055630</a></td>
+<td>ID</td>
+<td>Moderate</td>
+<td>Linux boot</td>
+</tr>
+</col></col></col></col></col></table>
+<h2 id="functional-updates">Functional updates</h2>
+<p>
+These updates are included for affected Pixel devices to address functionality
+issues not related to the security of Pixel devices. The table includes
+associated references; the affected category, such as Bluetooth or mobile data;
+and a summary of the issue.
+</p>
+<table>
+<col width="15%">
+<col width="15%">
+<col width="70%">
+<tr>
+<th>References</th>
+<th>Category</th>
+<th>Improvements</th>
+</tr>
+<tr>
+<td>A-65225835</td>
+<td>Audio</td>
+<td>Volume warning threshold adjusted in some regions.</td>
+</tr>
+<tr>
+<td>A-37943083</td>
+<td>Bluetooth</td>
+<td>Improvements for Bluetooth devices only supporting AVRCP version 1.3.</td>
+</tr>
+<tr>
+<td>A-63790458</td>
+<td>Bluetooth</td>
+<td>Improved headset connection pairing.</td>
+</tr>
+<tr>
+<td>A-64142363</td>
+<td>Bluetooth</td>
+<td>Improved song info display on some Bluetooth carkits.</td>
+</tr>
+<tr>
+<td>A-64991621</td>
+<td>Bluetooth</td>
+<td>Improved metadata in some carkits.</td>
+</tr>
+<tr>
+<td>A-65223508</td>
+<td>Bluetooth</td>
+<td>Improved Bluetooth connections to some carkits.</td>
+</tr>
+<tr>
+<td>A-65463237</td>
+<td>Bluetooth</td>
+<td>Improved Magic Tether on BLE.</td>
+</tr>
+<tr>
+<td>A-64977836</td>
+<td>Camera</td>
+<td>Improved Autofocus during video capture.</td>
+</tr>
+<tr>
+<td>A-65099590</td>
+<td>Camera</td>
+<td>Improved front camera response speed.</td>
+</tr>
+<tr>
+<td>A-68159303</td>
+<td>Display</td>
+<td>Adjustments to display color mode setting.</td>
+</tr>
+<tr>
+<td>A-68254840</td>
+<td>Display</td>
+<td>Adjustments to display brightness settings.</td>
+</tr>
+<tr>
+<td>A-68279369</td>
+<td>Display</td>
+<td>Adjustments to navigation bar brightness.</td>
+</tr>
+<tr>
+<td>A-64103722</td>
+<td>Mobile data</td>
+<td>Adjusted YouTube switching from mobile data to Wi-Fi.</td>
+</tr>
+<tr>
+<td>A-65113738</td>
+<td>Mobile data</td>
+<td>Mobile data adjustments on 3 Network.</td>
+</tr>
+<tr>
+<td>A-37187694</td>
+<td>Stability</td>
+<td>Improved application stability.</td>
+</tr>
+<tr>
+<td>A-67959484</td>
+<td>Stability</td>
+<td>Adjustments to call quality.</td>
+</tr>
+</col></col></col></table>
+<h2 id="common-questions-and-answers">Common questions and answers</h2>
+<p>
+This section answers common questions that may occur after reading this
+bulletin.
+</p>
+<p>
+<strong>1. How do I determine if my device is updated to address these issues?
+</strong>
+</p>
+<p>
+Security patch levels of 2017-11-05 or later address all issues associated with
+the 2017-11-05 security patch level and all previous patch levels. To learn how
+to check a device's security patch level, read the instructions on the <a href="//support.google.com/pixelphone/answer/4457705#pixel_phones&amp;nexus_devices">Pixel
+and Nexus update schedule</a>.
+</p>
+<p id="type">
+<strong>2. What do the entries in the <em>Type</em> column mean?</strong>
+</p>
+<p>
+Entries in the <em>Type</em> column of the vulnerability details table reference
+the classification of the security vulnerability.
+</p>
+<table>
+<col width="25%">
+<col width="75%">
+<tr>
+<th>Abbreviation</th>
+<th>Definition</th>
+</tr>
+<tr>
+<td>RCE</td>
+<td>Remote code execution</td>
+</tr>
+<tr>
+<td>EoP</td>
+<td>Elevation of privilege</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>Information disclosure</td>
+</tr>
+<tr>
+<td>DoS</td>
+<td>Denial of service</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Classification not available</td>
+</tr>
+</col></col></table>
+<p>
+<strong>3. What do the entries in the <em>References</em> column mean?</strong>
+</p>
+<p>
+Entries under the <em>References</em> column of the vulnerability details table
+may contain a prefix identifying the organization to which the reference value
+belongs.
+</p>
+<table>
+<col width="25%">
+<col width="75%">
+<tr>
+<th>Prefix</th>
+<th>Reference</th>
+</tr>
+<tr>
+<td>A-</td>
+<td>Android bug ID</td>
+</tr>
+<tr>
+<td>QC-</td>
+<td>Qualcomm reference number</td>
+</tr>
+<tr>
+<td>M-</td>
+<td>MediaTek reference number</td>
+</tr>
+<tr>
+<td>N-</td>
+<td>NVIDIA reference number</td>
+</tr>
+<tr>
+<td>B-</td>
+<td>Broadcom reference number</td>
+</tr>
+</col></col></table>
+<p id="asterisk">
+<strong>4. What does a * next to the Android bug ID in the <em>References</em>
+column mean?</strong>
+</p>
+<p>
+Issues that are not publicly available have a * next to the Android bug ID in
+the <em>References</em> column. The update for that issue is generally contained
+in the latest binary drivers for Nexus devices available from the <a href="//developers.google.com/android/nexus/drivers">Google Developer
+site</a>.
+</p>
+<p>
+<strong>5. Why are security vulnerabilities split between this bulletin and the
+Android Security Bulletins?</strong>
+</p>
+<p>
+Security vulnerabilities that are documented in the Android Security Bulletins
+are required in order to declare the latest security patch level on Android
+devices. Additional security vulnerabilities, such as those documented in this
+bulletin, are not required for declaring a security patch level.
+</p>
+<h2 id="versions">Versions</h2>
+<table>
+<col width="25%">
+<col width="25%">
+<col width="50%">
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Notes</th>
+</tr>
+<tr>
+<td>1.0</td>
+<td>November 6, 2017</td>
+<td>Bulletin published.</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>November 8, 2017</td>
+<td>Bulletin updated with AOSP links and additional details on
+   functional updates.</td>
+</tr>
+</col></col></col></table>
+</div>
+<div class="devsite-content-footer nocontent">
+<p>Except as otherwise noted, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.com/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+<p class="devsite-content-footer-date" content="2017-11-08T21:31:10.493470" itemprop="datePublished">
+      
+      Last updated November 8, 2017.
+    </p>
+</div>
+</article>
+</article>
+</div>
+<footer class="devsite-footer-linkboxes nocontent devsite-footer-linkboxes-all-backup "><nav class="devsite-full-site-width"><ul class="devsite-footer-linkboxes-list"><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">Build</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Repository Link" href="//android.googlesource.com">
+                Android Repository
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Requirements Link" href="https://source.android.com/source/requirements">
+                Requirements
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Downloading Link" href="https://source.android.com/source/downloading">
+                Downloading
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Preview Binaries Link" href="//developers.google.com/android/blobs-preview">
+                Preview Binaries
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Factory Images Link" href="//developers.google.com/android/images">
+                Factory Images
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Driver Binaries Link" href="//developers.google.com/android/drivers">
+                Driver Binaries
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer GitHub Link" href="//android.github.io">
+                GitHub
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">Connect</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Twitter Link" href="//twitter.com/Android">
+                @Android on Twitter
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Dev Twitter Link" href="//twitter.com/AndroidDev">
+                @AndroidDev on Twitter
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Blog Link" href="//blog.google/products/android/">
+                Android Blog
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Security Blog Link" href="//security.googleblog.com/">
+                Google Security Blog
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Platform Group Link" href="//groups.google.com/forum/?fromgroups#!forum/android-platform">
+                Platform on Google Groups
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Building Group Link" href="//groups.google.com/forum/?fromgroups#!forum/android-building">
+                Building on Google Groups
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Porting Group Link" href="//groups.google.com/forum/?fromgroups#!forum/android-porting">
+                Porting on Google Groups
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">Get Help</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Help Center Link" href="//support.google.com/android/">
+                Android Help Center
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Pixel Help Center Link" href="//support.google.com/pixelphone">
+                Pixel Help Center
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Nexus Help Center Link" href="//support.google.com/nexus/">
+                Nexus Help Center
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Home Link" href="//www.android.com">
+                www.android.com
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer GMS Link" href="//www.android.com/gms/">
+                Google Mobile Services
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Stack Overflow Link" href="//stackoverflow.com/questions/tagged/android-source">
+                Stack Overflow
+            </a></li><li class="devsite-footer-linkbox-item"><a class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Issue Tracker Link" href="//issuetracker.google.com/issues?q=status:open%20componentid:190923">
+                Issue Tracker
+            </a></li></ul></li></ul></nav></footer><footer class="devsite-utility-footer"><nav class="devsite-utility-footer-nav devsite-nav devsite-full-site-width"><div class="devsite-utility-footer-nav-left"><form action="/i18n/setlang/" class="devsite-utility-footer-language" method="post"><input name="xsrf_token" type="hidden" value="kmX9LFG7Do2s40t08TaFP7vxXNche4pr8SCGMBs6CuY6MTUxNjUxNDIzNDk4MTM4MA"/><input name="next" type="hidden" value="/security/bulletin/pixel/2017-11-01"><select class="devsite-utility-footer-language-select kd-select" name="language" track-name="click" track-type="languageSelector"><option selected="selected" track-metadata-original-language="en" track-metadata-selected-language="en" track-name="changed" track-type="languageSelector" value="en">
+            English
+          </option><option track-metadata-original-language="en" track-metadata-selected-language="ru" track-name="changed" track-type="languageSelector" value="ru">
+            Русский
+          </option><option track-metadata-original-language="en" track-metadata-selected-language="ja" track-name="changed" track-type="languageSelector" value="ja">
+            日本語
+          </option><option track-metadata-original-language="en" track-metadata-selected-language="zh-cn" track-name="changed" track-type="languageSelector" value="zh-cn">
+            简体中文
+          </option><option track-metadata-original-language="en" track-metadata-selected-language="zh-tw" track-name="changed" track-type="languageSelector" value="zh-tw">
+            繁體中文
+          </option><option track-metadata-original-language="en" track-metadata-selected-language="ko" track-name="changed" track-type="languageSelector" value="ko">
+            한국어
+          </option></select></input></form><span class="devsite-utility-footer-links"><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="about_android" data-label="Footer about_android link" href="https://source.android.com/source/">About Android
+         </a><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="community" data-label="Footer community link" href="https://source.android.com/source/community">Community
+         </a><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="legal" data-label="Footer legal link" href="https://source.android.com/legal">Legal
+         </a><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="license" data-label="Footer license link" href="https://source.android.com/license">License
+         </a><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="privacy" data-label="Footer privacy link" href="https://www.google.com/policies/privacy/">Privacy
+         </a><a class="devsite-utility-footer-link gc-analytics-event" data-category="Site-Wide Custom Events" data-footer-link-id="site_feedback" data-label="Footer site_feedback link" href="https://issuetracker.google.com/issues/new?component=191476">Site Feedback
+         </a></span></div></nav></footer></input></div><script async="" defer="" src="//www.gstatic.com/feedback/api.js"></script><script src="https://source.android.com/_static2/407853721c/jsi18n/"></script><script src="https://source.android.com/_static/407853721c/js/script_foot_closure.js"></script><script src="https://source.android.com/_static/407853721c/js/script_foot.js"></script><script>
+        (function($) {
+          
+          devsite.devsite.Init($, {'FULL_SITE_SEARCH_ENABLED': 1, 'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 0, 'VERSION_HASH': '407853721c', 'SITE_NAME': 'androidsource', 'HISTORY_ENABLED': 0, 'ENABLE_BLOCKED_LINK_TOOLTIP': 0, 'ALLOWED_HOSTS': ['.android.com', '.anvato.com', '.apigee.com', '.appspot.com', '.dialogflow.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.nest.com', '.openthread.io', '.openweave.io', '.orbitera.com', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 0, 'SCRIPTSAFE_DOMAIN': 'androidsource-dot-google-developers.appspot.com'},
+                               '[]','en',
+                               true, '',
+                               {"f62218c009ec029abef196bba5aa34cf": true, "098dafe57affddc137df300142652cfd": false, "8e03e230de0bd8a6fe173fdf172e8b3f": true, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "d169d485cf24243a263783dbe42029b1": true, "039e5d84b87fd75807ffb37b7f1bbf2c": true, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true}, '/',
+                               'https://source.android.com/');
+        })(jQuery);
+
+        
+        devsite.localInit = function() {
+          
+        };
+
+      </script><script>
+      $('.devsite-utility-footer-language-select').each(function() {
+        $(this).change(function(){$('.devsite-utility-footer-language').submit();});
+      });
+      </script></div><span data-request-elapsed="284.710168839" id="devsite-request-elapsed"></span></body></html>

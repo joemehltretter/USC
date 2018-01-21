@@ -1,0 +1,92 @@
+SEI InsightsHome > Insider Threat Blog > Announcing Insider Threat Program Evaluator Training from the CERT National Insider Threat Center
+        Real-World Work Combating Insider ThreatsPosted on
+                        
+                            January  5, 2018
+                        
+
+The National Insider Threat Center (NITC) at the CERT Division of the SEI is developing an Insider Threat Program Evaluator (ITPE) Training course based on the methods and techniques the NITC currently uses to conduct Insider Threat Program Evaluations. This three-day, instructor-led, classroom-based, certificate training program presents strategies for measuring and evaluating an operational insider threat program within an organization. The first course will be offered in March 2018.
+The National Insider Threat Center (NITC) at the CERT Division of the SEI is developing an Insider Threat Program Evaluator (ITPE) Training course based on the methods and techniques the NITC currently uses to conduct Insider Threat Program Evaluations. This three-day, instructor-led, classroom-based, certificate training program presents strategies for measuring and evaluating an operational insider threat program within an organization. The first course will be offered in March 2018.
+Organizations, including the federal government, are increasingly recognizing the need to counter insider threats and are doing it through specially focused teams. Several mandates for the federal government have been set forth in recent years including:
+
+M-11-08, Initial Assessments of Safeguarding and Counterintelligence Postures for Classified National Security Information in Automated Systems - Office of Management and Budget (OMB) memorandum dated January 2011 that evaluates the insider threat safeguards of government agencies.
+Executive Order (E.O.) 13587, Structural Reforms to Improve the Security of Classified Networks and the Responsible Sharing and Safeguarding of Classified Information [Obama 2011] - requires all federal agencies that have access to classified information and systems to have a formal insider threat program.
+National Industrial Security Program Operating Manual (NISPOM) - requires defense contractors to establish and maintain an insider threat program to meet many of the requirements of E.O. 13587.
+National Insider Threat Task Force (NITTF) minimum standards - requires a method to assess program strengths and weaknesses, and to identify areas for improvement. Complying organizations are required to conduct annual assessments.
+
+The NITC has developed and used an Insider Threat Program Evaluation instrument over the past five years. This instrument assesses the robustness of an organization's program to prevent, detect, and respond to insider threats and provides recommendations for enhancing the program's effectiveness. In the long term, the evaluation results help organizations reduce exposure to damage from potential insider threats and strengthen their insider threat programs.
+The NITC is in the process of developing the Insider Threat Program Evaluator (ITPE) Training course based on the methods and techniques it currently uses to conduct insider threat program evaluations. The course will use scenario-based exercises to show participants how to evaluate an insider threat program. Topics of exercises and discussions include techniques and templates for evaluation preparation and execution; processes for engagement, planning, data collection, scoring, and report development; and group discussions and summarized lessons learned for each exercise.
+The NITC Insider Threat Program Evaluation criteria are based on both the NITTF minimum standards and NITC best practices1 developed over its almost 20 years of research and experience in the insider threat domain, along with its continuous work helping organizations build or improve their insider threat programs.
+Participants will learn about all the components of a robust insider threat program, shown below, and how to compare them to the ITPE benchmark criteria. The instrument scores along a continuum that starts with meeting the NITTF and NISPOM minimum requirements and specific NITC practices. It ends with having an exceptional set of measures or practices in place.
+
+Figure 1: Components of an Insider Threat Program
+This training is for insider threat program managers, evaluators, and team members and for those interested in licensing the CERT methodology and tools to perform an Insider Threat Program Evaluation. This course may also benefit those working in auditing or risk management.
+The ITPE certificate program will enable evaluators to help organizations better understand the effectiveness of their established insider threat programs. Organizations will have the ability to license the CERT Insider Threat Program Evaluation methodology for internal use or to evaluate the effectiveness of other programs.
+Participants who complete the course will be able to
+
+design an evaluation plan for working with an organization
+build a team of experts to perform the evaluation
+use the workbooks and templates to assess capabilities, components, and processes of an insider threat program
+score capabilities based on evidence-driven assessment of a set of specific indicators
+highlight key gaps within a program and recommend improvements or mitigations
+
+Insider Threat Certificates and Training
+The Insider Threat Program Evaluator Training joins other NITC insider threat training and certificate programs:
+
+Insider Threat Awareness Training (ITAT): one-hour course for all employees on the basics of insider threats and role responsibilities
+Insider Threat Program Manager (ITPM) Certificate: training for team members and program managers developing formal insider threat programs
+Insider Threat Vulnerability Assessor (ITVA) Certificate: training for insider threat program managers and for those interested in licensing the CERT methodology and tools to perform insider threat vulnerability assessments
+Insider Threat Analyst Training: Training for insider threat program analysts regarding strategies for collecting and analyzing data to prevent, detect, and respond to insider activity.
+
+For more information on upcoming course dates and to register for an upcoming course, please visit https://cert.org/insiderthreat.
+1 Various NITC best practices are discussed in the following resources: The CERT® Guide to Insider Threats: How to Prevent, Detect, and Respond to Information Technology Crimes (Theft, Sabotage, Fraud); Common Sense Guide to Mitigating Insider Threats (5th Ed.); and other publications located on the CERT Division web site: https://www.cert.org/insider-threat/publications/index.cfm
+Organizations, including the federal government, are increasingly recognizing the need to counter insider threats and are doing it through specially focused teams. Several mandates for the federal government have been set forth in recent years including:The NITC has developed and used an Insider Threat Program Evaluation instrument over the past five years. This instrument assesses the robustness of an organization's program to prevent, detect, and respond to insider threats and provides recommendations for enhancing the program's effectiveness. In the long term, the evaluation results help organizations reduce exposure to damage from potential insider threats and strengthen their insider threat programs.The NITC is in the process of developing the Insider Threat Program Evaluator (ITPE) Training course based on the methods and techniques it currently uses to conduct insider threat program evaluations. The course will use scenario-based exercises to show participants how to evaluate an insider threat program. Topics of exercises and discussions include techniques and templates for evaluation preparation and execution; processes for engagement, planning, data collection, scoring, and report development; and group discussions and summarized lessons learned for each exercise.The NITC Insider Threat Program Evaluation criteria are based on both the NITTF minimum standards and NITC best practices1 developed over its almost 20 years of research and experience in the insider threat domain, along with its continuous work helping organizations build or improve their insider threat programs.Participants will learn about all the components of a robust insider threat program, shown below, and how to compare them to the ITPE benchmark criteria. The instrument scores along a continuum that starts with meeting the NITTF and NISPOM minimum requirements and specific NITC practices. It ends with having an exceptional set of measures or practices in place.Figure 1: Components of an Insider Threat ProgramThis training is for insider threat program managers, evaluators, and team members and for those interested in licensing the CERT methodology and tools to perform an Insider Threat Program Evaluation. This course may also benefit those working in auditing or risk management.The ITPE certificate program will enable evaluators to help organizations better understand the effectiveness of their established insider threat programs. Organizations will have the ability to license the CERT Insider Threat Program Evaluation methodology for internal use or to evaluate the effectiveness of other programs.Participants who complete the course will be able toThe Insider Threat Program Evaluator Training joins other NITC insider threat training and certificate programs:For more information on upcoming course dates and to register for an upcoming course, please visit https://cert.org/insiderthreat.1 Various NITC best practices are discussed in the following resources: The CERT® Guide to Insider Threats: How to Prevent, Detect, and Respond to Information Technology Crimes (Theft, Sabotage, Fraud); Common Sense Guide to Mitigating Insider Threats (5th Ed.); and other publications located on the CERT Division web site: https://www.cert.org/insider-threat/publications/index.cfmView other blog posts by Robin M. Ruefle.Phone: 412-268-5800
+                    Toll Free: 888-201-4479
+                    Fax: 412-268-6257Contact Us
+4500 Fifth Avenue
+                    Pittsburgh, PA 15213-2612
+                    U.S.A.Directions
+CERT/CC
+
+Insider Threat
+
+SATURN
+
+SEI Blog
+
+DevOps
+   CERT/CC
+
+  Insider Threat
+
+  SATURN
+
+  SEI Blog
+
+  DevOps
+SEI Digital Library
+
+SEI Podcast Series
+
+SEI Webinar Series
+ SEI Overview
+
+Director's Message
+
+Our Organization
+
+Our People
+
+Year in Review
+
+Terms of Use
+
+Posted on
+                            
+                                January 17, 2018
+                            
+                            by 
+              Sarah Miller
+              
+Each year, the CERT Division of the SEI collaborates with CSO Magazine to develop a U.S. State of Cybercrime report1. These reports are based on surveys of more than 500 organizations across the country, ranging in size from fewer than 500 employees to more than 10,000. Each organization self-reports on information security issues that have impacted them in the past calendar year. The 2017 report covers activity that occurred in 2016. In this blog post, we share some of the findings from the upcoming report as they relate to insider threats.Terms of Use | Privacy Statement | Intellectual Property
+© 2016 Carnegie Mellon University.The Software Engineering Institute (SEI) is a federally funded research and development center (FFRDC) sponsored by the U.S. Department of Defense (DoD).
+It is operated by Carnegie Mellon University.

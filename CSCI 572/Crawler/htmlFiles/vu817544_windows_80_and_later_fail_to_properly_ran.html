@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Vulnerability Note VU#817544 - Windows 8 and later fail to properly randomize every application if system-wide mandatory ASLR is enabled via EMET or Windows Defender Exploit Guard</title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<link href="/vulfeed" rel="alternate" title="Recently Published Vulnerability Notes" type="application/atom+xml">
+<meta content="Mon, 20 Nov 2017 03:07:17 GMT" name="date"/>
+<meta content="Microsoft Windows 8 introduced a change in how system-wide mandatory ASLR is implemented. This change requires system-wide bottom-up ASLR to be enabled for mandatory ASLR to receive entropy. Tools that enable system-wide ASLR without also setting bottom-up ASLR will fail to properly randomize execu" name="description"/>
+<meta name="keywords" value="Windows 8 and later always-on ASLR has zero entropy, EMET, WDEG, entropy, ASLR"/>
+<link href="/vuls/css/global.css" rel="stylesheet" type="text/css"/>
+<link href="/vuls/css/vulnotes.css" rel="stylesheet" type="text/css"/>
+<link href="/vuls/css/vulnotes-print.css" media="print" rel="stylesheet" type="text/css"/>
+<script src="/vuls/javascripts/jquery-min.js" type="text/javascript"></script>
+<script src="/vuls/javascripts/global.js" type="text/javascript"></script>
+<script src="/vuls/javascripts/vulnotes.js" type="text/javascript"></script>
+<link href="/favicon-uscert.ico" rel="shortcut icon" type="image/x-icon"/></link></head>
+<body bgcolor="#FFFFFF" text="#000000">
+<script language="JavaScript" type="text/javascript">
+<!-- 
+$(function(){
+			$("#vendor-info2 tr:even").addClass("row-alt");
+});
+// -->
+</script>
+<div id="header-wrapper">
+<div id="header">
+<div id="logo">
+<div id="cert"><a href="http://www.cert.org/">CERT</a></div>
+<div id="sei"><a href="http://www.sei.cmu.edu/">Software Engineering Institute</a></div>
+<div id="cmu"><a href="http://www.cmu.edu/">Carnegie Mellon University</a></div>
+<div id="vulnotesdb"><a href="/vuls/">Vulnerability Notes Database</a></div>
+</div>
+<div id="sponsored-by">
+<a href="http://www.dhs.gov/office-cybersecurity-and-communications">Sponsored by the Department of Homeland Security (DHS)</a>
+</div>
+</div>
+</div>
+<div id="navigation-wrapper">
+<div id="navigation">
+<ul>
+<li><a href="/vuls/"><span>Database Home</span></a></li>
+<li class="selected"><a href="/vuls/html/search/"><span>Search</span></a></li>
+<li><a href="https://vulcoord.cert.org/VulReport/"><span>Report a Vulnerability</span></a></li>
+<li class="last"><a href="/vuls/html/help/"><span>Help</span></a></li>
+</ul>
+</div>
+</div>
+<!-- MAIN BODY START -->
+<div id="main-content">
+<div class="left-content vul-note" id="content-container">
+<h1>Vulnerability Note VU#817544</h1>
+<h2>Windows 8 and later fail to properly randomize every application if system-wide mandatory ASLR is enabled via EMET or Windows Defender Exploit Guard</h2>
+<p class="meta-text">Original Release date: 17 Nov 2017 | Last revised: 19 Nov 2017</p>
+<!-- START SOCIAL BUTTONS -->
+<div id="social-options">
+<!-- START PRINT BUTTON -->
+<div id="custom-print-button">
+<span id="print-button">
+<a href="javascript:window.print();" rel="nofollow">Print Document</a>
+</span>
+</div>
+<!-- END PRINT BUTTON -->
+<!-- START TWEET BUTTON -->
+<div id="custom-tweet-button">
+<span id="tweet-button">
+<a class="popup-twitter" href="https://twitter.com/share?url=http%3A%2F%2Fwww.kb.cert.org%2Fvuls%2Fid%2F817544" rel="nofollow" target="_blank">Tweet</a>
+</span>
+</div>
+<script type="text/javascript"> 
+	$('.popup-twitter').popupWindow({ 
+	height:400, 
+	width:575, 
+	top:50, 
+	left:50 
+	}); 
+</script>
+<!-- END TWEET BUTTON -->
+<!-- START FACEBOOK BUTTON -->
+<div id="custom-facebook-button">
+<span id="facebook-button">
+<a class="popup-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.kb.cert.org%2Fvuls%2Fid%2F817544" rel="nofollow" target="_blank">Like Me</a>
+</span>
+</div>
+<script type="text/javascript">
+	$('.popup-facebook').popupWindow({ 
+	height:500,
+	width:900,
+	top:50, 
+	left:50 
+	}); 
+</script>
+<!-- END FACEBOOK BUTTON -->
+<!-- START SHARE BUTTON -->
+<div id="custom-share-button">
+<span id="share-button">
+<a class="popup-share" href="http://www.addthis.com/bookmark.php?url=http%3A%2F%2Fwww.kb.cert.org%2Fvuls%2Fid%2F817544" rel="nofollow" target="_blank">Share</a>
+</span>
+</div>
+<script type="text/javascript"> 
+	$('.popup-share').popupWindow({ 
+	height:500, 
+	width:900, 
+	top:50, 
+	left:50 
+	}); 
+</script>
+<!-- END SHARE BUTTON --></div><!-- END SOCIAL BUTTONS -->
+<div id="vulnerability-note-content">
+<a name="overview"></a>
+<h3>Overview</h3>
+<p>Microsoft Windows 8 introduced a change in how system-wide mandatory ASLR is implemented. This change requires system-wide bottom-up ASLR to be enabled for mandatory ASLR to receive entropy. Tools that enable system-wide ASLR without also setting bottom-up ASLR will fail to properly randomize executables that do not opt in to ASLR.</p>
+<a name="description"></a>
+<h3>Description</h3>
+<table border="0" cellpadding="0" cellspacing="0" class="wrapper-table"><tr><td><p><b>Address Space Layout Randomization (ASLR)</b>
+<p>Starting with Windows Vista, a feature called ASLR was introduced to Windows that <a href="https://blogs.technet.microsoft.com/srd/2010/12/08/on-the-effectiveness-of-dep-and-aslr/">helps prevent code-reuse attacks</a>. By loading executable modules at non-predictable addresses, Windows can help to mitigate attacks that rely on code being at predictable locations. Return-oriented programming (ROP) is an exploit technique that relies on code that is loaded to a predictable or discoverable location. One weakness with the implementation of ASLR is that it requires that the code is linked with the <a href="https://msdn.microsoft.com/en-us/library/bb384887.aspx"><tt>/DYNAMICBASE</tt></a> flag to opt in to ASLR.<br>
+<br>
+<b>EMET and Windows Defender Exploit Guard</b><br>
+<br>
+In order to help protect applications that don't necessarily opt in to using ASLR and other exploit mitigation techniques, <a href="https://support.microsoft.com/en-us/help/2458544/the-enhanced-mitigation-experience-toolkit">Microsoft EMET</a> was released. Using the EMET GUI, one can specify both system-wide and application-specific mitigations that can be enabled on a system. For system-wide mitigations, EMET simply acts as a front-end GUI to enable exploit mitigations that are built in to the Windows operating system. For application-specific mitigations, the EMET library is loaded into the process space of each application that is configured to be protected. Starting with the Windows 10 Fall Creators update, the capabilities that EMET provides have been replaced with <a href="https://blogs.technet.microsoft.com/mmpc/2017/10/23/windows-defender-exploit-guard-reduce-the-attack-surface-against-next-generation-malware/">Windows Defender Exploit Guard</a>.<br>
+<br>
+<b>Mandatory ASLR and Windows 8</b><br>
+<br>
+Both EMET and Windows Defender Exploit Guard can enable mandatory ASLR for code that isn't linked with the <tt>/DYNAMICBASE</tt> flag. This can be done on a per-application or system-wide basis. Before Windows 8, system-wide mandatory ASLR was implemented using the <tt>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\MoveImages</tt> registry value. By settings this value to <tt>0xFFFFFFFF</tt>, Windows will automatically relocate code that has a relocation table, and the new location of the code will be different across reboots of the same system or between different systems. Starting with Windows 8, system-wide mandatory ASLR is implemented differently than with prior versions of Windows. With Windows 8 and newer, system-wide mandatory ASLR is implemented via the <tt>HKLM\System\CurrentControlSet\Control\Session Manager\Kernel\MitigationOptions</tt> binary registry value. The other change introduced with Windows 8 is that system-wide ASLR must have system-wide <a href="https://blogs.technet.microsoft.com/srd/2013/12/11/software-defense-mitigating-common-exploitation-techniques/">bottom-up ASLR</a> enabled to supply entropy to mandatory ASLR.<br>
+<br>
+<b>The Problem</b><br>
+<br>
+Both EMET and Windows Defender Exploit Guard enable system-wide ASLR without also enabling system-wide bottom-up ASLR. Although Windows Defender Exploit guard does have a system-wide option for system-wide bottom-up-ASLR, the default GUI value of "On by default" does not reflect the underlying registry value (unset). This causes programs without <tt>/DYNAMICBASE</tt> to get relocated, but without any entropy. The result of this is that such programs will be relocated, but to the same address every time across reboots and even across different systems.</br></br></br></br></br></br></br></br></br></br></br></br></p></p></td></tr></table>
+<a name="impact"></a>
+<h3>Impact</h3>
+<table border="0" cellpadding="0" cellspacing="0" class="wrapper-table"><tr><td><p>Windows 8 and newer systems that have system-wide ASLR enabled via EMET or Windows Defender Exploit Guard will have non-<tt>DYNAMICBASE</tt> applications relocated to a predictable location, thus voiding any benefit of mandatory ASLR. This can make exploitation of some classes of vulnerabilities easier.</p></td></tr></table>
+<a name="solution"></a>
+<h3>Solution</h3>
+<table border="0" cellpadding="0" cellspacing="0" class="wrapper-table"><tr><td><p>The CERT/CC is currently unaware of a practical solution to this problem. Please consider the following workaround:</p></td></tr></table>
+<table border="0" cellpadding="0" cellspacing="0" class="wrapper-table" style="padding-top: 15px;"><tr><td><p><b>Enable system-wide bottom-up ASLR on systems that have system-wide mandatory ASLR</b><br>
+<br>
+To enable both bottom-up ASLR and mandatory ASLR on a system-wide basis on a Windows 8 or newer system, the following registry value should be imported:<br>
+<ul><tt>Windows Registry Editor Version 5.00</tt><br>
+<br>
+<tt>[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]</tt><br>
+<tt>"MitigationOptions"=hex:00,01,01,00,00,00,00,00,00,00,00,00,00,00,00,00</tt></br></br></br></ul>
+<br>
+Note that importing this registry value will overwrite any existing system-wide mitigations specified by this registry value. The bottom-up ASLR setting specifically is the second <tt>01</tt> in the binary string, while the mandatory ASLR setting is the first <tt>01</tt>. Also note that in the past, enabling <a href="https://insights.sei.cmu.edu/cert/2012/06/amd-video-drivers-prevent-the-use-of-the-most-secure-setting-for-microsofts-exploit-mitigation-exper.html">system-wide mandatory ASLR could cause problems</a> if older AMD/ATI video card drivers are in use. This issue was addressed in the Catalyst 12.6 drivers released in June, 2012.</br></br></br></br></p></td></tr></table>
+<a name="vendors"></a><a name="systems"></a>
+<h3>Vendor Information <span class="learn-more">(<a href="/vuls/html/fieldhelp#vendorinfo">Learn More</a>)</span></h3>
+<table id="vendor-info2" style="margin: 10px 0 20px 0;"><tr><th style="width: 250px; text-align: left; background-color: #EBEBEB; border: 1px solid #d5d7da;border-right: none; padding: 5px 10px; margin:0;">Vendor</th><th style="width: 110px; text-align: center;padding: 5px 10px; background-color: #EBEBEB; border-top: 1px solid #d5d7da; border-bottom: 1px solid #d5d7da; margin:0;">Status</th><th style="width: 125px; text-align: center;padding: 5px 10px; background-color: #EBEBEB; border-top: 1px solid #d5d7da; border-bottom: 1px solid #d5d7da; margin:0;">Date Notified</th><th style="width: 125px; text-align: center;padding: 5px 10px; background-color: #EBEBEB; border: 1px solid #d5d7da; border-left: none;margin:0;">Date Updated</th></tr><tr><td class="vendor" style="width: 250px; text-align: left;padding: 5px 10px; margin:0;">Microsoft Corporation</td><td class="status" style="width: 110px; text-align: center;padding: 5px 10px; margin:0;"><a href="/vuls/id/CHEU-AT6JND" title="View Vendor Information">Affected</a></td><td class="notified" style="width: 125px; text-align: center;padding: 5px 10px; margin:0;">16 Nov 2017</td><td class="updated" style="width: 125px; text-align: center;padding: 5px 10px; margin:0;">17 Nov 2017</td></tr></table><span class="my-product-affected">If you are a vendor and your product is affected, <a href="mailto:cert@cert.org?Subject=VU%23817544 Vendor Status Inquiry">let
+us know</a>.</span>
+<a name="cvss"></a>
+<h3 style="clear: both !important;">CVSS Metrics <span class="learn-more">(<a href="/vuls/html/fieldhelp#cvss">Learn More</a>)</span></h3>
+<table id="cvss-score" style="margin: 10px 0 10px 0;">
+<tr>
+<th style="width: 100px; text-align: left; background-color: #EBEBEB; border: 1px solid #d5d7da; border-right: none; padding: 5px 10px; margin:0;">Group</th>
+<th style="width: 100px; text-align: center;padding: 5px 10px; background-color: #EBEBEB; border-top: 1px solid #d5d7da; border-bottom: 1px solid #d5d7da; margin:0;">Score</th>
+<th style="width: 470px; text-align: left; background-color: #EBEBEB; border: 1px solid #d5d7da; border-left: none; padding: 5px 10px; margin:0;">Vector</th>
+</tr>
+<tr>
+<td class="cvss-metric-group" style="width: 100px; text-align: left; padding: 5px 10px; margin:0;">Base</td>
+<td class="cvss-score" style="width: 100px; text-align: center; padding: 5px 10px;">0.0</td>
+<td class="cvss-vector" style="width: 470px; text-align: left; padding: 5px 10px; margin:0;">AV:--/AC:--/Au:--/C:--/I:--/A:--</td>
+</tr>
+<tr>
+<td class="cvss-metric-group" style="width: 100px; text-align: left; padding: 5px 10px; margin:0;">Temporal</td>
+<td class="cvss-score" style="width: 100px; padding: 5px 10px; text-align: center">0.0</td>
+<td class="cvss-vector" style="width: 470px; text-align: left; padding: 5px 10px; margin:0;">E:ND/RL:ND/RC:ND</td>
+</tr>
+<tr>
+<td class="cvss-metric-group" style="width: 100px; text-align: left; padding: 5px 10px; margin:0;">Environmental</td>
+<td class="cvss-score" style="width: 100px; padding: 5px 10px; text-align: center">0.0</td>
+<td class="cvss-vector" style="width: 470px; text-align: left; padding: 5px 10px; margin:0;">CDP:ND/TD:H/CR:ND/IR:ND/AR:ND</td>
+</tr>
+</table>
+<a name="references"></a>
+<h3>References</h3>
+<ul>
+<li><a href="https://www.kb.cert.org/vuls/id/421280">https://www.kb.cert.org/vuls/id/421280</a></li>
+<li><a href="https://insights.sei.cmu.edu/cert/2012/06/amd-video-drivers-prevent-the-use-of-the-most-secure-setting-for-microsofts-exploit-mitigation-exper.html">https://insights.sei.cmu.edu/cert/2012/06/amd-video-drivers-prevent-the-use-of-the-most-secure-setting-for-microsofts-exploit-mitigation-exper.html</a></li>
+<li><a href="https://blogs.technet.microsoft.com/srd/2010/12/08/on-the-effectiveness-of-dep-and-aslr/">https://blogs.technet.microsoft.com/srd/2010/12/08/on-the-effectiveness-of-dep-and-aslr/</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/bb384887.aspx">https://msdn.microsoft.com/en-us/library/bb384887.aspx</a></li>
+<li><a href="https://support.microsoft.com/en-us/help/2458544/the-enhanced-mitigation-experience-toolkit">https://support.microsoft.com/en-us/help/2458544/the-enhanced-mitigation-experience-toolkit</a></li>
+<li><a href="https://blogs.technet.microsoft.com/srd/2013/12/11/software-defense-mitigating-common-exploitation-techniques/">https://blogs.technet.microsoft.com/srd/2013/12/11/software-defense-mitigating-common-exploitation-techniques/</a></li>
+<li><a href="https://blogs.technet.microsoft.com/mmpc/2017/10/23/windows-defender-exploit-guard-reduce-the-attack-surface-against-next-generation-malware/">https://blogs.technet.microsoft.com/mmpc/2017/10/23/windows-defender-exploit-guard-reduce-the-attack-surface-against-next-generation-malware/</a></li>
+</ul>
+<a name="credit"></a>
+<h3>Credit</h3>
+<p>This issue was reported by Will Dormann of the CERT/CC, with assistance from Matt Miller of Microsoft.</p>
+<p>This document was written by Will Dormann.</p>
+<a name="other"></a>
+<h3>Other Information</h3>
+<ul id="other-info">
+<li>
+<span class="field-title">CVE IDs:</span>
+<span>Unknown</span>
+</li>
+<li>
+<span class="field-title">Date Public:</span>
+<span>16 Nov 2017</span>
+</li>
+<li>
+<span class="field-title">Date First Published:</span>
+<span>17 Nov 2017</span>
+</li>
+<li>
+<span class="field-title">Date Last Updated:</span>
+<span>19 Nov 2017</span>
+</li>
+<li>
+<span class="field-title">Document Revision:</span>
+<span>40</span>
+</li>
+</ul>
+<div id="provide-feedback">
+<h3>Feedback</h3><p>If you have feedback, comments, or additional information about this vulnerability, please send us <a href="mailto:cert@cert.org?Subject=VU%23817544 Feedback">email</a>.</p>
+</div>
+</div>
+</div>
+<div class="right-sidebar" id="sidebar-navigation">
+<!-- QUICK SEARCHES START -->
+<div class="side-panel" id="quick-searches">
+<h2>Quick Search</h2>
+<ul>
+<li>
+<form action="/vuls/byid?searchview" method="post" name="vul-search">
+<input class="input-field" id="vul-search-general" name="query" type="text" value=""/>
+<input class="go" name="go" type="submit" value="Go"/>
+</form>
+</li>
+</ul>
+<div class="more-content"><a href="/vuls/html/search/">Advanced Search »</a></div>
+</div>
+<!-- QUICK SEARCHES END -->
+<!-- VIEW NOTES BY START -->
+<div class="side-panel" id="view-notes-by">
+<h2>View Notes By</h2>
+<ul>
+<li class="col1"><a href="/vuls/bypublished">Date Published</a></li>
+<li><a href="/vuls/bypublic">Date Public</a></li>
+<li class="col1"><a href="/vuls/byupdate">Date Updated</a></li>
+<li><a href="/vuls/byCVSS">CVSS Score</a></li>
+</ul>
+<div class="spacer"></div>
+<div class="more-content"></div>
+</div>
+<!-- VIEW NOTES BY END -->
+<!-- REPORT A VULNERABILITY START -->
+<div id="report-a-vul-widget">
+<h2>Report a Vulnerability</h2>
+<p><a href="https://vulcoord.cert.org/VulReport/"><img alt="Report a Vulnerability" src="/vuls/images/common/doc-feedback-icon.png"/></a>Please use the <a href="https://vulcoord.cert.org/VulReport/">Vulnerability Reporting Form</a> to report a vulnerability. Alternatively, you can send us <a href="mailto:cert@cert.org?subject=vulnerability%20report">email</a>. Be sure to read our <a href="http://www.cert.org/kb/vul_disclosure.html">vulnerability disclosure policy</a>.</p>
+</div>
+<!-- REPORT A VULNERABILITY END -->
+<!-- CONNECT WITH US START -->
+<div id="connect-with-us-widget">
+<h2>Connect with Us</h2>
+<ul>
+<li class="feed"><a href="/vulfeed" title="Subscribe to our Vulnerability Notes feed">Subscribe to our feed</a></li>
+<li class="blog"><a href="http://www.cert.org/blogs/certcc/" title="Read the CERT/CC blog">Read the CERT/CC blog</a></li>
+</ul>
+</div>
+<!-- CONNECT WITH US END -->
+</div>
+</div>
+<!-- MAIN BODY END -->
+<!-- FOOTER START -->
+<div id="footer-wrapper">
+<div id="footer">
+<div id="i-want-to">
+<h3>I Want To</h3>
+<ul>
+<li><a href="https://vulcoord.cert.org/VulReport/">Report a vulnerability</a></li>
+<li><a href="https://vulcoord.cert.org/VulReport/statement">Provide a vendor statement</a></li>
+<li><a href="https://www.us-cert.gov/forms/report">Report an incident</a></li>
+<li><a href="http://www.ic3.gov/complaint/">Report an internet crime</a></li>
+</ul>
+</div>
+<div id="subscribe-to-alerts"><h3>Subscribe to Updates</h3>
+<p>Receive security alerts, tips, and other updates.</p>
+<form action="https://public.govdelivery.com/accounts/USDHSUSCERT/subscribers/qualify">
+<input class="email-address-field long" id="email-address-field" name="email" title="Enter your email address" type="text" value="Enter your email address"/>
+<input class="button blue-button" name="submit" type="submit" value="Sign Up"/>
+</form>
+</div>
+<div id="contact-us">
+<h3>Contact Us</h3>
+<ul>
+<li class="phone">+1 412-268-5800</li>
+<li class="email"><a href="mailto:cert@cert.org" title="General questions or suggestions">Send us email</a></li>
+<li class="keys"><a href="https://www.cert.org/contact_cert/encryptmail.html">Download PGP/GPG key</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- FOOTER END -->
+<!-- SUB-FOOTER START -->
+<div id="sub-footer">
+<div class="copyright">
+<p>Copyright © 1999-2018 Carnegie Mellon University</p>
+</div>
+<ul>
+<li><a href="http://www.cert.org/legal_stuff/">Legal</a></li>
+<li><a href="http://www.cert.org/contents/">Site Index</a></li>
+<li><a href="http://www.cert.org/contact_cert/">Careers</a></li>
+<li class="last"><a href="http://www.cert.org/nav/our_feeds.html">RSS Feeds</a></li>
+</ul>
+</div>
+<script type="text/javascript">
+		 $('#email-address-field').resetField();
+	 </script>
+<!-- SUB-FOOTER END -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12114994-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body>
+</html>

@@ -1,0 +1,80 @@
+SEI InsightsHome > CERT/CC Blog > AMD Video Drivers Prevent the Use of the Most Secure Setting for Microsoft's Exploit Mitigation Experience Toolkit (EMET)
+        Vulnerability InsightsPosted on
+                        
+                            June  6, 2012
+                        
+
+Microsoft EMET is an effective way of preventing many vulnerabilities from being exploited; however, systems that use AMD or ATI video drivers do not support the feature that provides the highest amount of protection.
+Microsoft EMET is an effective way of preventing many vulnerabilities from being exploited; however, systems that use AMD or ATI video drivers do not support the feature that provides the highest amount of protection.
+Microsoft EMET is a utility that helps to prevent vulnerabilities from being exploited. Rather than reacting to specific, individual vulnerabilities, EMET proactively mitigates an entire class of vulnerabilities. Application crashes that could otherwise be exploited to run an attacker's code are reduced to crashes that may just cause a denial of service. The way that it accomplishes this is primarily through the defensive techniques of DEP (Data Execution Prevention) and ASLR (Address Space Layout Randomization). More information about DEP and ASLR is available in the Microsoft SRD Blog. The two main things to keep in mind with DEP and ASLR are:
+
+DEP and ASLR both must be used to provide protection.
+ASLR is supported only by Windows Vista or later. Windows XP, Server 2003, and earlier platforms do not support ASLR.
+
+ Along with other mitigation techniques, EMET provides a way to force DEP and ASLR to be enabled, regardless of whether the software vendor has decided to opt-in to use the features. The two ways that DEP and ASLR can be enabled with EMET are:
+
+On a system-wide basis
+On a per-application basis
+
+ The advantage of enabling DEP and ASLR on a system-wide basis is that those exploit mitigation techniques will be enforced for every single application that runs on a system, rather than only for the applications that have explicitly been added to the EMET list. To enable the ability to set ASLR to be "Always on" on a system-wide basis, set the following registry value to 1: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EMET\EnableUnsafeSettings  Why is this functionality not exposed by default? Some software is not compatible with ASLR and may not function properly as the result of enabling it or other EMET mitigations. The most critical example of this is the driver software for AMD and ATI video chips. If ASLR is enabled system-wide on a system that has AMD or ATI video drivers installed, then the machine may fail to boot properly, resulting in a "BSOD" crash.  The interesting impact of this incompatibility is that Microsoft Windows systems that have an AMD or an ATI video chip cannot be secured as well as systems with video chips that have ASLR-compatible drivers. In other words, environments that require the utmost security against attacks should avoid AMD/ATI video cards until the drivers support system-wide ASLR.  We are currently tracking video driver incompatibility with ASLR as VU#458153. If there are other drivers that are incompatible with system-wide ASLR, we'd like to hear about it.
+Update: June 28, 2012
+AMD has provided updated Catalyst drivers version 12.6 for supported Radeon hardware; these drivers are compatible with system-wide ASLR.
+Microsoft EMET is a utility that helps to prevent vulnerabilities from being exploited. Rather than reacting to specific, individual vulnerabilities, EMET proactively mitigates an entire class of vulnerabilities. Application crashes that could otherwise be exploited to run an attacker's code are reduced to crashes that may just cause a denial of service. The way that it accomplishes this is primarily through the defensive techniques of DEP (Data Execution Prevention) and ASLR (Address Space Layout Randomization). More information about DEP and ASLR is available in the Microsoft SRD Blog. The two main things to keep in mind with DEP and ASLR are: Along with other mitigation techniques, EMET provides a way to force DEP and ASLR to be enabled, regardless of whether the software vendor has decided to opt-in to use the features. The two ways that DEP and ASLR can be enabled with EMET are: The advantage of enabling DEP and ASLR on a system-wide basis is that those exploit mitigation techniques will be enforced for every single application that runs on a system, rather than only for the applications that have explicitly been added to the EMET list. To enable the ability to set ASLR to be "Always on" on a system-wide basis, set the following registry value to 1: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EMET\EnableUnsafeSettings  Why is this functionality not exposed by default? Some software is not compatible with ASLR and may not function properly as the result of enabling it or other EMET mitigations. The most critical example of this is the driver software for AMD and ATI video chips. If ASLR is enabled system-wide on a system that has AMD or ATI video drivers installed, then the machine may fail to boot properly, resulting in a "BSOD" crash.  The interesting impact of this incompatibility is that Microsoft Windows systems that have an AMD or an ATI video chip cannot be secured as well as systems with video chips that have ASLR-compatible drivers. In other words, environments that require the utmost security against attacks should avoid AMD/ATI video cards until the drivers support system-wide ASLR.  We are currently tracking video driver incompatibility with ASLR as VU#458153. If there are other drivers that are incompatible with system-wide ASLR, we'd like to hear about it.Update: June 28, 2012AMD has provided updated Catalyst drivers version 12.6 for supported Radeon hardware; these drivers are compatible with system-wide ASLR.
+ Contact Will Dormann
+     
+     
+     
+Visit the SEI Digital Library for other publications by Will
+           
+
+     View other blog posts by Will DormannPhone: 412-268-5800
+                    Toll Free: 888-201-4479
+                    Fax: 412-268-6257Contact Us
+4500 Fifth Avenue
+                    Pittsburgh, PA 15213-2612
+                    U.S.A.Directions
+CERT/CC
+
+Insider Threat
+
+SATURN
+
+SEI Blog
+
+DevOps
+   CERT/CC
+
+  Insider Threat
+
+  SATURN
+
+  SEI Blog
+
+  DevOps
+SEI Digital Library
+
+SEI Podcast Series
+
+SEI Webinar Series
+ SEI Overview
+
+Director's Message
+
+Our Organization
+
+Our People
+
+Year in Review
+
+Terms of Use
+
+Posted on
+                            
+                                January 15, 2018
+                            
+                            by 
+              Satya Venneti
+              
+Micro-expressions--involuntary, fleeting facial movements that reveal true emotions--hold valuable information for scenarios ranging from security interviews and interrogations to media analysis. They occur on various regions of the face, last only a fraction of a second, and are universal across...Terms of Use | Privacy Statement | Intellectual Property
+© 2016 Carnegie Mellon University.The Software Engineering Institute (SEI) is a federally funded research and development center (FFRDC) sponsored by the U.S. Department of Defense (DoD).
+It is operated by Carnegie Mellon University.

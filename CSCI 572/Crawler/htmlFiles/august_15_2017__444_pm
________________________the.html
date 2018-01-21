@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html itemscope="" itemtype="http://schema.org/Blog" lang="en-us">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<link href="/app.css" rel="stylesheet">
+<link href="/cert/styles.css" rel="stylesheet">
+<!--[if lt IE 9]>
+    <link rel="stylesheet" href="https://insights.sei.cmu.edu/cert/styles_ie.css">
+    <script src="/mt-static/support/theme_static/rainier/js/html5shiv.js"></script>
+    <![endif]-->
+<link href="https://insights.sei.cmu.edu/cert/" rel="start">
+<link href="https://insights.sei.cmu.edu/cert/atom.xml" rel="alternate" title="Recent Entries" type="application/atom+xml"/>
+<link href="https://insights.sei.cmu.edu/cert/2017/08/the-cert-guide-to-coordinated-vulnerability-disclosure.html" rel="canonical"/>
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-145208-4', 'auto');
+ga('create', 'UA-145208-5', 'auto', {'name': 'allProperties'});  // New tracker.
+ ga('send', 'pageview');
+ga('allProperties.send', 'pageview');
+
+
+ </script>
+<meta content="Blog Post" id="AssetType" name="AssetType"/>
+<title>The CERT Guide to Coordinated Vulnerability Disclosure</title>
+<meta content="We are happy to announce the release of the CERT® Guide to Coordinated Vulnerability Disclosure (CVD). The guide provides an introduction to the key concepts, principles, and roles necessary to establish a successful CVD process. It also provides insights into..." name="Description">
+<meta content="Best Practices" name="GSATaxonomyOutput"/>
+<meta content="Cyber Missions" name="GSATaxonomyOutput"/>
+<meta content="Vulnerability Analysis" name="GSATaxonomyOutput"/>
+<meta content="Vulnerability Discovery" name="GSATaxonomyOutput"/>
+<meta content="Vulnerability Mitigation" name="GSATaxonomyOutput"/>
+</meta></link></link></link></meta></meta></head>
+<body class="entry ">
+<!-- Google Tag Manager -->
+<noscript>
+<iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-T8C3C7" style="display:none;visibility:hidden" width="0"></iframe>
+</noscript>
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T8C3C7');
+</script>
+<!-- End Google Tag Manager -->
+<div class="superNav-wrapper show-for-large-up">
+<div class="row superNav">
+<div class="large-16 medium-16 small-16 columns">
+<ul class="superNavLinks left">
+<li><a href="https://www.cmu.edu/">CMU</a>
+</li>
+<li><a href="https://www.sei.cmu.edu/">SEI</a>
+</li>
+<li><a href="https://www.cert.org/">CERT Division</a>
+</li>
+</ul>
+<ul class="superNavLinks right">
+<li><a href="https://resources.sei.cmu.edu/library/">Digital Library</a>
+</li><li><a class="current" href="https://insights.sei.cmu.edu/">SEI Insights</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<section class="signature">
+<header class="contain-to-grid">
+<div class="row">
+<div class="large-16 column">
+<a href="/">
+<img class="left" src="https://insights.sei.cmu.edu/CERT_SEI_CMU.png">
+</img></a>
+<p class="right show-for-medium-up">SEI Insights</p>
+</div>
+</div>
+</header>
+</section>
+<section class="nav-search">
+<div class="row">
+<div class="large-9 medium-9 small-16 columns">
+<nav class="site-navigation" id="primary_nav_wrap" role="navigation">
+<ul class="menu">
+<li class="menu-item"><a href="/">Home</a>
+</li>
+<li class="menu-item"><a href="#">Blogs <i class="fa fa-caret-down"></i></a></li></ul></nav></div></div></section></body></html>
+<ul class="dropdown">
+<li class="menu-item sub-menu"><a href="/cert/">CERT/CC</a>
+</li>
+<li class="menu-item sub-menu"><a href="/devops/">DevOps</a>
+</li>
+<li class="menu-item sub-menu"><a href="/insider-threat/">Insider Threat</a>
+</li>
+<li class="menu-item sub-menu"><a href="/saturn/">SATURN</a>
+</li>
+<li class="menu-item sub-menu"><a href="/sei_blog/">SEI</a>
+</li>
+</ul>
+
+<li class="menu-item"><a href="/cats.html">Categories</a></li>
+<li class="menu-item"><a href="/authors.html">Authors</a>
+</li>
+
+
+
+<div class="large-7 medium-7 small-16 columns">
+<div class="row collapse">
+<div class="small-12 columns">
+<form action="/cgi-bin/mt/mt-search.cgi" method="GET">
+<input name="IncludeBlogs" type="hidden" value="11,14">
+<div class="icon-search"></div>
+<input id="search" name="search" placeholder="Search" type="text"/>
+</input></form></div>
+<div class="small-4 columns">
+<input class="button" type="submit" value="Search">
+</input></div>
+</div>
+</div>
+
+
+
+
+<div class="row">
+<div class="large-16 medium-16 small-16 columns breadcrumb">
+<p><a href="/">Home</a> &gt; <a href="/cert/">CERT/CC Blog</a> &gt; The CERT Guide to Coordinated Vulnerability Disclosure
+        </p>
+</div>
+</div>
+<div class="row">
+<div class="large-16 medium-16 small-16 columns">
+<div class="blog-title">
+<h3><strong>CERT/CC</strong> Blog</h3>
+<p><a href="http://insights.sei.cmu.edu/cert/atom.xml"><i class="fa fa-rss"></i></a></p>
+</div>
+<div class="blog-tag-line">
+<p id="ithreat">Vulnerability Insights</p>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="large-10 medium-10 small-12 columns">
+<section class="cta2">
+<h2 class="asset-name entry-title" itemprop="name"><i class="fa fa-stop cert-cc-color"></i> The CERT Guide to Coordinated Vulnerability Disclosure</h2>
+<p id="alert">Posted on
+                        <time datetime="August 15, 2017  4:44 PM" itemprop="datePublished">
+                            August 15, 2017
+                        </time>
+</p></section></div></div>
+                        by <span class="author entry-author vcard"><a href="/author/allen-householder">Allen Householder</a></span>
+                        
+                            
+                                in
+                                
+                                    <a href="https://insights.sei.cmu.edu/cert/vulnerability-analysis/" itemprop="articleSection" rel="tag">
+                                        Vulnerability Analysis
+                                    </a>
+
+<nav class="share-navigation" id="share" role="share">
+<ul class="inline-list">
+<li class="menu-item sub-menu facebook"><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Finsights.sei.cmu.edu%2Fcert%2F2017%2F08%2Fthe-cert-guide-to-coordinated-vulnerability-disclosure.html&amp;t=The%20CERT%20Guide%20to%20Coordinated%20Vulnerability%20Disclosure" target="_blank"><i class="fa fa-facebook"></i></a>
+</li>
+<li class="menu-item sub-menu twitter"><a href="http://twitter.com/intent/tweet?source=sharethiscom&amp;text=The%20CERT%20Guide%20to%20Coordinated%20Vulnerability%20Disclosure&amp;url=https%3A%2F%2Finsights.sei.cmu.edu%2Fcert%2F2017%2F08%2Fthe-cert-guide-to-coordinated-vulnerability-disclosure.html" target="_blank"><i class="fa fa-twitter"></i></a>
+</li>
+<li class="menu-item sub-menu googlePlus"><a href="https://plus.google.com/share?url=https%3A%2F%2Finsights.sei.cmu.edu%2Fcert%2F2017%2F08%2Fthe-cert-guide-to-coordinated-vulnerability-disclosure.html" target="_blank"><i class="fa fa-google-plus"></i></a>
+</li>
+<li class="menu-item sub-menu linkedIn"><a href="https://www.linkedin.com/company/software-engineering-institute"><i class="fa fa-linkedin"></i></a>
+</li>
+<li class="menu-item sub-menu emailPrint"><a href="javascript:window.print()" title="print"><i class="fa fa-print"></i></a>
+</li>
+<li class="menu-item sub-menu emailPrint">
+<a href="mailto:?subject=The%20CERT%20Guide%20to%20Coordinated%20Vulnerability%20Disclosure&amp;body=https%3A%2F%2Finsights.sei.cmu.edu%2Fcert%2F2017%2F08%2Fthe-cert-guide-to-coordinated-vulnerability-disclosure.html" target="_blank" title="Share by Email">
+<i class="fa fa-envelope"></i></a>
+</li>
+</ul>
+</nav>
+<p>
+<p>We are happy to announce the release of the <a href="https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=503330">CERT<sup>®</sup> Guide to Coordinated Vulnerability Disclosure</a> (CVD). The guide provides an introduction to the key concepts, principles, and roles necessary to establish a successful CVD process. It also provides insights into how CVD can go awry and how to respond when it does so.</p>
+</p>
+<p>
+<p>As a process, CVD is intended to minimize adversary advantage while an information security vulnerability is being mitigated. And it is important to recognize that CVD is a process, not an event. Releasing a patch or publishing a document are important events within the process, but do not define it.</p>
+<p>CVD participants can be thought of as repeatedly asking these questions: What actions should I take in response to knowledge of this vulnerability in this product? Who else needs to know what, and when do they need to know it? The CVD process for a vulnerability ends when the answers to these questions are nothing, and no one.</p>
+<p>If we have learned anything in nearly three decades of coordinating vulnerability reports at the CERT/CC, it is that there is no single right answer to many of the questions and controversies surrounding the disclosure of information about software and system vulnerabilities. The CERT Guide to CVD is a summary of what we know about a complex social process that surrounds humans trying to make the software and systems they use more secure. It's about what to do (and what not to) when you find a vulnerability, or when you find out about a vulnerability. It's written for vulnerability analysts, security researchers, developers, and deployers; it's for both technical staff and their management alike. While we discuss a variety of roles that play a part in the process, we intentionally chose not to focus on any one role; instead we wrote for any party that might find itself engaged in coordinating a vulnerability disclosure.</p>
+<p>In a sense, this report is a travel guide for what might seem a foreign territory. Maybe you've passed through once or twice. Maybe you've only heard about the bad parts. You may be uncertain of what to do next, nervous about making a mistake, or even fearful of what might befall you. If you count yourself as one of those individuals, we want to reassure you that you are not alone; you are not the first to experience events like these or even your reaction to them. We're locals. We've been doing this for a while. Here's what we know.</p>
+<h4 class="Body">Abstract</h4>
+<p><em>Security vulnerabilities remain a problem for vendors and deployers of software-based systems alike. Vendors play a key role by providing fixes for vulnerabilities, but they have no monopoly on the ability to discover vulnerabilities in their products and services. Knowledge of those vulnerabilities can increase adversarial advantage if deployers are left without recourse to remediate the risks they pose. Coordinated Vulnerability Disclosure (CVD) is the process of gathering information from vulnerability finders, coordinating the sharing of that information between relevant stakeholders, and disclosing the existence of software vulnerabilities and their mitigations to various stakeholders including the public. The CERT Coordination Center has been coordinating the disclosure of software vulnerabilities since its inception in 1988. This document is intended to serve as a guide to those who want to initiate, develop, or improve their own CVD capability. In it, the reader will find an overview of key principles underlying the CVD process, a survey of CVD stakeholders and their roles, and a description of CVD process phases, as well as advice concerning operational considerations and problems that may arise in the provision of CVD and related services.</em></p>
+<p>The <a href="https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=503330">CERT<sup>®</sup> Guide to Coordinated Vulnerability Disclosure</a> is available in the SEI Digital Library.</p>
+</p>
+<!--begin-->
+<header4>
+<div class="wrapper">
+<nav class="entry-navigation" id="entrynav" role="navigation">
+<ul class="menu">
+<li class="list_entry"><a href="https://insights.sei.cmu.edu/cert/2017/06/the-consequences-of-insecure-software-updates.html" title="Previous">&lt; Previous Article</a></li>
+</ul>
+</nav>
+</div></header4>
+<!--end-->
+
+<div class="wrapper more-from"><section class="cta2">
+<h2>About the Author</h2>
+<div class="more-from-author">
+<h3>Allen Householder</h3>
+<img align="left" id="auth" src="/mt-static/support/assets_c/userpics/userpic-85-100x100.png">
+<p>
+<i class="fa fa-envelope"></i> <a href="https://www.sei.cmu.edu/contact.cfm">Contact Allen Householder</a><br>
+     
+     
+     
+Visit the SEI Digital Library for <a href="https://resources.sei.cmu.edu/library/author.cfm?authorID=4483">other publications by Allen</a><br>
+           
+
+     View <a href="/author/allen-householder">other blog posts by Allen Householder</a><br/></br></br></p>
+</img></div>
+</section></div>
+<div class="wrapper">
+<section class="cta2">
+</section>
+</div>
+
+<div class="large-5 large-offset-1 medium-5 medium-offset-1 small-16 columns">
+<div class="wrapper">
+<section class="cta2">
+<nav class="widget-archive-monthly widget">
+<div class="now-trending">
+<h3>NOW TRENDING</h3>
+<ul class="fa-ul now-trending">
+<li><i class="fa-li fa fa-stop sei-color"></i>
+<a href="https://insights.sei.cmu.edu/sei_blog/2018/01/revealing-true-emotions-through-micro-expressions-a-machine-learning-approach.html">January 15, 2018  9:00 AM-
+                        Revealing True Emotions Through Micro-Expressions: A Machine Learning Approach</a>
+</li>
+<li><i class="fa-li fa fa-stop insider-threat-color"></i>
+<a href="https://insights.sei.cmu.edu/insider-threat/2018/01/announcing-insider-threat-program-evaluator-training-from-the-cert-national-insider-threat-center.html">January  5, 2018  8:36 PM-
+                        Announcing Insider Threat Program Evaluator Training from the CERT National Insider Threat Center</a>
+</li>
+<li><i class="fa-li fa fa-stop saturn-color"></i>
+<a href="https://insights.sei.cmu.edu/saturn/2017/10/call-for-papers-international-conference-on-technical-debt-techdebt-2018.html">October  3, 2017  1:49 PM-
+                        Call for Papers: International Conference on Technical Debt (TechDebt 2018)</a>
+</li>
+<li><i class="fa-li fa fa-stop cert-cc-color"></i>
+<a href="https://insights.sei.cmu.edu/cert/2017/08/the-cert-guide-to-coordinated-vulnerability-disclosure.html">August 15, 2017  4:44 PM-
+                        The CERT Guide to Coordinated Vulnerability Disclosure</a>
+</li>
+</ul>
+</div>
+<div class="blog-archive">
+<h3>ARCHIVE</h3>
+<div class="widget-content">
+<ul class="widget-list" style="margin-left:0px; list-style-position:inside">
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2017/08/">
+          August 2017 (1)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2017/06/">
+          June 2017 (1)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2017/04/">
+          April 2017 (1)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2016/11/">
+          November 2016 (1)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2016/10/">
+          October 2016 (1)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2016/08/">
+          August 2016 (1)
+        </a>
+</li>
+<br><br>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2017/">
+          2017 (3)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2016/">
+          2016 (13)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2015/">
+          2015 (18)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2014/">
+          2014 (17)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2013/">
+          2013 (30)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2012/">
+          2012 (14)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2011/">
+          2011 (7)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2010/">
+          2010 (4)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2009/">
+          2009 (12)
+        </a>
+</li>
+<li class="widget-list__item">
+<a href="https://insights.sei.cmu.edu/cert/2008/">
+          2008 (12)
+        </a>
+</li>
+</br></br></ul>
+</div>
+</div>
+</nav>
+<aside class="widgets widgets-related widgets-bottom" role="complementary"><div><div class="widgets-bottom-inner" id="widgets-masonry-container">
+</div></div></aside>
+<nav class="widget-archive-category widget">
+<div class="categories-archive">
+<h3>TOP CATEGORIES</h3>
+<div class="widget-content">
+<ul class="widget-list">
+<li> <a href="https://insights.sei.cmu.edu/saturn/architecture-centric-practices/">Architecture-Centric Practices</a> 147 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/saturn/architecture-centric-engineering/">Architecture-Centric Engineering</a> 146 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/insider-threat/insider-threat/">Insider Threat</a> 139 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/saturn/saturn-conference/">SATURN Conference</a> 137 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/saturn/conferences-and-events/">Conferences and Events</a> 102 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/cert/vulnerability-analysis/">Vulnerability Analysis</a> 87 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/sei_blog/architecture/">Architecture</a> 79 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/devops/devops/">DevOps</a> 49 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/cert/vulnerability-discovery/">Vulnerability Discovery</a> 43 Posts</li>
+<li> <a href="https://insights.sei.cmu.edu/sei_blog/agile/">Agile</a> 42 Posts</li>
+</ul>
+</div>
+<a class="view-all" href="/cats.html">View All</a>
+</div>
+</nav>
+</section>
+</div>
+</div>
+
+<section class="features2 footer">
+<div class="row wrapper">
+<div class="large-5 medium-5 small-16 columns feature2">
+<img alt="SEI" src="/img/seiblack.png">
+<h3>CONNECT</h3>
+<nav class="social-links">
+<a class="social-button" href="https://www.facebook.com/SEICMU" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a>
+<a class="social-button" href="https://twitter.com/seinews" target="_blank"><i class="fa fa-twitter"></i></a>
+<a class="social-button" href="https://www.linkedin.com/company/software-engineering-institute" target="_blank"><i class="fa fa-linkedin"></i></a>
+<a class="social-button" href="https://www.youtube.com/user/TheSEICMU" title="YouTube"><i class="fa fa-youtube"></i></a>
+</nav>
+<h3>CONTACT</h3>
+<p>Phone: 412-268-5800
+                    <br>Toll Free: 888-201-4479
+                    <br>Fax: 412-268-6257</br></br></p>
+<p><a class="button orange" href="http://www.sei.cmu.edu/contact.cfm">Contact Us</a>
+</p>
+<h3>SOFTWARE ENGINEERING INSTITUTE</h3>
+<p>4500 Fifth Avenue
+                    <br>Pittsburgh, PA 15213-2612
+                    <br>U.S.A.</br></br></p>
+<p><a class="button orange" href="https://www.google.com/maps?f=d&amp;source=s_d&amp;saddr&amp;daddr=4500+Fifth+Ave,+Pittsburgh,+PA+15213&amp;hl=en&amp;geocode&amp;gl=us&amp;mra=prev&amp;sll=40.447127,-79.949741&amp;sspn=0.010973,0.019205&amp;ie=UTF8&amp;ll=40.446914,-79.949741&amp;spn=0.011382,0.019205&amp;z=16">Directions</a>
+</p>
+</img></div>
+<div class="large-4 large-offset-1 medium-4 medium-offset-1 small-16 columns feature2">
+<div class="links">
+<h3>BLOGS</h3>
+<p><a href="/cert">CERT/CC</a>
+<br>
+<a href="/insider-threat">Insider Threat</a>
+<br>
+<a href="/saturn">SATURN</a>
+<br>
+<a href="/sei_blog">SEI Blog</a>
+<br>
+<a href="/devops">DevOps</a>
+</br></br></br></br></p>
+<h3>FEEDS</h3>
+<p> <a href="/cert/atom.xml"><i class="fa fa-rss"></i>  CERT/CC</a>
+<br>
+<a href="/insider-threat/atom.xml"><i class="fa fa-rss"></i>  Insider Threat</a>
+<br>
+<a href="/saturn/rss.xml"><i class="fa fa-rss"></i>  SATURN</a>
+<br>
+<a href="/sei_blog/rss.xml"><i class="fa fa-rss"></i>  SEI Blog</a>
+<br>
+<a href="/devops/rss.xml"><i class="fa fa-rss"></i>  DevOps</a>
+</br></br></br></br></p>
+<h3>SEI LIBRARY</h3>
+<p><a href="http://resources.sei.cmu.edu/library/">SEI Digital Library</a>
+<br>
+<a href="http://www.sei.cmu.edu/podcasts/">SEI Podcast Series</a>
+<br>
+<a href="http://www.sei.cmu.edu/webinars/">SEI Webinar Series</a>
+</br></br></p>
+<h3>ABOUT THE SEI</h3>
+<p> <a href="http://www.sei.cmu.edu/about/">SEI Overview</a>
+<br>
+<a href="http://www.sei.cmu.edu/about/message/index.cfm">Director's Message</a>
+<br>
+<a href="http://www.sei.cmu.edu/about/organization/index.cfm">Our Organization</a>
+<br>
+<a href="http://www.sei.cmu.edu/about/people/index.cfm">Our People</a>
+<br>
+<a href="http://www.sei.cmu.edu/about/yearinreview/index.cfm">Year in Review</a>
+<br>
+<a href="http://www.sei.cmu.edu/legal/index.cfm?_ga=1.112128132.107256436.1438697577">Terms of Use</a>
+<br>
+</br></br></br></br></br></br></p></div>
+</div>
+<div class="large-6 medium-6 small-16 columns feature2">
+<div class="latest-trending">
+<h3>LATEST POST</h3>
+<div id="latestpost">
+<h3><a href="https://insights.sei.cmu.edu/sei_blog/2018/01/revealing-true-emotions-through-micro-expressions-a-machine-learning-approach.html">
+                            Revealing True Emotions Through Micro-Expressions: A Machine Learning Approach
+                                </a></h3>
+<p id="alert">Posted on
+                            <time datetime="January 15, 2018  9:00 AM" itemprop="datePublished">
+                                January 15, 2018
+                            </time>
+                            by <span class="author entry-author vcard">
+              Satya Venneti
+              </span>
+</p>
+<div id="latestpostleft">
+<img align="left" id="auth" src="/mt-static/support/assets_c/userpics/userpic-157-100x100.png">
+</img></div>
+<div id="latestpostright">
+<p>Micro-expressions--involuntary, fleeting facial movements that reveal true emotions--hold valuable information for scenarios ranging from security interviews and interrogations to media analysis. They occur on various regions of the face, last only a fraction of a second, and are universal across...</p>
+</div>
+</div>
+<div class="now-trending">
+<h3>NOW TRENDING</h3>
+<ul>
+<li>
+<a href="https://insights.sei.cmu.edu/insider-threat/2018/01/announcing-insider-threat-program-evaluator-training-from-the-cert-national-insider-threat-center.html">
+                                    Announcing Insider Threat Program Evaluator Training from the CERT National Insider Threat Center
+                                </a>
+</li>
+<li>
+<a href="https://insights.sei.cmu.edu/sei_blog/2018/01/bitcoin-blockchain-machine-learning-and-ransomware-the-top-10-posts-of-2017.html">
+                                    Bitcoin, Blockchain, Machine Learning, and Ransomware: The Top 10 Posts of 2017
+                                </a>
+</li>
+<li>
+<a href="https://insights.sei.cmu.edu/insider-threat/2017/12/governing-the-internet-of-things.html">
+                                    Governing the Internet of Things (IoT)
+                                </a>
+</li>
+<li>
+<a href="https://insights.sei.cmu.edu/insider-threat/2017/12/mapping-CRR-to-FFIEC-CAT.html">
+                                    Mapping the Cyber Resilience Review to the Financial Sector's Cybersecurity Assessment Tool
+                                </a>
+</li>
+<li>
+<a href="https://insights.sei.cmu.edu/sei_blog/2018/01/revealing-true-emotions-through-micro-expressions-a-machine-learning-approach.html">
+                                    Revealing True Emotions Through Micro-Expressions: A Machine Learning Approach
+                                </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="footer-terms">
+<div class="row">
+<div class="large-5 medium-5 small-16 columns feature2">
+<p><a href="http://www.sei.cmu.edu/legal/index.cfm">Terms of Use</a> | <a href="http://www.sei.cmu.edu/legal/privacy/index.cfm">Privacy Statement</a> | <a href="http://www.sei.cmu.edu/legal/ip/index.cfm">Intellectual Property</a><br>
+© 2016 Carnegie Mellon University.</br></p>
+</div>
+<div class="large-10 large-offset-1 medium-10 medium-offset-1 small-16 columns feature2">
+<p>The Software Engineering Institute (SEI) is a federally funded research and development center (FFRDC) sponsored by the U.S. Department of Defense (DoD).
+It is operated by Carnegie Mellon University.</p>
+</div>
+</div></section>
+
+

@@ -1,0 +1,72 @@
+Published November 6, 2017 | Updated November 8, 2017
+The Pixel&hairsp;/&hairsp;Nexus Security Bulletin contains details of security vulnerabilities
+and functional improvements affecting supported
+Google Pixel and Nexus devices (Google devices).
+For Google devices, security patch levels of 2017-11-05 or later also address all
+issues in this bulletin. To learn how to check a device's security patch level, see Check and update your
+Android version.
+
+All supported Google devices will receive an update to the 2017-11-05 patch
+level. We encourage all customers to accept these updates to their devices.
+
+Note: The Google device firmware images are available on the Google Developer site.
+
+In addition to the security vulnerabilities described in the November 2017 Android
+Security Bulletin, Pixel and Nexus devices also contain patches for the
+security vulnerabilities described below. Partners were notified of these issues
+at least a month ago and may choose to incorporate them as part of their device
+updates.
+
+Vulnerabilities are grouped under the component that they affect. There is a
+description of the issue and a table with the CVE, associated references, type of vulnerability, severity,
+and updated Android Open Source Project (AOSP) versions (where applicable). When
+available, we link the public change that addressed the issue to the bug ID,
+like the AOSP change list. When multiple changes relate to a single bug,
+additional references are linked to numbers following the bug ID.
+
+These updates are included for affected Pixel devices to address functionality
+issues not related to the security of Pixel devices. The table includes
+associated references; the affected category, such as Bluetooth or mobile data;
+and a summary of the issue.
+
+This section answers common questions that may occur after reading this
+bulletin.
+
+1. How do I determine if my device is updated to address these issues?
+
+
+Security patch levels of 2017-11-05 or later address all issues associated with
+the 2017-11-05 security patch level and all previous patch levels. To learn how
+to check a device's security patch level, read the instructions on the Pixel
+and Nexus update schedule.
+
+2. What do the entries in the Type column mean?
+
+Entries in the Type column of the vulnerability details table reference
+the classification of the security vulnerability.
+
+3. What do the entries in the References column mean?
+
+Entries under the References column of the vulnerability details table
+may contain a prefix identifying the organization to which the reference value
+belongs.
+
+4. What does a * next to the Android bug ID in the References
+column mean?
+
+Issues that are not publicly available have a * next to the Android bug ID in
+the References column. The update for that issue is generally contained
+in the latest binary drivers for Nexus devices available from the Google Developer
+site.
+
+5. Why are security vulnerabilities split between this bulletin and the
+Android Security Bulletins?
+
+Security vulnerabilities that are documented in the Android Security Bulletins
+are required in order to declare the latest security patch level on Android
+devices. Additional security vulnerabilities, such as those documented in this
+bulletin, are not required for declaring a security patch level.
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 3.0 License, and code samples are licensed under the Apache 2.0 License. For details, see our Site Policies. Java is a registered trademark of Oracle and/or its affiliates.
+      
+      Last updated November 8, 2017.
+    

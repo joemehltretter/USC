@@ -1,0 +1,779 @@
+
+<!DOCTYPE doctype html>
+
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta content="ie=edge" http-equiv="x-ua-compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<script type="text/javascript">
+		ajaxurl = 'https://cloudblogs.microsoft.com/microsoftsecure/wp-admin/admin-ajax.php';
+	</script>
+<title>SSN for authentication is all wrong – Microsoft Secure</title>
+<script>
+dataLayer = [{"title":"SSN for authentication is all wrong","author":"Jenny Erie","wordcount":965,"logged_in":"false","page_id":74725,"post_date":"2017-10-23 12:00:38"}];
+</script>
+<link href="//az725175.vo.msecnd.net" rel="dns-prefetch"/>
+<link href="//s.w.org" rel="dns-prefetch"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/feed/" rel="alternate" title="Microsoft Secure » SSN for authentication is all wrong Comments Feed" type="text/xml"/>
+<meta content="article" property="og:type"/>
+<meta content="SSN for authentication is all wrong" property="og:title"/>
+<meta content="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/" property="og:url"/>
+<meta content="Unless you were stranded on a deserted island or participating in a zen digital fast chances are you’ve heard plenty about the massive Equifax breach and the head-rolling fallout. In the flurry of headlines and advice about credit freezes an important part of the conversation was lost: if we didn’t misuse our social security numbers," property="og:description"/>
+<meta content="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Identity-282x315.png" property="og:image"/>
+<meta content="282" property="og:image:width"/>
+<meta content="315" property="og:image:height"/>
+<meta content="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Identity-282x315.png" name="twitter:image"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="SSN for authentication is all wrong" name="twitter:title"/>
+<meta content="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/" name="twitter:url"/>
+<meta content="@msftsecurity" name="twitter:site"/>
+<meta content="Unless you were stranded on a deserted island or participating in a zen digital fast chances are you’ve heard plenty about the massive Equifax breach and the head-rolling fallout. In the flurry of headlines and advice about credit freezes an important part of the conversation was lost: if we didn’t misuse our social security numbers," name="twitter:description"/>
+<meta content="SSN for authentication is all wrong" name="Search.Title" property="Search.Title"/>
+<meta content="ceblognetwork" name="Search.Network" property="Search.Network"/>
+<meta content="Unless you were stranded on a deserted island or participating in a zen digital fast chances are you’ve heard plenty about the massive Equifax breach and the head-rolling fallout. In the flurry of headlines and advice about credit freezes an important part of the conversation was lost: if we didn’t misuse our social security numbers," name="Search.Excerpt" property="Search.Excerpt"/>
+<meta content="Featured" name="Search.Tags" property="Search.Tags"/>
+<meta content="Cybersecurity, Data Privacy, Tips &amp; Talk, Uncategorized" name="Search.Categories" property="Search.Categories"/>
+<meta content="October 23, 2017" name="Search.PublishedDate" property="Search.PublishedDate"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/cloudblogs.microsoft.com\/microsoftsecure\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<meta content="Jenny Erie" name="ms.author" property="ms.author"/>
+<meta content="Industry Trends" name="ms.pagetype" property="ms.pagetype"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/enterprisemobility/dist/images/favicon-technet.png" rel="shortcut icon">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/enterprisemobility/dist/styles/main.css?ver=msem_9900357" id="sage/childcss-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/styles/main.css?ver=msce_9900357" id="sage/css-css" media="all" rel="stylesheet" type="text/css"/>
+<!--[if lte IE 9]><link rel='stylesheet' id='ie9css1-css'  href='https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/styles/main_ie9-blessed1.css?ver=msce_9900357' type='text/css' media='all' />
+<![endif]--><!--[if lte IE 9]><link rel='stylesheet' id='ie9css2-css'  href='https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/styles/main_ie9.css?ver=msce_9900357' type='text/css' media='all' />
+<![endif]--><script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript"></script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" type="text/javascript"></script>
+<script src="https://az725175.vo.msecnd.net/scripts/jsll-4.2.1.js" type="text/javascript"></script>
+<!--[if lte IE 9]><script type='text/javascript' src='https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/scripts/flexibility.js?ver=3.7.2'></script>
+<![endif]--><link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-json/" rel="https://api.w.org/"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/windows-defender-exploit-guard-reduce-the-attack-surface-against-next-generation-malware/" rel="prev" title="Windows Defender Exploit Guard: Reduce the attack surface against next-generation malware"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/24/a-4-point-action-plan-for-proactive-security/" rel="next" title="A 4-point action plan for proactive security"/>
+<meta content="WordPress 4.9.1" name="generator"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/" rel="canonical"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/?p=74725" rel="shortlink"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcloudblogs.microsoft.com%2Fmicrosoftsecure%2F2017%2F10%2F23%2Fssn-for-authentication-is-all-wrong%2F" rel="alternate" type="application/json+oembed"/>
+<link href="https://cloudblogs.microsoft.com/microsoftsecure/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcloudblogs.microsoft.com%2Fmicrosoftsecure%2F2017%2F10%2F23%2Fssn-for-authentication-is-all-wrong%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+<link href="https://statics-uhf-eus.akamaized.net/west-european/shell/_scrf/css/themes=default.device=uplevel_web_pc/21-ecd6ef/6a-459940/9d-005998/14-a4dc48/e0-030d39/4b-120352/5a-621a2e?ver=2.0" media="all" rel="stylesheet" type="text/css"/><link href="https://uhf.microsoft.com/mscc/statics/mscc-0.3.7.min.css" rel="stylesheet" type="text/css"/> <meta content="Post" name="awa-pageType">
+<meta content="en-us" name="awa-market">
+<meta content="Production" name="awa-env">
+<!-- JSLL tracking -->
+<script>
+		var config = {
+			syncMuid: awa.utils.isValueAssigned(awa.cookie.getCookie("MSCC")),
+			userConsentCookieName: "MSCC",
+			coreData: {
+				appId: "CloudBlogs",
+			},
+		};
+		awa.init(config);
+	</script>
+<script src="https://statics-uhf-eus.akamaized.net/shell/_scrf/js/themes=default/a9-7a153c/75-5a6f00/2d-ec94e0/8a-743b47/ad-6e0df3/c0-ce5530/60-8edf46/f0-b41b18/d6-85d258/60-83556e/e5-8544d9/bf-391770/c9-7479f7/34-f17a8e/3b-c900a6/3f-cf48da/c2-fbaa77/55-ebcaeb/cd-c177a3/39-97641b/c2-55b6fb/c6-dff7f7/af-eb98d9/1f-f0db2b/7c-5650f2/c4-f116b7/8c-25ae9a/de-a04f90/26-493871/fc-fc1204/da-a2b29b?ver=2.0&amp;iife=1"></script><script src="https://mem.gfx.ms/meversion?partner=MSCloudBlogs&amp;market=en-us"></script><script src="https://uhf.microsoft.com/mscc/statics/mscc-0.3.7.min.js"></script></meta></meta></meta></link></meta></meta></meta></head>
+<link href="https://statics-uhf-eus.akamaized.net/west-european/shell/_scrf/css/themes=default.device=uplevel_web_pc/21-ecd6ef/6a-459940/9d-005998/14-a4dc48/e0-030d39/4b-120352/5a-621a2e?ver=2.0" media="all" rel="stylesheet" type="text/css"/><link href="https://uhf.microsoft.com/mscc/statics/mscc-0.3.7.min.css" rel="stylesheet" type="text/css"/><script src="https://statics-uhf-eus.akamaized.net/shell/_scrf/js/themes=default/a9-7a153c/75-5a6f00/2d-ec94e0/8a-743b47/ad-6e0df3/c0-ce5530/60-8edf46/f0-b41b18/d6-85d258/60-83556e/e5-8544d9/bf-391770/c9-7479f7/34-f17a8e/3b-c900a6/3f-cf48da/c2-fbaa77/55-ebcaeb/cd-c177a3/39-97641b/c2-55b6fb/c6-dff7f7/af-eb98d9/1f-f0db2b/7c-5650f2/c4-f116b7/8c-25ae9a/de-a04f90/26-493871/fc-fc1204/da-a2b29b?ver=2.0&amp;iife=1"></script><script src="https://mem.gfx.ms/meversion?partner=MSCloudBlogs&amp;market=en-us"></script><script src="https://uhf.microsoft.com/mscc/statics/mscc-0.3.7.min.js"></script>
+<body class="post-template-default single single-post postid-74725 single-format-standard microsoft-uhf ssn-for-authentication-is-all-wrong sidebar-primary" id="top-of-the-page">
+<a class="screen-reader-shortcut x-hidden-focus" href="#main">Skip to content</a>
+<section data-m='{"cN":"headerArea","cT":"Area_coreuiArea","id":"a1Body","sN":1,"aN":"Body"}' id="headerArea">
+<div data-m='{"cN":"headerRegion","cT":"Region_coreui-region","id":"r1a1","sN":1,"aN":"a1"}' data-region-key="headerregion" id="headerRegion">
+<div data-m='{"cN":"headerUniversalHeader","cT":"Module_coreui-universalheader","id":"m1r1a1","sN":1,"aN":"r1a1"}' data-module-id="Category|headerRegion|headerRegion|headerUniversalHeader|coreui-universalheader" id="headerUniversalHeader">
+<div class="x-hidden x-hidden-vp1 x-hidden-vp2 uhfc-universal-context context-uhf" data-m='{"cN":"epb_cont","cT":"Container","id":"c1m1r1a1","sN":1,"aN":"m1r1a1"}' id="epb">
+<div class="c-uhfh-alert f-information epb-container epb-default-color" data-m='{"cT":"Container","id":"c1c1m1r1a1","sN":1,"aN":"c1m1r1a1"}' role="alert">
+<div>
+<p class="c-paragraph">
+<img alt="Microsoft Edge" class="f-img-lzy" data-src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/REZlo1?ver=5722"/>
+<span class="c-text-group">
+<span class="epb-launch">Try Microsoft Edge</span>
+<span class="epb-text">A fast and secure browser that's designed for Windows 10</span>
+</span>
+<span class="c-group">
+<button aria-label="No thanks" class="c-action-trigger c-action-cancel glyph-cancel" data-m='{"cN":"EPB-dismiss_nonnav","id":"nn1c1c1m1r1a1","sN":1,"aN":"c1c1m1r1a1"}' id="close-epb">No thanks</button>
+<a aria-label="Open web page in Microsoft Edge" class="epb-launch c-action-trigger c-action-open" data-m='{"cN":"EPB-launch_nav","id":"n2c1c1m1r1a1","sN":2,"aN":"c1c1m1r1a1"}' data-telem-qsp="form=MY009W" id="epbTryNow">Get started</a>
+</span>
+</p>
+</div>
+</div>
+</div>
+<div data-m='{"cN":"cookiebanner_cont","cT":"Container","id":"c2c1m1r1a1","sN":2,"aN":"c1m1r1a1"}'>
+<div id="uhfCookieAlert">
+<div class="cc-banner" data-mscc-version="0.3.6" data-nver="aspnet-2.0.7" data-site-name="Microsoft.OneRenderFramework.Core" data-sver="0.1.2" dir="ltr" id="msccBanner" role="alert"><div class="cc-container"><svg class="cc-icon cc-v-center" fill="none" height="30px" stroke="currentColor" viewbox="0 0 44 44" x="0px" y="0px"><circle cx="22" cy="22" r="20" stroke-width="2"></circle><line stroke-width="3" x1="22" x2="22" y1="18" y2="33"></line><line stroke-width="3" x1="22" x2="22" y1="12" y2="15"></line></svg> <span class="cc-v-center cc-text">This site uses cookies for analytics, personalized content and ads. By continuing to browse this site, you agree to this use.</span> <a aria-label="Learn more about Microsoft's Cookie Policy" class="cc-link cc-v-center cc-float-right" data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?linkid=845480" id="msccLearnMore">Learn more</a></div></div>
+</div>
+</div>
+<header class="c-uhfh context-uhf no-js " data-ckrate="0.1" data-header-footprint="en-us/MSCloudBlogs/MSHybridCloudHeader" itemscope="itemscope" itemtype="http://schema.org/Organization" role="banner">
+<div class="theme-light js-global-head f-closed " data-m='{"cN":"Universal Header_cont","cT":"Container","id":"c3c1m1r1a1","sN":3,"aN":"c1m1r1a1"}'>
+<div class="c-uhfh-gcontainer">
+<button aria-expanded="false" aria-label="Header navigation menu" class="c-action-trigger c-glyph glyph-global-nav-button" data-m='{"cN":"Mobile menu button_nonnav","id":"nn1c3c1m1r1a1","sN":1,"aN":"c3c1m1r1a1"}'></button>
+<button aria-expanded="false" aria-label="Close search" class="c-action-trigger c-glyph glyph-arrow-htmllegacy" data-m='{"cN":"Close Search_nonnav","id":"nn2c3c1m1r1a1","sN":2,"aN":"c3c1m1r1a1"}'></button>
+<a aria-label="Microsoft" class="c-logo" data-m='{"cN":"GlobalNav_Logo_cont","cT":"Container","id":"c4c3c1m1r1a1","sN":4,"aN":"c3c1m1r1a1"}' href="https://www.microsoft.com" id="uhfLogo" itemprop="url">
+<img alt="Microsoft" class="c-image" itemprop="logo" itemscope="itemscope" role="none" src="https://assets.onestore.ms/cdnfiles/external/uhf/long/9a49a7e9d8e881327e81b9eb43dabc01de70a9bb/images/microsoft-gray.png"/>
+<span aria-hidden="true">Microsoft</span>
+</a>
+<div class="f-mobile-title">
+<button aria-label="See more menu options" class="c-action-trigger c-glyph glyph-chevron-left" data-m='{"cN":"Mobile back button_nonnav","id":"nn5c3c1m1r1a1","sN":5,"aN":"c3c1m1r1a1"}'></button>
+<span class="js-mobile-title" data-global-title="Microsoft home"></span>
+<button aria-label="See more menu options" class="c-action-trigger c-glyph glyph-chevron-right" data-m='{"cN":"Mobile forward button_nonnav","id":"nn6c3c1m1r1a1","sN":6,"aN":"c3c1m1r1a1"}'></button>
+</div>
+<button aria-label="Show previous" class="c-action-trigger c-glyph glyph-chevron-left js-primary-paddle" data-m='{"cN":"Previous_nonnav","id":"nn7c3c1m1r1a1","sN":7,"aN":"c3c1m1r1a1"}' tabindex="-1"></button>
+<nav aria-labelledby="uhfLogo" class="c-uhfh-gnav" data-m='{"cN":"Global nav_cont","cT":"Container","id":"c8c3c1m1r1a1","sN":8,"aN":"c3c1m1r1a1"}' id="uhf-g-nav" role="navigation">
+<ul class="js-paddle-items" role="none"><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_Microsoft 365_nav","id":"n1c8c3c1m1r1a1","sN":1,"aN":"c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/microsoft-365" id="shellmenu_0">Microsoft 365</a>
+</li><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_Azure_nav","id":"n2c8c3c1m1r1a1","sN":2,"aN":"c8c3c1m1r1a1"}' href="https://azure.microsoft.com" id="shellmenu_1">Azure</a>
+</li><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_Office 365_nav","id":"n3c8c3c1m1r1a1","sN":3,"aN":"c8c3c1m1r1a1"}' href="https://products.office.com/en-us/business/office" id="shellmenu_2">Office 365</a>
+</li><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_Dynamics 365_nav","id":"n4c8c3c1m1r1a1","sN":4,"aN":"c8c3c1m1r1a1"}' href="https://dynamics.microsoft.com/en-us/" id="shellmenu_3">Dynamics 365</a>
+</li><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_SQL_nav","id":"n5c8c3c1m1r1a1","sN":5,"aN":"c8c3c1m1r1a1"}' href="https://www.microsoft.com/sql-server/" id="shellmenu_4">SQL</a>
+</li><li>
+<a class="c-uhf-nav-link" data-m='{"cN":"GlobalNav_Windows 10_nav","id":"n6c8c3c1m1r1a1","sN":6,"aN":"c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/windowsforbusiness" id="shellmenu_5">Windows 10</a>
+</li><li>
+<div class="c-uhf-menu js-nav-menu">
+<button aria-expanded="false" aria-haspopup="true" data-m='{"cN":"GlobalNav_More_nonnav","id":"nn7c8c3c1m1r1a1","sN":7,"aN":"c8c3c1m1r1a1"}' id="More-navigation" style="white-space:nowrap">More</button>
+<ul aria-hidden="true" aria-labelledby="More-navigation" class="f-multi-column f-multi-column-6" data-m='{"cN":"More_cont","cT":"Container","id":"c8c8c3c1m1r1a1","sN":8,"aN":"c8c3c1m1r1a1"}' role="none">
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c1c8c8c3c1m1r1a1","sN":1,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c1c8c8c3c1m1r1a1","sN":1,"aN":"c1c8c8c3c1m1r1a1"}' id="Products&amp;Services-navigation">Products &amp; Services</button>
+<ul aria-hidden="true" aria-labelledby="Products&amp;Services-navigation" role="none">
+<li data-m='{"cN":"More_ProductsandServices_WindowsServer_cont","cT":"Container","id":"c2c1c8c8c3c1m1r1a1","sN":2,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_ProductsandServices_WindowsServer_nav","id":"n1c2c1c8c8c3c1m1r1a1","sN":1,"aN":"c2c1c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/cloud-platform/windows-server" id="shellmenu_8">Windows Server</a>
+</li>
+<li data-m='{"cN":"More_ProductsandServices_EnterpriseMobilityandSecurity_cont","cT":"Container","id":"c3c1c8c8c3c1m1r1a1","sN":3,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_ProductsandServices_EnterpriseMobilityandSecurity_nav","id":"n1c3c1c8c8c3c1m1r1a1","sN":1,"aN":"c3c1c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/cloud-platform/enterprise-mobility-security" id="shellmenu_9">Enterprise Mobility + Security</a>
+</li>
+<li data-m='{"cN":"More_ProductsandServices_PowerBI_cont","cT":"Container","id":"c4c1c8c8c3c1m1r1a1","sN":4,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_ProductsandServices_PowerBI_nav","id":"n1c4c1c8c8c3c1m1r1a1","sN":1,"aN":"c4c1c8c8c3c1m1r1a1"}' href="https://powerbi.microsoft.com/en-us/" id="shellmenu_10">Power BI</a>
+</li>
+<li data-m='{"cN":"More_ProductsandServices_Teams_cont","cT":"Container","id":"c5c1c8c8c3c1m1r1a1","sN":5,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_ProductsandServices_Teams_nav","id":"n1c5c1c8c8c3c1m1r1a1","sN":1,"aN":"c5c1c8c8c3c1m1r1a1"}' href="https://products.office.com/en-us/microsoft-teams/group-chat-software" id="shellmenu_11">Teams</a>
+</li>
+<li data-m='{"cN":"DeveloperAndIT_VisualStudio_cont","cT":"Container","id":"c6c1c8c8c3c1m1r1a1","sN":6,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_DeveloperAndIT_VisualStudio_nav","id":"n1c6c1c8c8c3c1m1r1a1","sN":1,"aN":"c6c1c8c8c3c1m1r1a1"}' href="https://www.visualstudio.com/" id="shellmenu_12">Visual Studio</a>
+</li>
+<li data-m='{"cN":"More_ProductsandServices_SurfaceforBusiness_cont","cT":"Container","id":"c7c1c8c8c3c1m1r1a1","sN":7,"aN":"c1c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_ProductsandServices_SurfaceforBusiness_nav","id":"n1c7c1c8c8c3c1m1r1a1","sN":1,"aN":"c7c1c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/surface/business/overview" id="shellmenu_13">Surface for Business</a>
+</li>
+</ul>
+</li>
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c2c8c8c3c1m1r1a1","sN":2,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c2c8c8c3c1m1r1a1","sN":1,"aN":"c2c8c8c3c1m1r1a1"}' id="EmergingTechnologies-navigation">Emerging Technologies</button>
+<ul aria-hidden="true" aria-labelledby="EmergingTechnologies-navigation" role="none">
+<li data-m='{"cN":"More_EmergingTechnologies_AI_cont","cT":"Container","id":"c2c2c8c8c3c1m1r1a1","sN":2,"aN":"c2c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_EmergingTechnologies_AI_nav","id":"n1c2c2c8c8c3c1m1r1a1","sN":1,"aN":"c2c2c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/ai/" id="shellmenu_15">AI</a>
+</li>
+<li data-m='{"cN":"More_EmergingTechnologies_InternetofThings_cont","cT":"Container","id":"c3c2c8c8c3c1m1r1a1","sN":3,"aN":"c2c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_EmergingTechnologies_InternetofThings_nav","id":"n1c3c2c8c8c3c1m1r1a1","sN":1,"aN":"c3c2c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/internet-of-things" id="shellmenu_16">Internet of Things</a>
+</li>
+<li data-m='{"cN":"More_EmergingTechnologies_AzureCognitiveServices_cont","cT":"Container","id":"c4c2c8c8c3c1m1r1a1","sN":4,"aN":"c2c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_EmergingTechnologies_AzureCognitiveServices_nav","id":"n1c4c2c8c8c3c1m1r1a1","sN":1,"aN":"c4c2c8c8c3c1m1r1a1"}' href="https://azure.microsoft.com/services/cognitive-services/" id="shellmenu_17">Azure Cognitive Services</a>
+</li>
+<li data-m='{"cN":"More_EmergingTechnologies_Quantum_cont","cT":"Container","id":"c5c2c8c8c3c1m1r1a1","sN":5,"aN":"c2c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_EmergingTechnologies_Quantum_nav","id":"n1c5c2c8c8c3c1m1r1a1","sN":1,"aN":"c5c2c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/quantum/" id="shellmenu_18">Quantum</a>
+</li>
+<li data-m='{"cN":"More_EmergingTechnologies_Research_cont","cT":"Container","id":"c6c2c8c8c3c1m1r1a1","sN":6,"aN":"c2c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_EmergingTechnologies_Research_nav","id":"n1c6c2c8c8c3c1m1r1a1","sN":1,"aN":"c6c2c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/research/" id="shellmenu_19">Research</a>
+</li>
+</ul>
+</li>
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c3c8c8c3c1m1r1a1","sN":3,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c3c8c8c3c1m1r1a1","sN":1,"aN":"c3c8c8c3c1m1r1a1"}' id="Developer&amp;IT-navigation">Developer &amp; IT</button>
+<ul aria-hidden="true" aria-labelledby="Developer&amp;IT-navigation" role="none">
+<li data-m='{"cN":"More_DeveloperAndIT_Docs.microsoft.com_cont","cT":"Container","id":"c2c3c8c8c3c1m1r1a1","sN":2,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_DeveloperAndIT_Docs.microsoft.com_nav","id":"n1c2c3c8c8c3c1m1r1a1","sN":1,"aN":"c2c3c8c8c3c1m1r1a1"}' href="https://docs.microsoft.com/en-us/" id="shellmenu_21">Docs</a>
+</li>
+<li data-m='{"cN":"More_DeveloperAndIT_TechNet_cont","cT":"Container","id":"c3c3c8c8c3c1m1r1a1","sN":3,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_DeveloperAndIT_TechNet_nav","id":"n1c3c3c8c8c3c1m1r1a1","sN":1,"aN":"c3c3c8c8c3c1m1r1a1"}' href="https://technet.microsoft.com/en-us/ms376608.aspx" id="shellmenu_22">TechNet</a>
+</li>
+<li data-m='{"cN":"Footer_Developer_MicrosoftDeveloperNetwork_cont","cT":"Container","id":"c4c3c8c8c3c1m1r1a1","sN":4,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_Footer_Developer_MicrosoftDeveloperNetwork_nav","id":"n1c4c3c8c8c3c1m1r1a1","sN":1,"aN":"c4c3c8c8c3c1m1r1a1"}' href="https://msdn.microsoft.com/en-us" id="shellmenu_23">Developer Network</a>
+</li>
+<li data-m='{"cN":"More_DeveloperAndIT_WindowsDevCenter_cont","cT":"Container","id":"c5c3c8c8c3c1m1r1a1","sN":5,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_DeveloperAndIT_WindowsDevCenter_nav","id":"n1c5c3c8c8c3c1m1r1a1","sN":1,"aN":"c5c3c8c8c3c1m1r1a1"}' href="https://developer.microsoft.com/en-us/windows" id="shellmenu_24">Windows Dev Center</a>
+</li>
+<li data-m='{"cN":"More_DeveloperAndIT_Windows_IT_Pro_Center_cont","cT":"Container","id":"c6c3c8c8c3c1m1r1a1","sN":6,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_DeveloperAndIT_Windows_IT_Pro_Center_nav","id":"n1c6c3c8c8c3c1m1r1a1","sN":1,"aN":"c6c3c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/itpro/windows" id="shellmenu_25">Windows IT Pro Center</a>
+</li>
+<li data-m='{"cN":"More_DeveloperAndIT_FastTrack_cont","cT":"Container","id":"c7c3c8c8c3c1m1r1a1","sN":7,"aN":"c3c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_DeveloperAndIT_FastTrack_nav","id":"n1c7c3c8c8c3c1m1r1a1","sN":1,"aN":"c7c3c8c8c3c1m1r1a1"}' href="https://fasttrack.microsoft.com/office" id="shellmenu_26">FastTrack</a>
+</li>
+</ul>
+</li>
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c4c8c8c3c1m1r1a1","sN":4,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c4c8c8c3c1m1r1a1","sN":1,"aN":"c4c8c8c3c1m1r1a1"}' id="Partner-navigation">Partner</button>
+<ul aria-hidden="true" aria-labelledby="Partner-navigation" role="none">
+<li data-m='{"cN":"More_Partner_PartnerNetwork_cont","cT":"Container","id":"c2c4c8c8c3c1m1r1a1","sN":2,"aN":"c4c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Partner_PartnerNetwork_nav","id":"n1c2c4c8c8c3c1m1r1a1","sN":1,"aN":"c2c4c8c8c3c1m1r1a1"}' href="https://partner.microsoft.com/" id="shellmenu_28">Partner Network</a>
+</li>
+<li data-m='{"cN":"More_Partner_SolutionProviders_cont","cT":"Container","id":"c3c4c8c8c3c1m1r1a1","sN":3,"aN":"c4c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Partner_SolutionProviders_nav","id":"n1c3c4c8c8c3c1m1r1a1","sN":1,"aN":"c3c4c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/solution-providers/" id="shellmenu_29">Solution Providers</a>
+</li>
+<li data-m='{"cN":"More_Partner_PartnerCenter_cont","cT":"Container","id":"c4c4c8c8c3c1m1r1a1","sN":4,"aN":"c4c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Partner_PartnerCenter_nav","id":"n1c4c4c8c8c3c1m1r1a1","sN":1,"aN":"c4c4c8c8c3c1m1r1a1"}' href="https://partnercenter.microsoft.com/partner/home" id="shellmenu_30">Partner Center</a>
+</li>
+<li data-m='{"cN":"More_Partner_CloudHosting_cont","cT":"Container","id":"c5c4c8c8c3c1m1r1a1","sN":5,"aN":"c4c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Partner_CloudHosting_nav","id":"n1c5c4c8c8c3c1m1r1a1","sN":1,"aN":"c5c4c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/cloudandhosting" id="shellmenu_31">Cloud Hosting</a>
+</li>
+</ul>
+</li>
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c5c8c8c3c1m1r1a1","sN":5,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c5c8c8c3c1m1r1a1","sN":1,"aN":"c5c8c8c3c1m1r1a1"}' id="Industries-navigation">Industries</button>
+<ul aria-hidden="true" aria-labelledby="Industries-navigation" role="none">
+<li data-m='{"cN":"Products_ForStudentsAndEducators_Education_cont","cT":"Container","id":"c2c5c8c8c3c1m1r1a1","sN":2,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_Products_ForStudentsAndEducators_Education_nav","id":"n1c2c5c8c8c3c1m1r1a1","sN":1,"aN":"c2c5c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/education" id="shellmenu_33">Education</a>
+</li>
+<li data-m='{"cN":"Footer_Enterprise_FinanciaServices_cont","cT":"Container","id":"c3c5c8c8c3c1m1r1a1","sN":3,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_Footer_Enterprise_FinanciaServices_nav","id":"n1c3c5c8c8c3c1m1r1a1","sN":1,"aN":"c3c5c8c8c3c1m1r1a1"}' href="https://enterprise.microsoft.com/en-us" id="shellmenu_34">Financial services</a>
+</li>
+<li data-m='{"cN":"More_Industries_Government_cont","cT":"Container","id":"c4c5c8c8c3c1m1r1a1","sN":4,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Industries_Government_nav","id":"n1c4c5c8c8c3c1m1r1a1","sN":1,"aN":"c4c5c8c8c3c1m1r1a1"}' href="https://enterprise.microsoft.com/en-us/industries/government/" id="shellmenu_35">Government</a>
+</li>
+<li data-m='{"cN":"More_Industries_Health_cont","cT":"Container","id":"c5c5c8c8c3c1m1r1a1","sN":5,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Industries_Health_nav","id":"n1c5c5c8c8c3c1m1r1a1","sN":1,"aN":"c5c5c8c8c3c1m1r1a1"}' href="https://enterprise.microsoft.com/en-us/industries/health/" id="shellmenu_36">Health</a>
+</li>
+<li data-m='{"cN":"Footer_Enterprise_ManufacturingAndResources_cont","cT":"Container","id":"c6c5c8c8c3c1m1r1a1","sN":6,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_Footer_Enterprise_ManufacturingAndResources_nav","id":"n1c6c5c8c8c3c1m1r1a1","sN":1,"aN":"c6c5c8c8c3c1m1r1a1"}' href="https://enterprise.microsoft.com/en-us/industries/discrete-manufacturing/" id="shellmenu_37">Manufacturing &amp; resources</a>
+</li>
+<li data-m='{"cN":"More_Industries_Retail_cont","cT":"Container","id":"c7c5c8c8c3c1m1r1a1","sN":7,"aN":"c5c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Industries_Retail_nav","id":"n1c7c5c8c8c3c1m1r1a1","sN":1,"aN":"c7c5c8c8c3c1m1r1a1"}' href="https://enterprise.microsoft.com/en-us/industries/retail-and-consumer-goods/" id="shellmenu_38">Retail</a>
+</li>
+</ul>
+</li>
+<li class="f-sub-menu js-nav-menu" data-m='{"cT":"Container","id":"c6c8c8c3c1m1r1a1","sN":6,"aN":"c8c8c3c1m1r1a1"}'>
+<button aria-expanded="false" data-m='{"id":"nn1c6c8c8c3c1m1r1a1","sN":1,"aN":"c6c8c8c3c1m1r1a1"}' id="Other-navigation">Other</button>
+<ul aria-hidden="true" aria-labelledby="Other-navigation" role="none">
+<li data-m='{"cN":"More_Other_Security_cont","cT":"Container","id":"c2c6c8c8c3c1m1r1a1","sN":2,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_Security_nav","id":"n1c2c6c8c8c3c1m1r1a1","sN":1,"aN":"c2c6c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/security/" id="shellmenu_40">Security</a>
+</li>
+<li data-m='{"cN":"More_Other_TrustCenter_cont","cT":"Container","id":"c3c6c8c8c3c1m1r1a1","sN":3,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_TrustCenter_nav","id":"n1c3c6c8c8c3c1m1r1a1","sN":1,"aN":"c3c6c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/TrustCenter/" id="shellmenu_41">Trust Center</a>
+</li>
+<li data-m='{"cN":"More_Other_Licensing_cont","cT":"Container","id":"c4c6c8c8c3c1m1r1a1","sN":4,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_Licensing_nav","id":"n1c4c6c8c8c3c1m1r1a1","sN":1,"aN":"c4c6c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/licensing/" id="shellmenu_42">Licensing</a>
+</li>
+<li data-m='{"cN":"More_Other_AppSource_cont","cT":"Container","id":"c5c6c8c8c3c1m1r1a1","sN":5,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_AppSource_nav","id":"n1c5c6c8c8c3c1m1r1a1","sN":1,"aN":"c5c6c8c8c3c1m1r1a1"}' href="https://appsource.microsoft.com/" id="shellmenu_43">AppSource</a>
+</li>
+<li data-m='{"cN":"More_Other_AzureMarketplace_cont","cT":"Container","id":"c6c6c8c8c3c1m1r1a1","sN":6,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_AzureMarketplace_nav","id":"n1c6c6c8c8c3c1m1r1a1","sN":1,"aN":"c6c6c8c8c3c1m1r1a1"}' href="https://azuremarketplace.microsoft.com/marketplace/" id="shellmenu_44">Azure Marketplace</a>
+</li>
+<li data-m='{"cN":"More_Other_Events_cont","cT":"Container","id":"c7c6c8c8c3c1m1r1a1","sN":7,"aN":"c6c8c8c3c1m1r1a1"}'>
+<a class="js-subm-uhf-nav-link" data-m='{"cN":"GlobalNav_More_Other_Events_nav","id":"n1c7c6c8c8c3c1m1r1a1","sN":1,"aN":"c7c6c8c8c3c1m1r1a1"}' href="https://events.microsoft.com/" id="shellmenu_45">Events</a>
+</li>
+</ul>
+</li>
+<li class="f-multi-column-info"><a aria-label="View all" class="c-glyph" data-m='{"cN":"View all_nav","id":"n7c8c8c3c1m1r1a1","sN":7,"aN":"c8c8c3c1m1r1a1"}' href="https://www.microsoft.com/en-us/sitemap.aspx">View all</a></li>
+</ul>
+</div>
+</li> </ul>
+</nav>
+<button aria-label="Show next" class="c-action-trigger c-glyph glyph-chevron-right js-secondary-paddle" data-m='{"cN":"Next_nonnav","id":"nn9c3c1m1r1a1","sN":9,"aN":"c3c1m1r1a1"}' tabindex="-1"></button>
+<div class="c-uhfh-actions" data-m='{"cN":"Header actions_cont","cT":"Container","id":"c10c3c1m1r1a1","sN":10,"aN":"c3c1m1r1a1"}'>
+<form action="/?s=" aria-expanded="false" autocomplete="off" class="c-search" data-m='{"cN":"GlobalNav_Search_cont","cT":"Container","id":"c1c10c3c1m1r1a1","sN":1,"aN":"c10c3c1m1r1a1"}' data-seautosuggest="" data-seautosuggestapi="https://www.microsoft.com/services/api/v3/suggest" id="searchForm" method="GET" name="searchForm" role="search">
+<input aria-autocomplete="list" aria-controls="universal-header-search-auto-suggest-transparent" aria-label="Search Cloud Blogs" aria-owns="universal-header-search-auto-suggest-ul" data-m='{"cN":"SearchBox_nav","id":"n2c1c10c3c1m1r1a1","sN":2,"aN":"c1c10c3c1m1r1a1"}' id="cli_shellHeaderSearchInput" name="s" placeholder="Search Cloud Blogs" role="combobox" type="search"/>
+<button aria-label="Search" class="c-glyph" data-bi-dnt="true" data-m='{"cN":"Search_nav","id":"n3c1c10c3c1m1r1a1","sN":3,"aN":"c1c10c3c1m1r1a1"}' id="search"></button>
+<div class="m-auto-suggest" id="universal-header-search-auto-suggest-transparent" role="group">
+<ul aria-hidden="true" class="c-menu" data-bi-dnt="true" data-js-auto-suggest-position="default" data-m='{"cN":"search suggestions_cont","cT":"Container","id":"c4c1c10c3c1m1r1a1","sN":4,"aN":"c1c10c3c1m1r1a1"}' data-tel="jsll" id="universal-header-search-auto-suggest-ul" role="listbox"></ul>
+<ul aria-hidden="true" class="c-menu f-auto-suggest-no-results" data-js-auto-suggest-position="default" data-js-auto-suggest-postion="default" tabindex="0">
+<li class="c-menu-item"> <span tabindex="-1">No results</span></li>
+</ul>
+</div>
+</form>
+</div>
+</div>
+</div>
+</header>
+</div>
+</div>
+</section><div class="container-wrapper blog-title-bar">
+<div class="container">
+<h1 class="blog-title">
+<a href="https://cloudblogs.microsoft.com/microsoftsecure">Microsoft Secure</a>
+</h1>
+</div>
+</div>
+<div class="wrap container" role="document">
+<div class="content row">
+<main class="main" id="main">
+<article class="post-74725 post type-post status-publish format-standard has-post-thumbnail hentry category-cybersecurity category-data-privacy-global category-tips-talk category-uncategorized tag-featured content-type-industry-trends">
+<div class="page-header clearfix">
+<div class="page-header-left">
+<div class="title-wrapper">
+<h1 class="entry-title">SSN for authentication is all wrong</h1>
+</div>
+<time class="updated" datetime="2017-10-23T19:00:38+00:00"> October 23, 2017</time>
+<!-- Your share button code -->
+<div class="social-share">
+<ul class="social-links-share list-float">
+<li class="social-item"><a arial-label="Share on Facebook" class="social-link" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcloudblogs.microsoft.com%2Fmicrosoftsecure%2F2017%2F10%2F23%2Fssn-for-authentication-is-all-wrong%2F&amp;title=SSN+for+authentication+is+all+wrong" onclick="javascript:var otherWindow = window.open;otherWindow.opener=null;otherWindow(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" title="Share on Facebook"><i aria-hidden="true" class="fa fa-facebook"></i></a></li><li class="social-item"><a arial-label="Share on Twitter" class="social-link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fcloudblogs.microsoft.com%2Fmicrosoftsecure%2F2017%2F10%2F23%2Fssn-for-authentication-is-all-wrong%2F&amp;text=SSN+for+authentication+is+all+wrong&amp;via=msftsecurity" onclick="javascript:var otherWindow = window.open;otherWindow.opener=null;otherWindow(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" title="Share on Twitter"><i aria-hidden="true" class="fa fa-twitter"></i></a></li><li class="social-item"><a arial-label="Share on LinkedIn" class="social-link" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/&amp;title=SSN%20for%20authentication%20is%20all%20wrong" onclick="javascript:var otherWindow=window.open;otherWindow.opener=null;otherWindow(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" title="Share on LinkedIn"><i aria-hidden="true" class="fa fa-linkedin"></i></a></li><li class="social-item"><a aria-label="Email this link" class="social-link" href="mailto:?subject=SSN for authentication is all wrong&amp;body=https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/" title="Email this link"><i aria-hidden="true" class="fa fa-envelope"></i></a></li> </ul>
+</div>
+</div>
+</div>
+<hr class="divider-secondary"/>
+<div class="post-meta">
+<div class="row">
+<div class="col-xs-12">
+<div class="author-details">
+<div class="col avatar-col">
+<div class="avatar-container">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" sizes="(max-width: 150px) 100vw, 150px" src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-150x150.jpg" srcset="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-150x150.jpg 150w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-32x32.jpg 32w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-50x50.jpg 50w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-64x64.jpg 64w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-96x96.jpg 96w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-128x128.jpg 128w" width="150"/> </div>
+</div>
+<div class="avatar-col-right">
+<div class="entry-author">
+<a class="author url fn" href="https://cloudblogs.microsoft.com/microsoftsecure/author/diana-kelly/" rel="author" title="Posts by Diana Kelly">Diana Kelly</a> </div>
+<div class="job-title">Program Manager Evangelist </div>
+</div>
+<div class="">
+<ul class="social-links list-float dark">
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 entry-categories">
+					in <a href="/microsoftsecure/?content-type=industry-trends" title="View all posts in Industry Trends">Industry Trends</a> </div>
+</div>
+</div>
+<div class="entry-content">
+<p>Unless you were stranded on a deserted island or participating in a zen digital fast chances are you’ve heard plenty about the massive <a href="https://www.cnbc.com/2017/09/26/equifax-ceo-retires-following-an-epic-data-breach-affecting-143-million-people.html">Equifax breach and the head-rolling fallout</a>. In the flurry of headlines and advice about credit freezes an important part of the conversation was lost: if we didn’t misuse our social security numbers, losing them wouldn’t be a big deal. Let me explain: most people, and that mainly includes some pretty high-up identity experts that I’ve met in my travels, don’t understand the difference between identification and verification. In the real world, conflating those two points doesn’t often have dire consequences. In the digital world, it’s a huge mistake that can lead to severe impacts.</p>
+<p>Isn’t it all just authentication you may ask? Well, yes, identification and verification are both parts of the authentication whole, but failure to understand the differences is where the mess comes in. However, one reason it’s so hard for many of us to separate identification and verification is that historically we haven’t had to. Think back to how humans authenticated to each other before the ability to travel long distances came into the picture. Our circle of acquaintances was pretty small and we knew each other by sight and sound. Just by looking at your neighbor, Bob, you could authenticate him. If you met a stranger, chances are someone else in the village knew the stranger and could vouch for her.</p>
+<p>The ability to travel long distances changed the equation a bit. We developed documents that provided verification during the initiation phase, for example when you have to bring a birth certificate to the DMV to get your initial driver’s license. And ongoing identification like a unique ID and a photo. These documents served as a single identification and verification mechanism. And that was great! Worked fine for years, until the digital age.</p>
+<p>The digital age changed the model because rather than one person holding a single license with their photo on it, we had billions of people trying to authenticate to billions of systems with simple credentials like user name and password. And no friendly local villager to vouch for us.</p>
+<h2>Who are you? Prove it!</h2>
+<p>This is where the difference between the two really starts to matter. Identification answers the question: Who are you? Your name is an identifier. It could also be an alias, such as your unique employee ID number.</p>
+<p>Do you want your name to be private? Imagine meeting another parent at your kid’s soccer game and refusing to tell them your name for “security reasons.” How about: “Oh your new puppy is so adorable, what’s her name?” And you respond, “If I told you, I’d have to kill you.” Or you try to find an address in a town with no street signs because the town is super security conscious. Ridiculous, right? Identifiers are public specifically so we can share them to help identify things.</p>
+<p>We also want consistency in our identifiers. Imagine if that town had street signs, but changed the names of the streets every 24 hours for security reasons. And uniqueness, if every street had the same name, you’d still have a heck of a time finding the right address wouldn’t you?</p>
+<p>Now that we’re clear on what the identifier is, we can enumerate a few aspects that make up a really good one:</p>
+<ul>
+<li>Public</li>
+<li>Unchanging</li>
+<li>Unique</li>
+</ul>
+<p>In a town or public road, we have a level of trust that the street sign is correct because the local authorities have governance over road signs. Back in our village, we trust Bob is Bob because we can verify him ourselves. But in the digital world, things get pretty tricky – how do you verify someone or something you’ve never met before? Ask them to- Prove It!</p>
+<p>We use these two aspects of authentication almost daily when we log into systems with a user ID (identification) and password (verification). How we verify in the real world can be public, unchanging, and unique because it’s very hard to forge a whole person. Or to switch all the street signs in a town. But verification online is trickier. We need to be able to provide verification of who we are to a number of entities, many of whom aren’t great at protecting data. And if the same verification is re-used across entities, and one loses it, attackers could gain access to every site where it was used. This is why experts strongly recommend using unique passwords for every website/app. This goes for those challenge questions too. Which can lead to some fun calls with customer service, Oh, the town where I was born? It’s: xja*21njaJK)`jjAQ^. At this point in time our father’s middle name, first pet’s name, town where we were born, school we went to and address history should be assumed public, using them as “secrets” for verification doesn’t make sense anymore.</p>
+<p>If one site loses your digital verification info, no worries. You only used it for that site and can create new info for the next one. What if you couldn’t change your password ever? It was permanent and also got lost during the Yahoo! breach? And it was the one you use at your bank, and for your college and car loans, and your health insurance? How would you feel?</p>
+<p>So, with that in mind, you’d probably agree that the best digital verifiers are:</p>
+<ul>
+<li>Private</li>
+<li>Easily changed</li>
+<li>Unique</li>
+</ul>
+<h2>Your turn</h2>
+<p>OK, now that you know the difference between identification and verification and the challenges of verification in a digital world, what do you think – Is your SSN a better identifier or verifier?</p>
+</div>
+<footer>
+<div class="post-tags">
+<h3>Tags</h3>
+<a href="/microsoftsecure/tag/featured" title="View all posts in Featured">Featured</a> </div>
+<nav class="row post-navigation">
+<div class="col-xs-12">
+<ul class="flexbox">
+<li>
+<a class="btn btn-primary ms-glyph-i-nav-left" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/windows-defender-exploit-guard-reduce-the-attack-surface-against-next-generation-malware/"><span class="text">Older Post</span></a>
+</li>
+<li>
+<a class="btn btn-primary ms-glyph-i-nav-right" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/24/a-4-point-action-plan-for-proactive-security/">
+<span class="text">Newer Post</span></a>
+</li>
+</ul>
+</div>
+</nav>
+<section class="row related-posts">
+<div class="col-xs-12">
+<h4 class="section-header">Related Blog Posts</h4>
+</div>
+<div class="col-xs-12 col-sm-4">
+<h5>
+<a class="title-link" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/15/microsoft-offers-several-mechanisms-to-protect-against-ransomware/">
+				Microsoft offers several mechanisms to protect against ransomware            </a>
+			The start of a new year is the perfect time to reassess your security strategy... <p><a aria-label="Read more about Microsoft offers several mechanisms to protect against ransomware" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/15/microsoft-offers-several-mechanisms-to-protect-against-ransomware/" title="Microsoft offers several mechanisms to protect against ransomware">Read more</a></p> </h5>
+</div>
+<div class="col-xs-12 col-sm-4">
+<h5>
+<a class="title-link" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/10/how-to-disrupt-attacks-caused-by-social-engineering/">
+				How to disrupt attacks caused by social engineering            </a>
+			This post is authored by Milad Aslaner, Senior Program Manager, Windows &amp; Devices Group.  A... <p><a aria-label="Read more about How to disrupt attacks caused by social engineering" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/10/how-to-disrupt-attacks-caused-by-social-engineering/" title="How to disrupt attacks caused by social engineering">Read more</a></p> </h5>
+</div>
+<div class="col-xs-12 col-sm-4">
+<h5>
+<a class="title-link" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/10/a-worthy-upgrade-next-gen-security-on-windows-10-proves-resilient-against-ransomware-outbreaks-in-2017/">
+				A worthy upgrade: Next-gen security on Windows 10 proves resilient against ransomware outbreaks in 2017            </a>
+			Adopting reliable attack methods and techniques borrowed from more evolved threat types, ransomware attained new... <p><a aria-label="Read more about A worthy upgrade: Next-gen security on Windows 10 proves resilient against ransomware outbreaks in 2017" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/10/a-worthy-upgrade-next-gen-security-on-windows-10-proves-resilient-against-ransomware-outbreaks-in-2017/" title="A worthy upgrade: Next-gen security on Windows 10 proves resilient against ransomware outbreaks in 2017">Read more</a></p> </h5>
+</div>
+</section>
+<div class="divider-primary"></div>
+<script type="text/javascript">
+	gpid = '74725';
+</script>
+</footer>
+</article>
+</main><!-- /.main -->
+<aside class="sidebar">
+<section class="widget widget_leadership_blog_widget">
+<h2 class="widget-title">Featured Posts</h2>
+<div class="row">
+<div class="col-xs-12">
+<div class="avatar-lg-col">
+<div class="avatar-container">
+<div class="avatar">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" src="https://cloudblogs.microsoft.com/uploads/prod/2018/01/terry-myerson-150x150.png" width="150"/> </div>
+</div>
+</div>
+<div class="avatar-lg-col-right">
+<div class="entry-author">Terry Myerson</div>
+<div class="role">Executive Vice President, Windows and Devices Group</div>
+<h3><a href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/09/understanding-the-performance-impact-of-spectre-and-meltdown-mitigations-on-windows-systems/">Understanding the performance impact of Spectre and Meltdown mitigations on Windows Systems</a></h3>
+<div class="excerpt">Last week the technology industry and many of our customers learned of new vulnerabilities in the hardware chips that power phones, PCs and servers. We (and others in the industry) had learned of this vulnerability under nondisclosure agreement several months ago and immediately began developing engineering mitigations and updating our cloud infrastructure. In this blog,... <p><a aria-label="Read more about Understanding the performance impact of Spectre and Meltdown mitigations on Windows Systems" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2018/01/09/understanding-the-performance-impact-of-spectre-and-meltdown-mitigations-on-windows-systems/" title="Understanding the performance impact of Spectre and Meltdown mitigations on Windows Systems">Read more</a></p>...					</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="avatar-lg-col">
+<div class="avatar-container">
+<div class="avatar">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" sizes="(max-width: 150px) 100vw, 150px" src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-150x150.jpg" srcset="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-150x150.jpg 150w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-32x32.jpg 32w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-50x50.jpg 50w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-64x64.jpg 64w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-96x96.jpg 96w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/11/Mark-McIntyre_1275-3-128x128.jpg 128w" width="150"/> </div>
+</div>
+</div>
+<div class="avatar-lg-col-right">
+<div class="entry-author">Mark McIntyre</div>
+<div class="role">Executive Security Advisor, Enterprise Cybersecurity Group</div>
+<h3><a href="https://cloudblogs.microsoft.com/microsoftsecure/2017/12/13/how-public-private-partnerships-can-combat-cyber-adversaries/">How public-private partnerships can combat cyber adversaries</a></h3>
+<div class="excerpt">For several years now, policymakers and practitioners from governments, CERTs, and the security industry have been speaking about the importance of public-private partnerships as an essential part of combating cyber threats. It is impossible to attend a security conference without a keynote presenter talking about it. In fact, these conferences increasingly include sessions or entire... <p><a aria-label="Read more about How public-private partnerships can combat cyber adversaries" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/12/13/how-public-private-partnerships-can-combat-cyber-adversaries/" title="How public-private partnerships can combat cyber adversaries">Read more</a></p>...					</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<div class="avatar-lg-col">
+<div class="avatar-container">
+<div class="avatar">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" sizes="(max-width: 150px) 100vw, 150px" src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-150x150.png" srcset="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-150x150.png 150w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-300x300.png 300w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-32x32.png 32w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-50x50.png 50w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-64x64.png 64w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-96x96.png 96w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure-128x128.png 128w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/09/MsftSecure.png 400w" width="150"/> </div>
+</div>
+</div>
+<div class="avatar-lg-col-right">
+<div class="entry-author">Microsoft Secure Blog Staff</div>
+<div class="role"></div>
+<h3><a href="https://cloudblogs.microsoft.com/microsoftsecure/2017/11/16/minimize-cybersecurity-risk-with-software-asset-management/">Minimize cybersecurity risk with Software Asset Management</a></h3>
+<div class="excerpt">This post is authored by Patama Chantaruck, General Manager of Worldwide Software Asset Management &amp; Compliance.  By 2021, worldwide cybercrime damage is expected to reach $6 trillion—double what it cost businesses in 2015. Unapproved apps, unmanaged devices, poor password protection, and other security issues are leaving far too many organizations vulnerable to attack. And as... <p><a aria-label="Read more about Minimize cybersecurity risk with Software Asset Management" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/11/16/minimize-cybersecurity-risk-with-software-asset-management/" title="Minimize cybersecurity risk with Software Asset Management">Read more</a></p>...					</div>
+</div>
+</div>
+</div>
+<div class="row leadership-invisble" style="display: none;">
+<div class="col-xs-12">
+<div class="avatar-lg-col">
+<div class="avatar-container">
+<div class="avatar">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" sizes="(max-width: 150px) 100vw, 150px" src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-150x150.jpg" srcset="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-150x150.jpg 150w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-32x32.jpg 32w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-50x50.jpg 50w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-64x64.jpg 64w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-96x96.jpg 96w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Diana-Kelly-128x128.jpg 128w" width="150"/> </div>
+</div>
+</div>
+<div class="avatar-lg-col-right">
+<div class="entry-author">Diana Kelly</div>
+<div class="role">Program Manager Evangelist </div>
+<h3><a href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/">SSN for authentication is all wrong</a></h3>
+<div class="excerpt">Unless you were stranded on a deserted island or participating in a zen digital fast chances are you’ve heard plenty about the massive Equifax breach and the head-rolling fallout. In the flurry of headlines and advice about credit freezes an important part of the conversation was lost: if we didn’t misuse our social security numbers,... <p><a aria-label="Read more about SSN for authentication is all wrong" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/23/ssn-for-authentication-is-all-wrong/" title="SSN for authentication is all wrong">Read more</a></p>...					</div>
+</div>
+</div>
+</div>
+<div class="row leadership-invisble" style="display: none;">
+<div class="col-xs-12">
+<div class="avatar-lg-col">
+<div class="avatar-container">
+<div class="avatar">
+<img alt="" class="avatar avatar-150 photo wp-post-image" height="150" sizes="(max-width: 150px) 100vw, 150px" src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-150x150.jpg" srcset="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-150x150.jpg 150w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-32x32.jpg 32w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-50x50.jpg 50w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-64x64.jpg 64w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-96x96.jpg 96w, https://cloudblogs.microsoft.com/microsoftsecure/wp-content/uploads/sites/13/2017/10/Jonathan20Trull_1232-2-128x128.jpg 128w" width="150"/> </div>
+</div>
+</div>
+<div class="avatar-lg-col-right">
+<div class="entry-author">Jonathan Trull</div>
+<div class="role">Chief Security Advisor, Enterprise Cybersecurity Group</div>
+<h3><a href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/12/easily-create-securely-configured-virtual-machines/">Easily create securely configured virtual machines</a></h3>
+<div class="excerpt">While a securely configured operating system is essential to repelling today’s cyber attacks, the base images provided by vendors do not come pre-hardened and require significant research, expertise, and proper configuration by the customer. To make it easier for Microsoft customers to deploy secured virtual machines “out of the box,” I am excited to share... <p><a aria-label="Read more about Easily create securely configured virtual machines" class="read-more" href="https://cloudblogs.microsoft.com/microsoftsecure/2017/10/12/easily-create-securely-configured-virtual-machines/" title="Easily create securely configured virtual machines">Read more</a></p>...					</div>
+</div>
+</div>
+</div>
+<button class="btn btn-block btn-default load-more js-collapse-button" data-less-text="Show Less" data-more-text="Load More" type="button">Load More</button>
+</section>
+</aside><!-- /.sidebar -->
+</div><!-- /.content -->
+</div><!-- /.wrap -->
+<!-- RSS template -->
+<script id="js-rss-template" type="text/template">
+	<div class="btn-group" id="filters-rss">
+		<button
+			class="btn btn-vertical dropdown-toggle"
+			data-toggle="dropdown"
+			aria-haspopup="true"
+			aria-expanded="false"
+			type="button"
+			aria-label="RSS"
+		>
+			<i class="icon icon-round fa fa-rss" aria-hidden="true"></i>
+			<span class="sr-only">RSS</span>
+		</button>
+		<ul class="dropdown-menu">
+			<li id="rss-filtered"><a href="https://cloudblogs.microsoft.com/microsoftsecure?feed=rss2">Get Filtered RSS</a></li>
+			<li id="all-rss"><a href="https://cloudblogs.microsoft.com/microsoftsecure?feed=rss2">Get All RSS</a></li>
+		</ul>
+	</div>
+</script>
+<div class="social-footer">
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-md-6 social-footer-left">
+<div class="blog-social-links clearfix"><h3>Follow Microsoft </h3><ul class="social-links-follow list-float"><li><a aria-label="Follow us on Facebook" class="fa fa-facebook social social-facebook" href="http://www.facebook.com/microsoftcloud" title="Follow us on Facebook"></a></li><li><a aria-label="Follow us on Twitter" class="fa fa-twitter social social-twitter" href="https://twitter.com/msftsecurity" title="Follow us on Twitter"></a></li><li><a aria-label="Follow us on Youtube" class="fa fa-youtube social social-youtube" href="https://www.youtube.com/user/mscloudos/" title="Follow us on Youtube"></a></li></ul></div> </div>
+<div class="col-xs-12 col-md-6 social-footer-right">
+</div>
+</div>
+</div>
+</div>
+<section data-m='{"cN":"footerArea","cT":"Area_coreuiArea","id":"a2Body","sN":2,"aN":"Body"}' id="footerArea">
+<div data-m='{"cN":"footerRegion","cT":"Region_coreui-region","id":"r1a2","sN":1,"aN":"a2"}' data-region-key="footerregion" id="footerRegion">
+<div data-m='{"cN":"footerUniversalFooter","cT":"Module_coreui-universalfooter","id":"m1r1a2","sN":1,"aN":"r1a2"}' data-module-id="Category|footerRegion|footerRegion|footerUniversalFooter|coreui-universalfooter" id="footerUniversalFooter">
+<footer class="c-uhff context-uhf" data-footer-footprint="en-us/MSCloudBlogs/MSHybridCloudFooter" data-m='{"cN":"Uhf footer_cont","cT":"Container","id":"c1m1r1a2","sN":1,"aN":"m1r1a2"}' data-uhf-mscc-rq="false" id="uhf-footer" role="contentinfo">
+<nav aria-label="Footer" class="c-uhff-nav" data-m='{"cN":"Footer nav_cont","cT":"Container","id":"c1c1m1r1a2","sN":1,"aN":"c1m1r1a2"}' role="navigation">
+<div class="c-uhff-nav-row">
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn1_cont","cT":"Container","id":"c1c1c1m1r1a2","sN":1,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">What's new</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_SurfaceBook2_nav","id":"n1c1c1c1m1r1a2","sN":1,"aN":"c1c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/surface/devices/surface-book-2/overview">Surface Book 2</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_NewSurfacePro_nav","id":"n2c1c1c1m1r1a2","sN":2,"aN":"c1c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/surface/devices/surface-pro/overview">Surface Pro</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_XboxOneX_nav","id":"n3c1c1c1m1r1a2","sN":3,"aN":"c1c1c1m1r1a2"}' href="https://www.xbox.com/en-us/xbox-one-x">Xbox One X</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_XboxOneS_nav","id":"n4c1c1c1m1r1a2","sN":4,"aN":"c1c1c1m1r1a2"}' href="https://www.xbox.com/en-us/xbox-one-s?xr=shellnav">Xbox One S</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_VRandMixedReality_nav","id":"n5c1c1c1m1r1a2","sN":5,"aN":"c1c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/store/b/virtualreality">VR &amp; mixed reality</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_Windows_10_apps_nav","id":"n6c1c1c1m1r1a2","sN":6,"aN":"c1c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/windows/windows-10-apps">Windows 10 apps</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_WhatsNew_OfficeApps_nav","id":"n7c1c1c1m1r1a2","sN":7,"aN":"c1c1c1m1r1a2"}' href="https://store.office.com/en-us/appshome.aspx?">Office apps</a>
+</li>
+</ul>
+</div>
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn2_cont","cT":"Container","id":"c2c1c1m1r1a2","sN":2,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">Store &amp; Support</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_AccountProfile_nav","id":"n1c2c1c1m1r1a2","sN":1,"aN":"c2c1c1m1r1a2"}' href="https://account.microsoft.com/">Account profile</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_DownloadCenter_nav","id":"n2c2c1c1m1r1a2","sN":2,"aN":"c2c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/download">Download Center</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_SalesAndSupport_nav","id":"n3c2c1c1m1r1a2","sN":3,"aN":"c2c1c1m1r1a2"}' href="https://go.microsoft.com/fwlink/p/?LinkID=824761&amp;clcid=0x409">Sales &amp; support</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"MicrosoftStore_ExtendedHolidayReturns_nav","id":"n4c2c1c1m1r1a2","sN":4,"aN":"c2c1c1m1r1a2"}' href="https://go.microsoft.com/fwlink/p/?LinkID=824764&amp;clcid=0x409">Returns</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_OrderTracking_nav","id":"n5c2c1c1m1r1a2","sN":5,"aN":"c2c1c1m1r1a2"}' href="https://account.microsoft.com/orders">Order tracking</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_StoreLocations_nav","id":"n6c2c1c1m1r1a2","sN":6,"aN":"c2c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/store/locations/find-a-store">Store locations</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_StoreandSupport_Support_nav","id":"n7c2c1c1m1r1a2","sN":7,"aN":"c2c1c1m1r1a2"}' href="https://support.microsoft.com/en-us">Support</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"StoreandSupport_BuyOnlinePickUpInStore_nav","id":"n8c2c1c1m1r1a2","sN":8,"aN":"c2c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/store/b/buy-online-pick-up-in-store?icid=uhf_footer_bopuis">Buy online, pick up in store</a>
+</li>
+</ul>
+</div>
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn3_cont","cT":"Container","id":"c3c1c1m1r1a2","sN":3,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">Education</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Education_MicrosoftInEducation_nav","id":"n1c3c1c1m1r1a2","sN":1,"aN":"c3c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/education">Microsoft in education</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Education_OfficeForStudents_nav","id":"n2c3c1c1m1r1a2","sN":2,"aN":"c3c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/education/products/office/default.aspx">Office for students</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Education_Office365ForSchools_nav","id":"n3c3c1c1m1r1a2","sN":3,"aN":"c3c1c1m1r1a2"}' href="https://products.office.com/en-us/academic/compare-office-365-education-plans">Office 365 for schools</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Education_DealsForStudentsandEducators_nav","id":"n4c3c1c1m1r1a2","sN":4,"aN":"c3c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/store/b/student">Deals for students &amp; educators </a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_MicrosoftAzureInEducation_nav","id":"n5c3c1c1m1r1a2","sN":5,"aN":"c3c1c1m1r1a2"}' href="https://azure.microsoft.com/en-us/community/education/">Microsoft Azure in education</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="c-uhff-nav-row">
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn4_cont","cT":"Container","id":"c4c1c1m1r1a2","sN":4,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">Enterprise</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_MicrosoftAzure_nav","id":"n1c4c1c1m1r1a2","sN":1,"aN":"c4c1c1m1r1a2"}' href="https://azure.microsoft.com/">Microsoft Azure </a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_Enterprise_nav","id":"n2c4c1c1m1r1a2","sN":2,"aN":"c4c1c1m1r1a2"}' href="https://enterprise.microsoft.com/en-us/">Enterprise</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_DataPlatform_nav","id":"n3c4c1c1m1r1a2","sN":3,"aN":"c4c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/sql-server/">Data platform</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_FindASolutionsProvider_nav","id":"n4c4c1c1m1r1a2","sN":4,"aN":"c4c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/solution-providers">Find a solutions provider</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_MicrosoftPartnerResources_nav","id":"n5c4c1c1m1r1a2","sN":5,"aN":"c4c1c1m1r1a2"}' href="https://partner.microsoft.com/en-us/">Microsoft partner resources </a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_MicrosoftAppSource_nav","id":"n6c4c1c1m1r1a2","sN":6,"aN":"c4c1c1m1r1a2"}' href="https://go.microsoft.com/fwlink/?LinkID=808093">Microsoft AppSource </a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_ManufacturingAndResources_nav","id":"n7c4c1c1m1r1a2","sN":7,"aN":"c4c1c1m1r1a2"}' href="https://enterprise.microsoft.com/en-us/industries/discrete-manufacturing/">Manufacturing &amp; resources</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Enterprise_FinanciaServices_nav","id":"n8c4c1c1m1r1a2","sN":8,"aN":"c4c1c1m1r1a2"}' href="https://enterprise.microsoft.com/en-us">Financial services</a>
+</li>
+</ul>
+</div>
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn5_cont","cT":"Container","id":"c5c1c1m1r1a2","sN":5,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">Developer</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_MicrosoftVisualStudio_nav","id":"n1c5c1c1m1r1a2","sN":1,"aN":"c5c1c1m1r1a2"}' href="https://www.visualstudio.com/">Microsoft Visual Studio</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_WindowsDevCenter_nav","id":"n2c5c1c1m1r1a2","sN":2,"aN":"c5c1c1m1r1a2"}' href="https://developer.microsoft.com/en-us/windows">Windows Dev Center</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_MicrosoftDeveloperNetwork_nav","id":"n3c5c1c1m1r1a2","sN":3,"aN":"c5c1c1m1r1a2"}' href="https://msdn.microsoft.com/en-us">Developer Network</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_TechNet_nav","id":"n4c5c1c1m1r1a2","sN":4,"aN":"c5c1c1m1r1a2"}' href="https://technet.microsoft.com/en-us">TechNet</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_MicrosoftVirtualAcademy_nav","id":"n5c5c1c1m1r1a2","sN":5,"aN":"c5c1c1m1r1a2"}' href="https://mva.microsoft.com/">Microsoft Virtual Academy</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_MicrosoftDeveloperProgram_nav","id":"n6c5c1c1m1r1a2","sN":6,"aN":"c5c1c1m1r1a2"}' href="https://developer.microsoft.com/en-us/store/register">Microsoft developer program</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_Channel9_nav","id":"n7c5c1c1m1r1a2","sN":7,"aN":"c5c1c1m1r1a2"}' href="https://channel9.msdn.com/">Channel 9</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Developer_OfficeDevCenter_nav","id":"n8c5c1c1m1r1a2","sN":8,"aN":"c5c1c1m1r1a2"}' href="https://developer.microsoft.com/office">Office Dev Center</a>
+</li>
+</ul>
+</div>
+<div class="c-uhff-nav-group" data-m='{"cN":"footerNavColumn6_cont","cT":"Container","id":"c6c1c1m1r1a2","sN":6,"aN":"c1c1m1r1a2"}'>
+<h6 class="c-heading-4">Company</h6>
+<ul class="c-list f-bare">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_Careers_nav","id":"n1c6c1c1m1r1a2","sN":1,"aN":"c6c1c1m1r1a2"}' href="https://careers.microsoft.com/">Careers</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_AboutMicrosoft_nav","id":"n2c6c1c1m1r1a2","sN":2,"aN":"c6c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/about">About Microsoft</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_CompanyNews_nav","id":"n3c6c1c1m1r1a2","sN":3,"aN":"c6c1c1m1r1a2"}' href="https://news.microsoft.com/">Company news</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_PrivacyAtMicrosoft_nav","id":"n4c6c1c1m1r1a2","sN":4,"aN":"c6c1c1m1r1a2"}' href="https://privacy.microsoft.com/en-us">Privacy at Microsoft</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_Investors_nav","id":"n5c6c1c1m1r1a2","sN":5,"aN":"c6c1c1m1r1a2"}' href="https://www.microsoft.com/investor/default.aspx">Investors</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_DiversityAndInclusion_nav","id":"n6c6c1c1m1r1a2","sN":6,"aN":"c6c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/diversity/">Diversity and inclusion</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_Accessibility_nav","id":"n7c6c1c1m1r1a2","sN":7,"aN":"c6c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/accessibility/home">Accessibility</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Company_Security_nav","id":"n8c6c1c1m1r1a2","sN":8,"aN":"c6c1c1m1r1a2"}' href="https://www.microsoft.com/en-us/security/default.aspx">Security</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="c-uhff-base">
+<a class="c-uhff-link c-uhff-lang-selector c-glyph glyph-world" data-m='{"cN":"locale_picker(US)_nav","id":"n7c1c1m1r1a2","sN":7,"aN":"c1c1m1r1a2"}' href="http://www.microsoft.com/en-us/locale.aspx" id="locale-picker-link">English (United States)</a>
+<ul aria-label="Microsoft corporate links" class="c-list f-bare" data-m='{"cN":"Corp links_cont","cT":"Container","id":"c8c1c1m1r1a2","sN":8,"aN":"c1c1m1r1a2"}' role="contentinfo">
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Sitemap_nav","id":"n1c8c1c1m1r1a2","sN":1,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://www.microsoft.com/en-us/sitemap1.aspx">Sitemap</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_ContactUs_nav","id":"n2c8c1c1m1r1a2","sN":2,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://support.microsoft.com/en-us/contactus">Contact us</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_PrivacyandCookies_nav","id":"n3c8c1c1m1r1a2","sN":3,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy &amp; cookies </a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_TermsOfUse_nav","id":"n4c8c1c1m1r1a2","sN":4,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of use</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_Trademarks_nav","id":"n5c8c1c1m1r1a2","sN":5,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://www.microsoft.com/trademarks">Trademarks</a>
+</li>
+<li>
+<a class="c-uhff-link" data-m='{"cN":"Footer_AboutourAds_nav","id":"n6c8c1c1m1r1a2","sN":6,"aN":"c8c1c1m1r1a2"}' data-mscc-ic="false" href="https://choice.microsoft.com">About our ads</a>
+</li>
+<li>© Microsoft 2018</li>
+</ul>
+</div>
+</footer>
+</div>
+</div>
+</section><a aria-label="Navigate back to the top of the page." class="back-to-top" href="#top-of-the-page" title="Navigate back to the top of the page.">
+<i aria-hidden="true" class="ms-glyph ms-glyph-up"></i>
+</a>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/plugins/microsoft-cloud-blogs/assets/js/microsoft-cloud-blogs-plugin.js?ver=1516513634" type="text/javascript"></script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/enterprisemobility/dist/scripts/main.js?ver=msem_9900357" type="text/javascript"></script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/js/vendor/jquery.cookie.js" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var emebed_filter_regexes = "(https?:\/\/(www.)?youtube\\.com\/(?:v|embed)\/([^\/]+))|(http(s)?:\/\/channel9\\.msdn\\.com\/(.*))|(https?:\/\/.+?\\.(mp3|ogg|m4a|wav))|(https?:\/\/.+?\\.(mp4|m4v|webm|ogv|flv))|(https?:\/\/((m|www)\\.)?youtube\\.com\/watch.*)|(https?:\/\/((m|www)\\.)?youtube\\.com\/playlist.*)|(https?:\/\/youtu\\.be\/.*)|(https?:\/\/(.+\\.)?vimeo\\.com\/.*)|(https?:\/\/(www\\.)?dailymotion\\.com\/.*)|(https?:\/\/dai\\.ly\/.*)|(https?:\/\/(www\\.)?flickr\\.com\/.*)|(https?:\/\/flic\\.kr\/.*)|(https?:\/\/(.+\\.)?smugmug\\.com\/.*)|(https?:\/\/(www\\.)?hulu\\.com\/watch\/.*)|(http:\/\/i*.photobucket.com\/albums\/*)|(http:\/\/gi*.photobucket.com\/groups\/*)|(https?:\/\/(www\\.)?scribd\\.com\/doc\/.*)|(https?:\/\/wordpress\\.tv\/.*)|(https?:\/\/(.+\\.)?polldaddy\\.com\/.*)|(https?:\/\/poll\\.fm\/.*)|(https?:\/\/(www\\.)?funnyordie\\.com\/videos\/.*)|(https?:\/\/(www\\.)?twitter\\.com\/\\w{1,15}\/status(es)?\/.*)|(https?:\/\/(www\\.)?twitter\\.com\/\\w{1,15})|(https?:\/\/(www\\.)?twitter\\.com\/\\w{1,15}\/likes)|(https?:\/\/(www\\.)?twitter\\.com\/\\w{1,15}\/lists\/.*)|(https?:\/\/(www\\.)?twitter\\.com\/\\w{1,15}\/timelines\/.*)|(https?:\/\/(www\\.)?twitter\\.com\/i\/moments\/.*)|(https?:\/\/(www\\.)?soundcloud\\.com\/.*)|(https?:\/\/(.+?\\.)?slideshare\\.net\/.*)|(https?:\/\/(www\\.)?instagr(\\.am|am\\.com)\/p\/.*)|(https?:\/\/(open|play)\\.spotify\\.com\/.*)|(https?:\/\/(.+\\.)?imgur\\.com\/.*)|(https?:\/\/(www\\.)?meetu(\\.ps|p\\.com)\/.*)|(https?:\/\/(www\\.)?issuu\\.com\/.+\/docs\/.+)|(https?:\/\/(www\\.)?collegehumor\\.com\/video\/.*)|(https?:\/\/(www\\.)?mixcloud\\.com\/.*)|(https?:\/\/(www\\.|embed\\.)?ted\\.com\/talks\/.*)|(https?:\/\/(www\\.)?(animoto|video214)\\.com\/play\/.*)|(https?:\/\/(.+)\\.tumblr\\.com\/post\/.*)|(https?:\/\/(www\\.)?kickstarter\\.com\/projects\/.*)|(https?:\/\/kck\\.st\/.*)|(https?:\/\/cloudup\\.com\/.*)|(https?:\/\/(www\\.)?reverbnation\\.com\/.*)|(https?:\/\/videopress\\.com\/v\/.*)|(https?:\/\/(www\\.)?reddit\\.com\/r\/[^\/]+\/comments\/.*)|(https?:\/\/(www\\.)?speakerdeck\\.com\/.*)|(https?:\/\/www\\.facebook\\.com\/.*\/posts\/.*)|(https?:\/\/www\\.facebook\\.com\/.*\/activity\/.*)|(https?:\/\/www\\.facebook\\.com\/.*\/photos\/.*)|(https?:\/\/www\\.facebook\\.com\/photo(s\/|\\.php).*)|(https?:\/\/www\\.facebook\\.com\/permalink\\.php.*)|(https?:\/\/www\\.facebook\\.com\/media\/.*)|(https?:\/\/www\\.facebook\\.com\/questions\/.*)|(https?:\/\/www\\.facebook\\.com\/notes\/.*)|(https?:\/\/www\\.facebook\\.com\/.*\/videos\/.*)|(https?:\/\/www\\.facebook\\.com\/video\\.php.*)|(https?:\/\/(www\\.)?screencast\\.com\/.*)|(https?:\/\/([a-z0-9-]+\\.)?amazon\\.(com|com\\.mx|com\\.br|ca)\/.*)|(https?:\/\/([a-z0-9-]+\\.)?amazon\\.(co\\.uk|de|fr|it|es|in|nl|ru)\/.*)|(https?:\/\/([a-z0-9-]+\\.)?amazon\\.(co\\.jp|com\\.au)\/.*)|(https?:\/\/([a-z0-9-]+\\.)?amazon\\.cn\/.*)|(https?:\/\/(www\\.)?a\\.co\/.*)|(https?:\/\/(www\\.)?amzn\\.to\/.*)|(https?:\/\/(www\\.)?amzn\\.eu\/.*)|(https?:\/\/(www\\.)?amzn\\.in\/.*)|(https?:\/\/(www\\.)?amzn\\.asia\/.*)|(https?:\/\/(www\\.)?z\\.cn\/.*)|(https?:\/\/www\\.someecards\\.com\/.+-cards\/.+)|(https?:\/\/www\\.someecards\\.com\/usercards\/viewcard\/.+)|(https?:\/\/some\\.ly\\\/.+)";
+/* ]]> */
+</script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/scripts/main.js?ver=msce_9900357" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var msceLoadMore = {"postsPerPage":"10","l10n":{"errorMessage":"An error occurred, and we are unable to load more posts."}};
+/* ]]> */
+</script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/themes/cloudperspectives/dist/scripts/load-more.js?ver=msce_9900357" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var microsoftUhfSettings = {"homePath":"\/microsoftsecure\/","loginUrl":"","logoutUrl":"","scripts":[],"inline":[]};
+/* ]]> */
+</script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-content/plugins/microsoft-uhf/assets/microsoft-uhf.js?ver=0.3.5" type="text/javascript"></script>
+<script src="https://cloudblogs.microsoft.com/microsoftsecure/wp-includes/js/wp-embed.min.js?ver=4.9.1" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+var _analytics_scr = document.createElement('script');
+_analytics_scr.type = 'text/javascript'; _analytics_scr.async = true; _analytics_scr.src = '/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=9&cb=2010782704';
+var _analytics_elem = document.getElementsByTagName('script')[0]; _analytics_elem.parentNode.insertBefore(_analytics_scr, _analytics_elem);
+})();
+// ]]>
+</script></body>
+</html>
