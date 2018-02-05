@@ -30,12 +30,16 @@ class GameController(object):
       isStar = False
     if self.algorithm == 'MINIMAX':
       score = self.Minimax(root, 0, maxPlayer, isStar)
-      print("Score in start %d " % score)
-      bestMove, farSightScore, numNodes  = root.TermEvaluation(score, depth, isStar)
-      print bestMove, score[0], farSightScore[0], numNodes
+      bestMove, score, farSightScore, numNodes  = root.TermEvaluation(score, depth, isStar)
+      print bestMove, score, farSightScore, numNodes
+      with open('output.txt', 'w') as openFile:
+        openFile.write(bestMove +'\n')
+        openFile.write(str(score) + '\n')
+        openFile.write(str(farSightScore) + '\n')
+        openFile.write(str(numNodes))
+ 
 
   def Minimax(self, node, depth, maxPlayer, isStar):
-    print("Entering minimax with depth of %d " % depth)
     pieces = self.pieces
     depthHolder = depth
     if depth == self.maxDepth:
@@ -43,17 +47,13 @@ class GameController(object):
       return node.score
 
     else:
-      print("Getting moves")
       moves, childLocation = node.state.getMoves(isStar, pieces)
       if maxPlayer:
         score = -float("inf")
       else:
         score = float("inf")
 
-      print("Amount of moves return %d " % len(moves))
-      print("Amount of children return %d \n" % len(childLocation))
       if len(childLocation) == 0:
-        print("In child location")
         node.score = node.ScoreEvaluation()
         return node.score
       for index in range(len(childLocation)):
@@ -65,6 +65,6 @@ class GameController(object):
           score = max(score, childScore)
         else:
           score = min(score, childScore)
-      node.score = score
+      #node.score = score
       return score
         

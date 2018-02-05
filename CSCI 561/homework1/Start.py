@@ -42,7 +42,7 @@ def main():
     if value in pieces:
       piecesPos[value].append(index)
 
-  initialState = StateHandler(currentBoard)
+  initialState = StateHandler(currentBoard, False)
   game = GameController(currentPlayer, algToUse, dLimit, initialState, pieces)
   game.Start()
 

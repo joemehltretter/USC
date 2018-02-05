@@ -13,13 +13,17 @@ from CreateMove import CreateMove
 
 class StateHandler(object):
 
-  def __init__(self, boardState):
+  def __init__(self, boardState, terminal):
     self.boardState = boardState
+    self.terminal = terminal
 
-  def createChildState(self, move, jump, currPiece, ogRow, ogCol):
+  def createChildState(self, move, jump, currPiece, ogRow, ogCol, player):
+    piecesPos = collections.defaultdict(list) 
+    starPieces = []
+    circlePieces = []
     if move.position == 'pass':
       boardValues = np.copy(self.boardState)
-      newChild = StateHandler(boardValues)
+      newChild = StateHandler(boardValues, False)
       return newChild
 
     boardValues = np.copy(self.boardState)
@@ -27,24 +31,52 @@ class StateHandler(object):
       boardValues[jump[0]][jump[1]] = '0'
     boardValues[ogRow, ogCol] = '0'
     boardValues[move.row, move.column] = currPiece
-    newChild = StateHandler(boardValues)
+    for index, value in np.ndenumerate(boardValues):
+      if 'S' or 'C' in value:
+        piecesPos[value].append(index)
+    for key in piecesPos.keys():
+      if 'S' in key:
+        count = len(piecesPos[key])
+        num = 0
+        while(num < count):
+          starPieces.append([piecesPos[key][num][0], piecesPos[key][num][1]])
+          num += 1
+      elif 'C' in key:
+        count = len(piecesPos[key])
+        num = 0
+        while(num < count):
+          circlePieces.append([piecesPos[key][num][0], piecesPos[key][num][1]])
+          num += 1
+    if len(circlePieces) == 0 and player == True:
+      terminalState = True
+    elif len(starPieces) == 0 and player == False:
+     terminalState = True
+    else:
+      terminalState = False
+    newChild = StateHandler(boardValues, terminalState)
     return newChild
 
   def getUtilityScore(self, player):
     score = 0
+    starScore = 0
+    circleScore = 0
     for index, value in np.ndenumerate(self.boardState):
-      if 'S' in value and player == True:
+      if 'S' in value:
         row1, column = np.where(self.boardState == value)
         count = int(value[1:])
         index = list(index)
         row, col = index[0], index[1]
-        score = score + (BoardConfig.starScore[row] * count)
-      elif 'C' in value and player == False:
+        starScore = starScore + (BoardConfig.starScore[row] * count)
+      elif 'C' in value:
         count = int(value[1:])
         index = list(index)
         row, col = index[0], index[1]
-        score = score + (BoardConfig.circScore[row] * count)
-    return score
+        circleScore = circleScore + (BoardConfig.circScore[row] * count)
+    if starScore > circleScore:
+      score = starScore - circleScore
+    else:
+      score = circleScore - starScore
+    return int(score[0])
 
   def checkAvailable(self, location, player):
     row, column = np.where(BoardConfig.board == location)
@@ -60,12 +92,14 @@ class StateHandler(object):
 
   def checkFinalRow(self, row, column, player, currPiece):
     piece = currPiece
-    if player == True and row == 0:
-      pieceNum = int(piece[1:])
+    boardPiece = self.boardState[row, column]
+    if player == True and row == 0 and 'S' in boardPiece:
+      #pieceNum = int(piece[1:])
+      pieceNum = int(boardPiece[1:])
       pieceNum = pieceNum + 1
       piece = 'S'+str(pieceNum)
       return piece
-    elif player == False and row == 7:
+    elif player == False and row == 7 and 'C' in boardPiece:
       pieceNum = int(piece[1:])
       pieceNum = pieceNum + 1
       piece = 'C'+str(pieceNum)
@@ -112,7 +146,6 @@ class StateHandler(object):
           return False
 
   def getMoves(self, player, pieces):
-    print("Player getting moves %s " % player)
     moves = []
     childStates = []
     piecesPos = collections.defaultdict(list)
@@ -137,7 +170,6 @@ class StateHandler(object):
           num += 1
 
     if player == True:
-      print("Number of stars %d " % len(starPieces))
       for count in range(len(starPieces)):
         row = starPieces[count][0]
         column = starPieces[count][1]
@@ -164,9 +196,8 @@ class StateHandler(object):
               pass
           piece = self.checkFinalRow(newRow, newColumn, player, currPiece)
           leftMove = str(currLoc + "-" + newLoc)
-          print("Star leftmove is: %s " % leftMove)
           move = CreateMove(newRow, newColumn, leftMove, player)
-          newChild = self.createChildState(move, jumpLoc, piece, row, column)
+          newChild = self.createChildState(move, jumpLoc, piece, row, column, player)
           moves.append(move)
           childStates.append(newChild)
         elif row == 0 or column == 0:
@@ -193,23 +224,20 @@ class StateHandler(object):
               pass
           piece = self.checkFinalRow(newRow, newColumn, player, currPiece)
           rightMove = str(currLoc + "-" + newLoc)
-          print("Star rightMove: %s " % rightMove)
           move = CreateMove(newRow, newColumn, rightMove, player)
-          newChild = self.createChildState(move, jumpLoc, piece, row, column)
+          newChild = self.createChildState(move, jumpLoc, piece, row, column, player)
           moves.append(move)
           childStates.append(newChild)
         elif row == 0 or column == 7:
           pass
       if not moves and len(starPieces) > 0:
-        print("No moves returning pass\n")
         move = CreateMove(None, None, 'pass', player)
-        newChild = self.createChildState(move, False, None, None, None)
+        newChild = self.createChildState(move, False, None, None, None, player)
         moves.append(move)
         childStates.append(newChild)
       return moves, childStates
 
     if player == False:
-      print("Number of circles %d " % len(circlePieces))
       for count in range(len(circlePieces)):
         row = circlePieces[count][0]
         column = circlePieces[count][1]
@@ -235,9 +263,8 @@ class StateHandler(object):
             else:
               pass
           leftMove = str(currLoc + "-" + newLoc)
-          print("Circle left move: %s " % leftMove)
           move = CreateMove(newRow, newColumn, leftMove, player)
-          newChild = self.createChildState(move, jumpLoc, currPiece, row, column)
+          newChild = self.createChildState(move, jumpLoc, currPiece, row, column, player)
           moves.append(move)
           childStates.append(newChild)
         elif row == 7 or column == 0:
@@ -263,17 +290,15 @@ class StateHandler(object):
             else:
               pass
           rightMove = str(currLoc + "-" + newLoc)
-          print("Circle right move: %s " % rightMove)
           move = CreateMove(newRow, newColumn, rightMove, player)
-          newChild = self.createChildState(move, jumpLoc, currPiece, row, column)
+          newChild = self.createChildState(move, jumpLoc, currPiece, row, column, player)
           moves.append(move)
           childStates.append(newChild)
         elif row == 7 or column == 0:
           pass
       if not moves and len(circlePieces) > 0:
-        print("No moves returning pass\n")
         move = CreateMove(None, None, 'pass', player)
-        newChild = self.createChildState(move, False, None, None, None)
+        newChild = self.createChildState(move, False, None, None, None, player)
         moves.append(move)
         childStates.append(newChild)
       return moves, childStates

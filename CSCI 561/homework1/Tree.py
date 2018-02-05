@@ -32,30 +32,48 @@ class Node(object):
         nodesCount = self.traverseTreeCount(children[count].children, nodesCount)
       return nodesCount
 
-  def traverseFarSight(self, children, farSightScore, depth):
+  def traverseScore(self, children, farSightScore, depth, player, lock):
     if children is not None:
       for count in range(len(children)):
-        if children[count].depth == depth:
-          score = children[count].state.getUtilityScore(self.children[count].player)
+        score = children[count].state.getUtilityScore(player)
+        if children[count].depth == depth and lock is False:
           if score > farSightScore:
             farSightScore = score
-            print farSightScore
-          farSightScore = self.traverseFarSight(children[count].children, farSightScore, depth)
+          farSightScore = self.traverseScore(children[count].children, farSightScore, depth, player, lock)
+        elif children[count].state.terminal == True:
+          lock = True
+          if score > farSightScore:
+            farSightScore = score
+          farSightScore = self.traverseScore(children[count].children, farSightScore, depth, player, lock)
         else:
-          farSightScore = self.traverseFarSight(children[count].children, farSightScore, depth)
+          farSightScore = self.traverseScore(children[count].children, farSightScore, depth, player, lock)
       return farSightScore
+
+  def traverseUtilityScore(self, children, utilityScore, depth, player):
+    if children is not None:
+      for count in range(len(children)):
+        if children[count].depth == 1:
+          uScore = children[count].state.getUtilityScore(player)
+          if uScore > utilityScore:
+            utilityScore = max(utilityScore, uScore)
+          utilityScore = self.traverseUtilityScore(children[count].children, utilityScore, depth, player)
+      return utilityScore
 
   def TermEvaluation(self, bestScore, depth, player):
     level = 1
     farSightScore = 0
+    utilityScore = 0
     nodeCount = self.traverseTreeCount(self.children, level)
-    farSight = self.traverseFarSight(self.children, farSightScore, depth)
+    print self.player
+    farSight = self.traverseScore(self.children, farSightScore, depth, self.player, False)
+    utilityScore = self.traverseUtilityScore(self.children, utilityScore, depth, self.player)
+    print farSight, utilityScore
     ### Get move for best score ####
     for child in self.children:
-      if bestScore == child.state.getUtilityScore(player):
+      if utilityScore == child.state.getUtilityScore(player):
         bestMove = child.move.position
 
-    return bestMove, farSight, nodeCount
+    return bestMove, utilityScore, farSight, nodeCount
 
     for child in self.children:
       if child.score == bestScore:
