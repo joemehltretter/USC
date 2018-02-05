@@ -25,25 +25,37 @@ class Node(object):
     childNode.parent = self
     childNode.depth = self.depth + 1
 
+  def traverseTreeCount(self, children, nodesCount):
+    if children is not None:
+      nodesCount = nodesCount + len(children)
+      for count in range(len(children)):
+        nodesCount = self.traverseTreeCount(children[count].children, nodesCount)
+      return nodesCount
+
+  def traverseFarSight(self, children, farSightScore, depth):
+    if children is not None:
+      for count in range(len(children)):
+        if children[count].depth == depth:
+          score = children[count].state.getUtilityScore(self.children[count].player)
+          if score > farSightScore:
+            farSightScore = score
+            print farSightScore
+          farSightScore = self.traverseFarSight(children[count].children, farSightScore, depth)
+        else:
+          farSightScore = self.traverseFarSight(children[count].children, farSightScore, depth)
+      return farSightScore
+
   def TermEvaluation(self, bestScore, depth, player):
     level = 1
     farSightScore = 0
+    nodeCount = self.traverseTreeCount(self.children, level)
+    farSight = self.traverseFarSight(self.children, farSightScore, depth)
     ### Get move for best score ####
     for child in self.children:
       if bestScore == child.state.getUtilityScore(player):
         bestMove = child.move.position
 
-    for treeLevel in range(depth):
-      level = level + 1
-      if self.children[treeLevel]:
-        if len(self.children[treeLevel].children) > 0:
-          for count in range(len(self.children[treeLevel].children)):
-            level = level + 1
-            if((treeLevel + 1) == depth):
-              currScore = self.children[treeLevel].children[count].state.getUtilityScore(player)
-              if currScore > farSightScore:
-                farSightScore = currScore
-    return bestMove, farSightScore, level
+    return bestMove, farSight, nodeCount
 
     for child in self.children:
       if child.score == bestScore:
