@@ -50,7 +50,7 @@ class StateHandler(object):
     if len(circlePieces) == 0 and player == True:
       terminalState = True
     elif len(starPieces) == 0 and player == False:
-     terminalState = True
+      terminalState = True
     else:
       terminalState = False
     newChild = StateHandler(boardValues, terminalState)
@@ -72,10 +72,10 @@ class StateHandler(object):
         index = list(index)
         row, col = index[0], index[1]
         circleScore = circleScore + (BoardConfig.circScore[row] * count)
-    if starScore > circleScore:
-      score = starScore - circleScore
-    else:
+    if player == False or player == 'Circle':
       score = circleScore - starScore
+    else:
+      score = starScore - circleScore
     return int(score[0])
 
   def checkAvailable(self, location, player):
@@ -83,9 +83,9 @@ class StateHandler(object):
     piece = self.boardState[row, column]
     if piece == '0':
       return True
-    elif 'S' in piece and row == 0 and player == True:
+    elif 'S' in piece[0] and row == 0 and player == True:
       return True
-    elif 'C' in piece and row == 7 and player == False:
+    elif 'C' in piece[0] and row == 7 and player == False:
       return True
     else:
       return False
@@ -113,15 +113,16 @@ class StateHandler(object):
       circRow = opponent[count][0]
       circColumn = opponent[count][1]
       if row == circRow and column == circColumn:
-        if moveType == 'left':
+        if moveType == 'left' and column != 0 and row != 0:
           row = row - 1
           column = column - 1
-        elif moveType == 'right':
+        elif moveType == 'right' and column != 7 and row != 0:
           row = row - 1
           column = column + 1
         if 'C' in self.boardState[row, column][0]:
           return False
         elif 'S' in self.boardState[row, column][0] and row == np.array([0]):
+          print("True")
           return True
         else:
           return False
@@ -132,20 +133,22 @@ class StateHandler(object):
       starRow = opponent[count][0]
       starColumn = opponent[count][1]
       if row == starRow and column == starColumn:
-        if moveType == 'left':
+        if moveType == 'left' and column != 0 and row != 7:
           row = row + 1
           column = column - 1
-        elif moveType == 'right':
+        elif moveType == 'right' and column != 7 and row != 7:
           row = row + 1
           column = column + 1
         if 'S' in self.boardState[row, column][0]:
-          return True
-        elif 'C' in self.boardState[row, column][0] and row == 7:
           return False
+        elif 'C' in self.boardState[row, column][0] and row == np.array([7]):
+          return True
         else:
           return False
 
-  def getMoves(self, player, pieces):
+  def getMoves(self, player, pieces, endFlag):
+    if endFlag:
+      return [], []
     moves = []
     childStates = []
     piecesPos = collections.defaultdict(list)
@@ -193,7 +196,7 @@ class StateHandler(object):
               newColumn = newColumn -1
               newLoc = BoardConfig.board[newRow, newColumn]
             else:
-              pass
+              continue
           piece = self.checkFinalRow(newRow, newColumn, player, currPiece)
           leftMove = str(currLoc + "-" + newLoc)
           move = CreateMove(newRow, newColumn, leftMove, player)
@@ -221,7 +224,7 @@ class StateHandler(object):
               newColumn = newColumn + 1
               newLoc = BoardConfig.board[newRow, newColumn]
             else:
-              pass
+              continue
           piece = self.checkFinalRow(newRow, newColumn, player, currPiece)
           rightMove = str(currLoc + "-" + newLoc)
           move = CreateMove(newRow, newColumn, rightMove, player)
@@ -261,7 +264,7 @@ class StateHandler(object):
               newColumn = newColumn - 1
               newLoc = BoardConfig.board[newRow, newColumn]
             else:
-              pass
+              continue
           leftMove = str(currLoc + "-" + newLoc)
           move = CreateMove(newRow, newColumn, leftMove, player)
           newChild = self.createChildState(move, jumpLoc, currPiece, row, column, player)
@@ -288,7 +291,7 @@ class StateHandler(object):
               newColumn = newColumn + 1
               newLoc = BoardConfig.board[newRow, newColumn]
             else:
-              pass
+              continue
           rightMove = str(currLoc + "-" + newLoc)
           move = CreateMove(newRow, newColumn, rightMove, player)
           newChild = self.createChildState(move, jumpLoc, currPiece, row, column, player)

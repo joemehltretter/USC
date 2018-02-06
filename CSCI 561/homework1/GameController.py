@@ -7,7 +7,7 @@
 #                                                                  #
 ####################################################################
 
-from Tree import Node
+from Tree import Node, ABNode
 import BoardConfig
 
 class GameController(object):
@@ -19,7 +19,6 @@ class GameController(object):
     self.pieces = pieces
 
   def Start(self):
-    root = Node(self.state, None, self.player)
     currentPlayer = self.player
     maxPlayer = True
     depth = self.maxDepth
@@ -29,6 +28,7 @@ class GameController(object):
     else:
       isStar = False
     if self.algorithm == 'MINIMAX':
+      root = Node(self.state, None, self.player)
       score = self.Minimax(root, 0, maxPlayer, isStar)
       bestMove, score, farSightScore, numNodes  = root.TermEvaluation(score, depth, isStar)
       print bestMove, score, farSightScore, numNodes
@@ -38,16 +38,61 @@ class GameController(object):
         openFile.write(str(farSightScore) + '\n')
         openFile.write(str(numNodes))
  
+    elif self.algorithm == 'ALPHABETA':
+      root = ABNode(self.state, None, self.player)
+      alpha = -float("inf")
+      beta = float("inf")
+      score = self.AlphaBeta(root, 0, maxPlayer, isStar, alpha, beta)
+      bestMove, score, farSightScore, numNodes = root.TermEvaluation(score, self.maxDepth, isStar)
+      print bestMove, score, farSightScore, numNodes 
+
+  def AlphaBeta(self, node, depth, maxPlayer, isStar, alpha, beta):
+    pieces = self.pieces
+    if depth == self.maxDepth:
+      node.score = node.ScoreEvaluation()
+      return node.score
+    else:
+      endFlag = node.checkEnd()
+      moves, childLocation = node.state.getMoves(isStar, pieces, endFlag)
+      if endFlag:
+        self.maxDepth = depth
+
+      if len(childLocation) == 0:
+        node.score = node.ScoreEvaluation()
+        return node.score
+      for index in range(len(childLocation)):
+        childState, move = childLocation[index], moves[index]
+        childNode = ABNode(childState, move, isStar)
+        node.addChild(childNode)
+        childScore = self.AlphaBeta(childNode, depth+1, not maxPlayer, not isStar, alpha, beta)
+        if maxPlayer:
+          alpha = max(alpha, childScore)
+          node.score = alpha
+          if beta <= alpha:
+            return alpha
+        else:
+          beta = min(beta, childScore)
+          node.score = beta
+          if beta <= alpha:
+            return beta
+
+      node.alpha = alpha
+      node.beta = beta
+      if maxPlayer:
+        return alpha
+      else:
+        return beta
 
   def Minimax(self, node, depth, maxPlayer, isStar):
     pieces = self.pieces
-    depthHolder = depth
+
     if depth == self.maxDepth:
       node.score = node.ScoreEvaluation()
       return node.score
 
     else:
-      moves, childLocation = node.state.getMoves(isStar, pieces)
+      endFlag = node.checkEnd()
+      moves, childLocation = node.state.getMoves(isStar, pieces, endFlag)
       if maxPlayer:
         score = -float("inf")
       else:
