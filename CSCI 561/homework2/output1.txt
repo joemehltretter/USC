@@ -1,4 +1,0 @@
-Yes
-USA,Germany,Iran,Argentina
-Brazil,Japan,France,England
-Australia,Italy,Mexico,Russia
