@@ -28,5 +28,11 @@ AI algorithms to solve constraint satisfaction problems.
    - Variables = Teams
    - Variable Assignment = Group
    - Domains = Group
+   
+   OR
+   
+   - Variables = Array (Pots x Group)
+   - Variable Assignment = Teams
+   - Domains = Team
 
 ### Constraint Programming  

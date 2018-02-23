@@ -7,6 +7,7 @@
 #####################################################################
 import sys
 import collections
+import CSP
 
 def main():
   #filePath = sys.argv[1]
@@ -19,16 +20,22 @@ def main():
 
   dNumOfGroups = int(cspInfo[0])
   dNumOfPots = int(cspInfo[1])
-  dctVariables = collections.defaultdict(list)
+  lsVariables = []
+  dctVarInfo = collections.defaultdict(list)
+  dctDomains = collections.defaultdict(list)
   count = 2
   intPotNum = 1
   for pot in range(dNumOfPots):
     splitLine = cspInfo[count].split(',')
     for country in splitLine:
-      dctVariables[country].append(intPotNum)
+      lsVariables.append(country)
+      dctVarInfo[country].append(intPotNum)
+
+      for num in range(1, dNumOfGroups+1):
+        dctDomains[country].append(num)
+
     count = count + 1
     intPotNum = intPotNum + 1
-
   for confederation in range(6):
     #parse string
     splitLine = cspInfo[count].split(':')
@@ -41,11 +48,47 @@ def main():
         word = word.strip('[')
         word = word.strip(']')
         word = word.strip("'")
-        dctVariables[word].append(strConfederation)
+        dctVarInfo[word].append(strConfederation)
 
-  print("Number of groups: %d " % dNumOfGroups)
-  print("Number of pots: %d " % dNumOfPots)
-  for key in dctVariables.keys():
-    print("Country %s has variables: %s " % (key, dctVariables[key]))
+  #Create two neighbor variables for the constraints
+  dctConfNeighbors = collections.defaultdict(list)
+  dctPotNeighbors = collections.defaultdict(list)
+
+  for country in dctVarInfo.keys():
+    if dctVarInfo[country][0] == 1:
+      neigh = [2,3,4]
+      dctPotNeighbors[country].append(neigh)
+    elif dctVarInfo[country][0] == 2:
+      neigh = [1,3,4]
+      dctPotNeighbors[country].append(neigh)
+    elif dctVarInfo[country][0] == 3:
+      neigh = [1,2,4]
+      dctPotNeighbors[country].append(neigh)
+    else:
+      neigh = [1,2,3]
+      dctPotNeighbors[country].append(neigh)
+    if dctVarInfo[country][1] == 'AFC':
+      neigh = ['CAF', 'OFC', 'CONCACAF', 'CONMEBOL', 'UEFA']
+      dctConfNeighbors[country].append(neigh)
+    elif dctVarInfo[country][1] == 'CAF':
+      neigh = ['AFC', 'OFC', 'CONCACAF', 'CONMEBOL', 'UEFA']
+      dctConfNeighbors[country].append(neigh)
+    elif dctVarInfo[country][1] == 'OFC':
+      neigh = ['AFC', 'CAF', 'CONCACAF', 'CONMEBOL', 'UEFA']
+      dctConfNeighbors[country].append(neigh)
+    elif dctVarInfo[country][1] == 'CONCACAF':
+      neigh = ['AFC', 'CAF', 'OFC', 'CONMEBOL', 'UEFA']
+      dctConfNeighbors[country].append(neigh)
+    elif dctVarInfo[country][1] == 'CONMEBOL':
+      neigh = ['AFC', 'CAF', 'OFC', 'CONCACAF', 'UEFA']
+      dctConfNeighbors[country].append(neigh)
+    else:
+      neigh = ['AFC', 'CAF', 'OFC', 'CONCACAF', 'CONMEBOL']
+      dctConfNeighbors[country].append(neigh)
+
+  cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctPotNeighbors, dctConfNeighbors, None)
+  print cspProblem
+  cspProblem.Solve()
+
 if __name__ == '__main__':
   main()
