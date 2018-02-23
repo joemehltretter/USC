@@ -19,12 +19,13 @@ def main():
 
   dNumOfGroups = int(cspInfo[0])
   dNumOfPots = int(cspInfo[1])
-  dctPots = collections.defaultdict(list)
-  dctConfederation = collections.defaultdict(list)
+  dctVariables = collections.defaultdict(list)
   count = 2
   intPotNum = 1
   for pot in range(dNumOfPots):
-    dctPots[intPotNum] = cspInfo[count]
+    splitLine = cspInfo[count].split(',')
+    for country in splitLine:
+      dctVariables[country].append(intPotNum)
     count = count + 1
     intPotNum = intPotNum + 1
 
@@ -35,12 +36,16 @@ def main():
     splitLine = str(splitLine)
     splitLine = splitLine.split(',')
     count = count + 1
-    for word in splitLine:
-      word = word.strip('[')
-      word = word.strip(']')
-      word = word.strip("'")
-      dctConfederation[strConfederation].append(word)
+    if 'None' not in ''.join(splitLine):
+      for word in splitLine:
+        word = word.strip('[')
+        word = word.strip(']')
+        word = word.strip("'")
+        dctVariables[word].append(strConfederation)
 
-
+  print("Number of groups: %d " % dNumOfGroups)
+  print("Number of pots: %d " % dNumOfPots)
+  for key in dctVariables.keys():
+    print("Country %s has variables: %s " % (key, dctVariables[key]))
 if __name__ == '__main__':
   main()

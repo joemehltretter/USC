@@ -23,3 +23,10 @@ AI algorithms to solve constraint satisfaction problems.
     2) No group can have more than one team from any continental confederation,
        with exception to UEFA, which can have up to two teams in a group.
        
+### CSP Assignments:
+
+   - Variables = Teams
+   - Variable Assignment = Group
+   - Domains = Group
+
+### Constraint Programming  
