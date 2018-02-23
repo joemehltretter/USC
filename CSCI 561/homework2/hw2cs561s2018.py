@@ -10,7 +10,7 @@ import collections
 
 def main():
   #filePath = sys.argv[1]
-  with open('input1.txt', 'r') as openFile:
+  with open('tests/input1.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]
