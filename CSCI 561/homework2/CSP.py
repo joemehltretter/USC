@@ -11,49 +11,73 @@ class CSP(object):
     self.variables = variables
     self.valInfo = variableInfo
     self.domains = domains
+    self.notConstrainedDomains = collections.defaultdict(list)
+    self.constraintCount = 0
     self.potNeighbors = potNeighbors
     self.confNeighbors = confNeighbors
     self.constraints = constraints
+    self.assignCount = 0
     self.assignments = collections.defaultdict(list)
+    self.consCheck = collections.defaultdict(list)
 
-  def Solve(self):
-    lsDomains = self.domains
-    lsVars = self.variables
-    dctAssignments = self.assignments
-    dctAssignments[1].append('Brazil')
-    dctAssignments[1].append('Mexico')
-    if len(dctAssignments) == len(self.variables):
+  def Solve(self, dctAssignments):
+    lsVariables = self.variables
+    if len(dctAssignments) == len(self.valInfo):
+      for key in dctAssignments.keys():
+        print("%s : % s" % (key, dctAssignments[key]))
       return dctAssignments
 
-    currentCountry = self.GetVar()
-    for value in lsDomains[currentCountry]:
-      if 0 == self.CheckConstraints(currentCountry, value, dctAssignments):
-        print("Allowed in group: %d " % value)
+    strCurrentCountry = self.GetVarMRV(lsVariables, dctAssignments)
+    if self.notConstrainedDomains[strCurrentCountry]:
+      lsReorderedVals = self.notConstrainedDomains[strCurrentCountry]
+    else:
+      lsReorderedVals = self.domains[strCurrentCountry]
 
-  def MakeAssign(self):
-    pass
+    for value in lsReorderedVals:
+      if 0 == self.CheckConstraints(strCurrentCountry, value):
+        dctAssignments = self.MakeAssign(strCurrentCountry, value, dctAssignments)
+        solution = self.Solve(dctAssignments)
+        if strCurrentCountry in lsVariables:
+          lsVariables.remove(strCurrentCountry)
+        if solution is not None:
+          return solution
 
-  def GetVar(self):
-    for country in self.variables:
-      if country not in self.assignments:
-        return country
+    self.RemoveAssginment(strCurrentCountry, dctAssignments)
+    return None
 
-  def Assign(self):
-    pass
+  def RemoveAssginment(self, country, assignments):
+    if country in assignments:
+      del assignments[country]
+    return assignments
 
-  def CheckConstraints(self, currentCountry, value, dctAssignments):
-    #print("%s info: %s , %s " % (currentCountry, self.potNeighbors[currentCountry], self.confNeighbors[currentCountry]))
+  def MakeAssign(self, country, group, assignments):
+    assignments[country].append(group)
+    self.consCheck[group].append(country)
+    return assignments
+
+  def GetVarMRV(self, variables, assignments):
+    dctCount = collections.defaultdict(list)
+    for country in variables:
+      if country not in assignments:
+        if self.notConstrainedDomains[country]:
+          dctCount[country] = len(self.notConstrainedDomains[country])
+        else:
+          dctCount[country] = len(self.domains)
+    mrv = min(dctCount, key=dctCount.get)
+    return mrv
+
+
+  def CheckConstraints(self, currentCountry, value):
     constraints = 0
-    if value in dctAssignments:
-      for country in dctAssignments[value]:
+    if value in self.consCheck:
+      for country in self.consCheck[value]:
+        #print("\n%s info: %s , %s " % (currentCountry, self.potNeighbors[currentCountry], self.confNeighbors[currentCountry]))
         #print("%s info: %s , %s " % (country, self.potNeighbors[country], self.confNeighbors[country]))
-        if self.potNeighbors[country] == self.potNeighbors[currentCountry] or \
-          self.confNeighbors[country] == self.confNeighbors[currentCountry]:
+        if self.potNeighbors[country] == self.potNeighbors[currentCountry]:
           constraints = constraints + 1
 
-        elif self.potNeighbors[country] != self.potNeighbors[currentCountry] and \
-          self.confNeighbors[country] != self.confNeighbors[currentCountry]:
-          return 0
+        elif self.confNeighbors[country] == self.confNeighbors[currentCountry]:
+          constraints = constraints + 1
 
     return constraints
 

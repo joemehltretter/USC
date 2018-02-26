@@ -86,9 +86,9 @@ def main():
       neigh = ['AFC', 'CAF', 'OFC', 'CONCACAF', 'CONMEBOL']
       dctConfNeighbors[country].append(neigh)
 
+  dctEmpty = collections.defaultdict(list)
   cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctPotNeighbors, dctConfNeighbors, None)
-  print cspProblem
-  cspProblem.Solve()
+  solution = cspProblem.Solve(dctEmpty)
 
 if __name__ == '__main__':
   main()
