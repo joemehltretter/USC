@@ -7,11 +7,14 @@ class SearchAndCheck(object):
 
   def BacktrackSearch(self, dctAssignments):
     lsVariables = self.csp.variables
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(len(dctAssignments), len(self.csp.valInfo))
     if len(dctAssignments) == len(self.csp.valInfo):
       return dctAssignments
 
     #strCurrentCountry = self.GetVarMRV(lsVariables, dctAssignments)
     lsVariables = self.GetVarMRV(lsVariables, dctAssignments)
+    print("About to go through variables, size: %d " % len(lsVariables))
     for strCurrentCountry in lsVariables:
       print("******** Current Country: %s*******************\n" % strCurrentCountry)
       if self.csp.notConstrainedDomains:
@@ -23,46 +26,54 @@ class SearchAndCheck(object):
         if 0 == self.csp.CheckConstraints(strCurrentCountry, value):
           dctAssignments = self.csp.MakeAssignment(strCurrentCountry, value, dctAssignments)
           # Begin Inference
-          self.MakeInferenceFromRemoval(strCurrentCountry, value)
+          removed = self.MakeInferenceFromRemoval(strCurrentCountry, value)
+          self.removed = removed
           queueAc3 = [(strCurrentCountry, neighbor) for neighbor in self.csp.neighboringCountries[strCurrentCountry]]
-          if self.ArcConsistency3(queueAc3):
+          arcConsistent = self.ArcConsistency3(queueAc3)
+          if arcConsistent:
             solution = self.BacktrackSearch(dctAssignments)
-            if solution is not None:
+            if solution != None:
+              print("Solution is not none")
               return solution
+          print("\nIs not arc consistent: %s " % arcConsistent)
+          self.csp.Undo(removed)
 
-          self.csp.Undo(self.removed)
-      dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
-      print("%s was unassignable %s " % (strCurrentCountry, dctAssignments))
-      #dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
-      return None
+    dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
+    #dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
+    return None
 
 
   def ArcConsistency3(self, queueToCheck=None):
     #Check is toCheck queue is empty
     if not queueToCheck:
+      print("In not queue check #######################")
       for getCountry in self.csp.variables:
         for neighbor in self.csp.neighboringCountries[getCountry]:
           queueToCheck.append([getCountry, neighbor])
-    #print("Current queue: %s " % queueToCheck)
+    print("\nCurrent queue: %s " % queueToCheck)
     self.PruneDomainValues()
     while queueToCheck:
       (country, neighbor) = queueToCheck.pop()
-      #print("\tPerforming AC3 for %s on neighbor %s " % (country, neighbor))
+      if not self.csp.notConstrainedDomains[country]:
+        print("%s : %s " % (country, self.csp.notConstrainedDomains[country]))
+        return False
+      print("\tPerforming AC3 for %s on neighbor %s " % (country, neighbor))
       pruneDone = self.CheckForPrunes(country, neighbor)
-      #print("Prune done value is: %s " % pruneDone)
+      print("\tPrune done value is: %s " % pruneDone)
       if pruneDone:
-        if not self.csp.notConstrainedDomains[country]:
-          return False
-        for newNeighbor in self.csp.neighboringCountries[country]:
+        #if not self.csp.notConstrainedDomains[neighbor]:
+          #print("%s : %s " % (neighbor, self.csp.notConstrainedDomains[neighbor]))
+          #return False
+        for newNeighbor in self.csp.neighboringCountries[neighbor]:
           if neighbor != newNeighbor:
-            queueToCheck.append((country, newNeighbor))
-
+            queueToCheck.append((neighbor, newNeighbor))
     return True
 
   def MakeInferenceFromRemoval(self, country, valueAssigned):
     self.PruneDomainValues()
-    self.removed = [(country, value) for value in self.csp.notConstrainedDomains[country] if value != valueAssigned]
+    removed = [(country, value) for value in self.csp.notConstrainedDomains[country] if value != valueAssigned]
     self.csp.notConstrainedDomains[country] = [valueAssigned]
+    return removed
 
   def CheckForPrunes(self, currentCountry, neighbor):
     prunesAvailable = False
@@ -74,9 +85,9 @@ class SearchAndCheck(object):
     return prunesAvailable
 
   def MakePrune(self, country, value):
-    #print("\tBefore prune %s: %s " % (country, self.csp.notConstrainedDomains[country]))
+    print("\t \tBefore prune %s: %s " % (country, self.csp.notConstrainedDomains[country]))
     self.csp.notConstrainedDomains[country].remove(value)
-    #print("\tAfter prune %s: %s " % (country, self.csp.notConstrainedDomains[country]))
+    print("\t \tAfter prune %s: %s " % (country, self.csp.notConstrainedDomains[country]))
     if self.removed is not None:
       self.removed.append((country, value))
 

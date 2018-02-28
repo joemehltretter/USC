@@ -16,31 +16,35 @@ class CSP(object):
     self.constraintCount = 0
     self.neighboringCountries = neighbors
     self.constraints = constraints
-    self.assignCount = 0
+    self.assignOrder = []
     self.assignments = {}
     self.consCheck = collections.defaultdict(list)
 
   def RemoveAssignment(self, country, assignments):
-    print("Before removal assignments are: %s " % assignments)
+    print("\nBefore removal assignments are: %s " % assignments)
+    print("\tCountry assigned before this one was: %s " % self.assignOrder[-1])
+    country = self.assignOrder[-1]
     if country in assignments:
-      print("\nConstraint issue so removing %s assignment of %s " % (country, assignments[country]))
+      print("\tConstraint issue so removing %s assignment of %s " % (country, assignments[country]))
       del self.assignments[country]
       del assignments[country]
-    print("Therefore, current assignments are: %s " % assignments)
+    print("\tTherefore, current assignments are: %s " % assignments)
+    return assignments
 
   def MakeAssignment(self, country, group, assignments):
-    #print("\nAssigning %s to %s. " % (group, country))
+    print("\nAssigning %s to %s. " % (group, country))
     self.assignments[country] = group
     assignments[country] = group
+    self.assignOrder.append(country)
     self.consCheck[group].append(country)
-    #print("Making current assignments: %s " % assignments)
+    print("\tMaking current assignments: %s \n" % assignments)
     return assignments
 
   def Undo(self, lsRemoved):
-    print("\n Constraint issue so resetting removed queue from: %s " % self.notConstrainedDomains)
-    for country, value in lsRemoved:
-      if value not in self.notConstrainedDomains[country]:
-        self.notConstrainedDomains[country].append(value)
+    print("\n Completed assignments resetting constrained domains from: %s " % self.notConstrainedDomains)
+    for removedCountry, removedValue in lsRemoved:
+      print(removedCountry, removedValue)
+      self.notConstrainedDomains[removedCountry].append(removedValue)
     print("To: %s " % self.notConstrainedDomains)
 
   def CheckDirectConstraint(self, c1, c1Val, c2, c2Val):
