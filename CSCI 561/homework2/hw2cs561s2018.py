@@ -8,6 +8,7 @@
 import sys
 import collections
 import CSP
+import SearchAndCheck
 
 def main():
   #filePath = sys.argv[1]
@@ -50,45 +51,24 @@ def main():
         word = word.strip("'")
         dctVarInfo[word].append(strConfederation)
 
-  #Create two neighbor variables for the constraints
-  dctConfNeighbors = collections.defaultdict(list)
-  dctPotNeighbors = collections.defaultdict(list)
+  dctNeighboringCountries = collections.defaultdict(list)
 
   for country in dctVarInfo.keys():
-    if dctVarInfo[country][0] == 1:
-      neigh = [2,3,4]
-      dctPotNeighbors[country].append(neigh)
-    elif dctVarInfo[country][0] == 2:
-      neigh = [1,3,4]
-      dctPotNeighbors[country].append(neigh)
-    elif dctVarInfo[country][0] == 3:
-      neigh = [1,2,4]
-      dctPotNeighbors[country].append(neigh)
-    else:
-      neigh = [1,2,3]
-      dctPotNeighbors[country].append(neigh)
-    if dctVarInfo[country][1] == 'AFC':
-      neigh = ['CAF', 'OFC', 'CONCACAF', 'CONMEBOL', 'UEFA']
-      dctConfNeighbors[country].append(neigh)
-    elif dctVarInfo[country][1] == 'CAF':
-      neigh = ['AFC', 'OFC', 'CONCACAF', 'CONMEBOL', 'UEFA']
-      dctConfNeighbors[country].append(neigh)
-    elif dctVarInfo[country][1] == 'OFC':
-      neigh = ['AFC', 'CAF', 'CONCACAF', 'CONMEBOL', 'UEFA']
-      dctConfNeighbors[country].append(neigh)
-    elif dctVarInfo[country][1] == 'CONCACAF':
-      neigh = ['AFC', 'CAF', 'OFC', 'CONMEBOL', 'UEFA']
-      dctConfNeighbors[country].append(neigh)
-    elif dctVarInfo[country][1] == 'CONMEBOL':
-      neigh = ['AFC', 'CAF', 'OFC', 'CONCACAF', 'UEFA']
-      dctConfNeighbors[country].append(neigh)
-    else:
-      neigh = ['AFC', 'CAF', 'OFC', 'CONCACAF', 'CONMEBOL']
-      dctConfNeighbors[country].append(neigh)
+    for checkCountry in lsVariables:
+      if country != checkCountry:
+        if dctVarInfo[country][0] == dctVarInfo[checkCountry][0]:
+          if checkCountry not in dctNeighboringCountries[country]:
+            dctNeighboringCountries[country].append(checkCountry)
+        if dctVarInfo[country][1] == dctVarInfo[checkCountry][1]:
+          if checkCountry not in dctNeighboringCountries[country]:
+            dctNeighboringCountries[country].append(checkCountry)
 
-  dctEmpty = collections.defaultdict(list)
-  cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctPotNeighbors, dctConfNeighbors, None)
-  solution = cspProblem.Solve(dctEmpty)
+  dctAssignments = {}
+  cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctNeighboringCountries, None)
+  backtrack = SearchAndCheck.SearchAndCheck(cspProblem)
+  solution = backtrack.BacktrackSearch(dctAssignments)
+  print solution
+  #solution = cspProblem.Solve(dctEmpty)
 
 if __name__ == '__main__':
   main()

@@ -5,80 +5,73 @@
 #                                                                   #
 #####################################################################
 import collections
+import SearchAndCheck
 
 class CSP(object):
-  def __init__(self, variables, variableInfo, domains, potNeighbors, confNeighbors, constraints):
+  def __init__(self, variables, variableInfo, domains, neighbors, constraints):
     self.variables = variables
     self.valInfo = variableInfo
     self.domains = domains
-    self.notConstrainedDomains = collections.defaultdict(list)
+    self.notConstrainedDomains = None
     self.constraintCount = 0
-    self.potNeighbors = potNeighbors
-    self.confNeighbors = confNeighbors
+    self.neighboringCountries = neighbors
     self.constraints = constraints
     self.assignCount = 0
-    self.assignments = collections.defaultdict(list)
+    self.assignments = {}
     self.consCheck = collections.defaultdict(list)
 
-  def Solve(self, dctAssignments):
-    lsVariables = self.variables
-    if len(dctAssignments) == len(self.valInfo):
-      for key in dctAssignments.keys():
-        print("%s : % s" % (key, dctAssignments[key]))
-      return dctAssignments
-
-    strCurrentCountry = self.GetVarMRV(lsVariables, dctAssignments)
-    if self.notConstrainedDomains[strCurrentCountry]:
-      lsReorderedVals = self.notConstrainedDomains[strCurrentCountry]
-    else:
-      lsReorderedVals = self.domains[strCurrentCountry]
-
-    for value in lsReorderedVals:
-      if 0 == self.CheckConstraints(strCurrentCountry, value):
-        dctAssignments = self.MakeAssign(strCurrentCountry, value, dctAssignments)
-        solution = self.Solve(dctAssignments)
-        if strCurrentCountry in lsVariables:
-          lsVariables.remove(strCurrentCountry)
-        if solution is not None:
-          return solution
-
-    self.RemoveAssginment(strCurrentCountry, dctAssignments)
-    return None
-
-  def RemoveAssginment(self, country, assignments):
+  def RemoveAssignment(self, country, assignments):
+    print("Before removal assignments are: %s " % assignments)
     if country in assignments:
+      print("\nConstraint issue so removing %s assignment of %s " % (country, assignments[country]))
+      del self.assignments[country]
       del assignments[country]
-    return assignments
+    print("Therefore, current assignments are: %s " % assignments)
 
-  def MakeAssign(self, country, group, assignments):
-    assignments[country].append(group)
+  def MakeAssignment(self, country, group, assignments):
+    #print("\nAssigning %s to %s. " % (group, country))
+    self.assignments[country] = group
+    assignments[country] = group
     self.consCheck[group].append(country)
+    #print("Making current assignments: %s " % assignments)
     return assignments
 
-  def GetVarMRV(self, variables, assignments):
-    dctCount = collections.defaultdict(list)
-    for country in variables:
-      if country not in assignments:
-        if self.notConstrainedDomains[country]:
-          dctCount[country] = len(self.notConstrainedDomains[country])
-        else:
-          dctCount[country] = len(self.domains)
-    mrv = min(dctCount, key=dctCount.get)
-    return mrv
+  def Undo(self, lsRemoved):
+    print("\n Constraint issue so resetting removed queue from: %s " % self.notConstrainedDomains)
+    for country, value in lsRemoved:
+      if value not in self.notConstrainedDomains[country]:
+        self.notConstrainedDomains[country].append(value)
+    print("To: %s " % self.notConstrainedDomains)
 
+  def CheckDirectConstraint(self, c1, c1Val, c2, c2Val):
+    if((c1Val == c2Val) and ('UEFA' in self.valInfo[c1]) and ('UEFA' in self.valInfo[c2])):
+      return False
+    if((c1Val == c2Val) and (('UEFA' in self.valInfo[c1]) or ('UEFA' in self.valInfo[c2]))):
+      #print("\t \tEither %s or %s are in UEFA so checking additional constraint." % (c1, c2))
+      count = 0
+      for country in self.assignments.keys():
+        if "UEFA" in self.valInfo[country] and self.assignments[country] == c1Val:
+          count = count + 1
+      if count < 2:
+        #print("\t%d country(ies) in pot %s" % (count, c2Val))
+        return True
+      else:
+        #print("\t%d country(ies) in pot %s" % (count, c2Val))
+        return False
+    elif c1Val == c2Val:
+      return False
+    return True
 
   def CheckConstraints(self, currentCountry, value):
     constraints = 0
-    if value in self.consCheck:
-      for country in self.consCheck[value]:
-        #print("\n%s info: %s , %s " % (currentCountry, self.potNeighbors[currentCountry], self.confNeighbors[currentCountry]))
-        #print("%s info: %s , %s " % (country, self.potNeighbors[country], self.confNeighbors[country]))
-        if self.potNeighbors[country] == self.potNeighbors[currentCountry]:
-          constraints = constraints + 1
+    assignments = self.assignments
 
-        elif self.confNeighbors[country] == self.confNeighbors[currentCountry]:
-          constraints = constraints + 1
-
+    for neighbor in self.neighboringCountries[currentCountry]:
+      if neighbor in assignments.keys():
+        if assignments[neighbor] == value:
+          return 1
+      if neighbor not in assignments.keys():
+        continue
     return constraints
 
 
