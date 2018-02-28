@@ -12,7 +12,7 @@ import SearchAndCheck
 
 def main():
   #filePath = sys.argv[1]
-  with open('tests/input1.txt', 'r') as openFile:
+  with open('tests/input2.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]
@@ -52,7 +52,6 @@ def main():
         dctVarInfo[word].append(strConfederation)
 
   dctNeighboringCountries = collections.defaultdict(list)
-
   for country in dctVarInfo.keys():
     for checkCountry in lsVariables:
       if country != checkCountry:
@@ -64,6 +63,8 @@ def main():
             dctNeighboringCountries[country].append(checkCountry)
 
   dctAssignments = {}
+  for country, value in dctVarInfo.iteritems():
+    print country, value
   cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctNeighboringCountries, None)
   backtrack = SearchAndCheck.SearchAndCheck(cspProblem)
   solution = backtrack.BacktrackSearch(dctAssignments)
