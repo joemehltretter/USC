@@ -23,25 +23,37 @@ class SearchAndCheck(object):
         lsReorderedVals = self.csp.domains[strCurrentCountry]
 
       for value in lsReorderedVals:
-        if 0 == self.csp.CheckConstraints(strCurrentCountry, value):
+        if 0 == self.csp.CheckConstraints(strCurrentCountry, value, dctAssignments):
           dctAssignments = self.csp.MakeAssignment(strCurrentCountry, value, dctAssignments)
           # Begin Inference
           removed = self.MakeInferenceFromRemoval(strCurrentCountry, value)
           self.removed = removed
-          queueAc3 = [(strCurrentCountry, neighbor) for neighbor in self.csp.neighboringCountries[strCurrentCountry]]
-          arcConsistent = self.ArcConsistency3(queueAc3)
-          if arcConsistent:
+          #queueAc3 = [(strCurrentCountry, neighbor) for neighbor in self.csp.neighboringCountries[strCurrentCountry]]
+          #arcConsistent = self.ArcConsistency3(queueAc3)
+          consistent = self.consistent(strCurrentCountry, value, dctAssignments)
+          print("\t Is value consistent? %s " % consistent)
+          if consistent:
             solution = self.BacktrackSearch(dctAssignments)
             if solution != None:
               print("Solution is not none")
               return solution
-          print("\nIs not arc consistent: %s " % arcConsistent)
+          print("\t Going to undo")
           self.csp.Undo(removed)
 
     dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
     #dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
     return None
 
+  def consistent(self, country, value, assignments):
+    for neighbor in self.csp.neighboringCountries[country]:
+      if neighbor not in assignments:
+        for possibleValue in self.csp.notConstrainedDomains[neighbor]:
+          contrained = self.csp.CheckDirectConstraint(country, value, neighbor, possibleValue)
+          if not contrained:
+            self.MakePrune(neighbor, possibleValue)
+        else:
+          return False
+    return True
 
   def ArcConsistency3(self, queueToCheck=None):
     #Check is toCheck queue is empty

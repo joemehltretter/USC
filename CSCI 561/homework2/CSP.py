@@ -66,16 +66,18 @@ class CSP(object):
       return False
     return True
 
-  def CheckConstraints(self, currentCountry, value):
+  def CheckConstraints(self, currentCountry, value, assignments):
     constraints = 0
-    assignments = self.assignments
-
-    for neighbor in self.neighboringCountries[currentCountry]:
-      if neighbor in assignments.keys():
-        if assignments[neighbor] == value:
-          return 1
-      if neighbor not in assignments.keys():
-        continue
+    uefaCount = 0
+    for country, checkValue in assignments.iteritems():
+      if value == checkValue:
+        if 'UEFA' in self.valInfo[country] and 'UEFA' in self.valInfo[currentCountry]:
+          print("Both UEFA")
+          uefaCount = uefaCount + 1
+          if uefaCount >= 2:
+            return 2
+        elif country in self.neighboringCountries[currentCountry]:
+          constraints = 1
     return constraints
 
 
