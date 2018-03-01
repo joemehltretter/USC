@@ -1,4 +1,5 @@
 import collections
+import random
 
 class SearchAndCheck(object):
   def __init__(self, cspObject):
@@ -7,13 +8,11 @@ class SearchAndCheck(object):
 
   def BacktrackSearch(self, dctAssignments):
     lsVariables = self.csp.variables
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     print(len(dctAssignments), len(self.csp.valInfo))
     if len(dctAssignments) == len(self.csp.valInfo):
       return dctAssignments
 
     strCurrentCountry = self.GetVarMRV(lsVariables, dctAssignments)
-    print("About to go through variables, size: %d " % len(lsVariables))
     print("******** Current Country: %s*******************\n" % strCurrentCountry)
     if self.csp.notConstrainedDomains:
       lsReorderedVals = self.csp.notConstrainedDomains[strCurrentCountry]
@@ -26,26 +25,21 @@ class SearchAndCheck(object):
         # Begin Inference
         removed = self.MakeInferenceFromRemoval(strCurrentCountry, value)
         self.removed = removed
-        #queueAc3 = [(strCurrentCountry, neighbor) for neighbor in self.csp.neighboringCountries[strCurrentCountry]]
-        #consistent = self.ArcConsistency3([])
-        consistent = self.consistent(strCurrentCountry, value, dctAssignments)
-        #print("\t Is value consistent? %s " % consistent)
+        consistent = self.ArcConsistency3([])
+        #consistent = self.consistent(strCurrentCountry, value, dctAssignments)
         if consistent:
           solution = self.BacktrackSearch(dctAssignments)
           if solution != None:
             return solution
         self.csp.Undo(removed)
 
-    dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
-    #dctAssignments = self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
+    self.csp.RemoveAssignment(strCurrentCountry, dctAssignments)
     return None
 
   def consistent(self, country, value, assignments):
-    print("Checking consistency of value %s for country %s with neighbors %s " % (value, country, self.csp.neighboringCountries[country]))
     for neighbor in self.csp.neighboringCountries[country]:
       if neighbor not in assignments:
         for possibleValue in self.csp.notConstrainedDomains[neighbor]:
-          print("\t Checking consistency of neighbor %s with value %s " % (neighbor, possibleValue))
           #constrained = self.csp.CheckDirectConstraint(country, value, neighbor, possibleValue)
           constrained = self.csp.IsConstrained(country, value, neighbor, possibleValue)
           if constrained:
@@ -64,12 +58,10 @@ class SearchAndCheck(object):
     while queueToCheck:
       (country, neighbor) = queueToCheck.pop()
       if not self.csp.notConstrainedDomains[country]:
-        print("%s : %s " % (country, self.csp.notConstrainedDomains[country]))
         return False
       pruneDone = self.CheckForPrunes(country, neighbor)
       if pruneDone:
         if not self.csp.notConstrainedDomains[neighbor]:
-          print("%s : %s " % (neighbor, self.csp.notConstrainedDomains[neighbor]))
           return False
         for newNeighbor in self.csp.neighboringCountries[neighbor]:
           if neighbor != newNeighbor:
@@ -109,7 +101,8 @@ class SearchAndCheck(object):
         else:
           dctCount[country] = len(self.csp.domains[country])
     vars = []
-    for country, value in sorted(dctCount.iteritems(), key=lambda (key, value): (value, key)):
-      vars.append(country)
-    mrv = min(dctCount, key=dctCount.get)
+    minVal = min(dctCount.values())
+    vars = [variable for variable, value in dctCount.items() if value == minVal]
+    mrv = random.choice(vars)
+    #mrv = min(dctCount, key=dctCount.get)
     return mrv

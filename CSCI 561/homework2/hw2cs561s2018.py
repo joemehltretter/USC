@@ -12,7 +12,7 @@ import SearchAndCheck
 
 def main():
   #filePath = sys.argv[1]
-  with open('tests/input2.txt', 'r') as openFile:
+  with open('tests/input6.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]
@@ -63,13 +63,21 @@ def main():
             dctNeighboringCountries[country].append(checkCountry)
 
   dctAssignments = {}
-  for country, value in dctVarInfo.iteritems():
-    print country, value
   cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctNeighboringCountries, None)
   backtrack = SearchAndCheck.SearchAndCheck(cspProblem)
   solution = backtrack.BacktrackSearch(dctAssignments)
-  print solution
-  #solution = cspProblem.Solve(dctEmpty)
+  if solution is not None:
+    finalSolution = collections.defaultdict(list)
+    for country, group in solution.iteritems():
+      finalSolution[group].append(country)
+    print("Yes")
+    for group in finalSolution.keys():
+      countries = str(finalSolution[group]).replace(']', '')
+      countries = countries.replace('[', '')
+      countries = countries.replace("'", '')
+      print countries
+  else:
+    print("No")
 
 if __name__ == '__main__':
   main()
