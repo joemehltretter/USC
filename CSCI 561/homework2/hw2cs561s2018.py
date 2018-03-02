@@ -7,12 +7,14 @@
 #####################################################################
 import sys
 import collections
+import multiprocessing
+import os
 import CSP
 import SearchAndCheck
 
 def main():
   #filePath = sys.argv[1]
-  with open('tests/input6.txt', 'r') as openFile:
+  with open('tests/input3.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]

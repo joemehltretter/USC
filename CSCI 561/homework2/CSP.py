@@ -6,6 +6,7 @@
 #####################################################################
 import collections
 import SearchAndCheck
+import copy
 
 class CSP(object):
   def __init__(self, variables, variableInfo, domains, neighbors, constraints):
@@ -21,21 +22,15 @@ class CSP(object):
     self.consCheck = collections.defaultdict(list)
 
   def RemoveAssignment(self, country, assignments):
-    #if len(self.assignOrder) != 0:
-      #country = self.assignOrder[-1]
-      #self.assignOrder.remove(country)
-    print("Removing %s from assignments." % country)
     if country in assignments:
-      print("%s Removed " % country)
       del self.assignments[country]
-      del assignments[country]
-    return assignments
+    return self.assignments
 
   def MakeAssignment(self, country, group, assignments):
     self.assignments[country] = group
-    assignments[country] = group
+    #assignments[country] = group
     self.assignOrder.append(country)
-    return assignments
+    return self.assignments
 
   def Undo(self, lsRemoved):
     for removedCountry, removedValue in lsRemoved:
@@ -57,6 +52,32 @@ class CSP(object):
       return True
 
     return False
+
+  def GetConstraintCount(self, variables, assignments):
+    valInfo = copy.deepcopy(self.valInfo)
+    dctConstraints = {}
+    for country in variables:
+      constraints = 0
+      possVals = self.domains[country]
+      if country not in assignments:
+        for value in possVals:
+          uefaCount = 0
+          uefaFlip = False
+          for checkCountry, checkValue in assignments.iteritems():
+            if value == checkValue and valInfo[country][0] == valInfo[checkCountry][0]:
+              constraints = constraints + 1
+            if value == checkValue and valInfo[country][1] == valInfo[checkCountry][1]:
+              if 'UEFA' in valInfo[checkCountry][1]:
+                uefaCount = uefaCount + 1
+              elif ('UEFA' not in valInfo[checkCountry][1]):
+                constraints = constraints + 1
+            if ((uefaCount == 2) and ('UEFA' in valInfo[country][1])):
+              if uefaFlip == False:
+                constraints = constraints + 1
+                uefaFlip = True
+        dctConstraints[country] = constraints
+
+    return dctConstraints
 
   def CheckConstraints(self, currentCountry, value, assignments):
     constraints = 0
