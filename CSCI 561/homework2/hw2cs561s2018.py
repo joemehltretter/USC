@@ -12,7 +12,7 @@ import SearchAndCheck
 
 def main():
   start = time.time()
-  with open('tests/input2.txt', 'r') as openFile:
+  with open('input.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]
