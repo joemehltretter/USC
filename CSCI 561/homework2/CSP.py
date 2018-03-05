@@ -5,7 +5,6 @@
 #                                                                   #
 #####################################################################
 import collections
-import SearchAndCheck
 import copy
 
 class CSP(object):
@@ -17,8 +16,9 @@ class CSP(object):
     self.constraintCount = 0
     self.neighboringCountries = neighbors
     self.constraints = constraints
-    self.assignOrder = []
-    self.assignments = {}
+    self.assignOrder = collections.OrderedDict()
+    self.dctConstraints = {}
+    self.assignments = collections.OrderedDict()
     self.consCheck = collections.defaultdict(list)
 
   def RemoveAssignment(self, country, assignments):
@@ -28,8 +28,6 @@ class CSP(object):
 
   def MakeAssignment(self, country, group, assignments):
     self.assignments[country] = group
-    #assignments[country] = group
-    self.assignOrder.append(country)
     return self.assignments
 
   def Undo(self, lsRemoved):
@@ -77,7 +75,29 @@ class CSP(object):
                 uefaFlip = True
         dctConstraints[country] = constraints
 
+    self.dctConstraints = dctConstraints
     return dctConstraints
+
+  def CountryConstraints(self, country, assignments):
+    valInfo = copy.deepcopy(self.valInfo)
+    value = assignments[country]
+    constraints = 0
+    uefaCount = 0
+    uefaFlip = False
+    for checkCountry, checkValue in assignments.iteritems():
+      if checkCountry != country:
+        if value == checkValue and valInfo[country][0] == valInfo[checkCountry][0]:
+          constraints = constraints + 1
+        if value == checkValue and valInfo[country][1] == valInfo[checkCountry][1]:
+          if 'UEFA' in valInfo[checkCountry][1]:
+            uefaCount = uefaCount + 1
+          elif ('UEFA' not in valInfo[checkCountry][1]):
+            constraints = constraints + 1
+        if ((uefaCount == 2) and ('UEFA' in valInfo[country][1])):
+          if uefaFlip == False:
+            constraints = constraints + 1
+            uefaFlip = True
+    return constraints
 
   def CheckConstraints(self, currentCountry, value, assignments):
     constraints = 0
@@ -93,6 +113,14 @@ class CSP(object):
         if uefaCount >= 2:
           return 1
     return constraints
+
+  def ConflictedAssignments(self, assignments):
+    countries = []
+    for country, group in assignments.iteritems():
+      if self.CheckConstraints(country, group, assignments) != 0:
+        countries.append(country)
+    return countries
+
 
 
 

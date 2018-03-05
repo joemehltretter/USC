@@ -5,16 +5,14 @@
 # that content to the CSP controller file.                          #
 #                                                                   #
 #####################################################################
-import sys
 import collections
-import multiprocessing
-import os
+import time
 import CSP
 import SearchAndCheck
 
 def main():
-  #filePath = sys.argv[1]
-  with open('tests/input3.txt', 'r') as openFile:
+  start = time.time()
+  with open('tests/input2.txt', 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
   cspInfo = [line.strip() for line in fileData]
@@ -65,21 +63,32 @@ def main():
             dctNeighboringCountries[country].append(checkCountry)
 
   dctAssignments = {}
-  cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctNeighboringCountries, None)
-  backtrack = SearchAndCheck.SearchAndCheck(cspProblem)
-  solution = backtrack.BacktrackSearch(dctAssignments)
-  if solution is not None:
-    finalSolution = collections.defaultdict(list)
-    for country, group in solution.iteritems():
-      finalSolution[group].append(country)
-    print("Yes")
-    for group in finalSolution.keys():
-      countries = str(finalSolution[group]).replace(']', '')
-      countries = countries.replace('[', '')
-      countries = countries.replace("'", '')
-      print countries
+  if len(lsVariables) >= 20:
+    consistencyCheck = 'hc'
   else:
-    print("No")
+    consistencyCheck = 'bc'
+  print("Size of variables is %s using: %s" % (len(lsVariables), consistencyCheck))
+  cspProblem = CSP.CSP(lsVariables, dctVarInfo, dctDomains, dctNeighboringCountries, None)
+  solve = SearchAndCheck.SearchAndCheck(cspProblem)
+  if consistencyCheck == 'bc':
+    solution = solve.BacktrackSearch(dctAssignments, consistencyCheck)
+  else:
+    solution = solve.HillClimbing(1000, dctAssignments)
+  if solution is not None:
+    with open("output.txt", 'w') as openFile:
+      finalSolution = collections.defaultdict(list)
+      for country, group in solution.iteritems():
+        finalSolution[group].append(country)
+      openFile.write("Yes")
+      for group in finalSolution.keys():
+        countries = ','.join(finalSolution[group])
+        openFile.write('\n')
+        openFile.write(countries)
 
+  else:
+    with open("output.txt", 'w') as openFile:
+      openFile.write("No")
+  end = time.time()
+  print(end - start)
 if __name__ == '__main__':
   main()
