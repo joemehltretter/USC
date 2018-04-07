@@ -42,7 +42,7 @@ def main():
     row = int(termNums[0])
     column = int(termNums[1])
     weight = termNums[2]
-    dct_terminalStatePos[(row, column)] = float(weight)
+    dct_terminalStatePos[(row -1, column-1)] = float(weight)
 
   #Transition model probabilities
   count = count + 1
@@ -75,7 +75,7 @@ def main():
   for position in dct_terminalStatePos.keys():
     row = position[0]
     column = position[1]
-    gridHold[row-1][column-1] = dct_terminalStatePos[position]
+    gridHold[row][column] = dct_terminalStatePos[position]
 
   #Create reward dictionary and states set for easy reference
   dct_reward = {}
@@ -90,8 +90,13 @@ def main():
   ls_terminalStates = list(dct_terminalStatePos.keys())
   startState = (0,0)
   mdp_Object = mdp.MDPInfo(grid, gridStates, ls_terminalStates, startState, flt_dscntNum, dct_actions, dct_reward, dct_transitionProbs)
-  #print ls_wallPosition, dct_terminalStatePos, dct_transitionModelProbs, dct_rewardNums, flt_dscntNum, ls_actions
 
+  #Modified policy iteration for efficiency?
+  #Set episolon for value iteration to identify change, set to .001 as in book
+  eps = .001
+  solver = DecisionMaking.DecisionMaking(mdp_Object, eps)
+  solved = solver.ModPolicyIteration()
+  print solved
 
 
 

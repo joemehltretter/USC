@@ -8,84 +8,112 @@ class MDPInfo(object):
     self.start = startState
     self.gamma = disctFactor
     self.actions = actions
+    self.stateActions = {}
     self.rewards = rewards
     self.actionProbability = actionProbs
 
     #Create transition matrix based on mdp info
-    transitionMatrix = {}
-    maxRow = self.grid.shape[0] + 1
-    maxCol = self.grid.shape[1] + 1
+    self.transitionMatrix = {}
+    maxRow = self.grid.shape[0]
+    maxCol = self.grid.shape[1]
     for state in self.states:
-      transitionMatrix[state] = collections.defaultdict(list)
-      for action, coordMove in self.actions.iteritems():
-        if 'run' in action:
-          trueActionProb = float(self.actionProbability['Run'])
-          unreliableProb = float(0.5 * (1.0-trueActionProb))
+      if not self.grid[::-1][state[0]][state[1]]:
+        continue
 
-        elif 'walk' in action:
-          trueActionProb = float(self.actionProbability['Walk'])
-          unreliableProb = float(0.5 * (1.0 - trueActionProb))
-
-        else:
-          trueActionProb = None
-          unreliableProb = None
-
-        if 'Up' in action:
+      else:
+        self.stateActions[state] = collections.defaultdict(list)
+        self.transitionMatrix[state] = collections.defaultdict(list)
+        moves = []
+        for action, coordMove in self.actions.iteritems():
           if 'run' in action:
-            intendedMove = (state[0] + 2, state[0])
-            rightTurn = (state[0], state[1] + 2)
-            leftTurn = (state[0], state[1] - 2)
+            trueActionProb = float(self.actionProbability['Run'])
+            unreliableProb = float(0.5 * (1.0-trueActionProb))
 
           elif 'walk' in action:
-            intendedMove = (state[0] + 1, state[1])
-            rightTurn = (state[0], state[1] + 1)
-            leftTurn = (state[0], state[1] - 1)
+            trueActionProb = float(self.actionProbability['Walk'])
+            unreliableProb = float(0.5 * (1.0 - trueActionProb))
 
-        elif 'Down' in action:
-          if 'run' in action:
-            intendedMove = (state[0] - 2, state[1])
-            rightTurn = (state[0], state[1] - 2)
-            leftTurn = (state[0], state[1] + 2)
-          elif 'walk' in action:
-            intendedMove = (state[0] -1, state[1])
-            rightTurn = (state[0], state[1] - 1)
-            leftTurn = (state[0], state[1] + 1)
+          else:
+            trueActionProb = None
+            unreliableProb = None
 
-        elif 'Left' in action:
-          if 'run' in action:
-            intendedMove = (state[0], state[1] - 2)
-            rightTurn = (state[0] - 2, state[1])
-            leftTurn = (state[0] + 2, state[1])
-          elif 'walk' in action:
-            intendedMove = (state[0], state[1] - 1)
-            rightTurn = (state[0] - 1, state[1])
-            leftTurn = (state[0] + 1, state[1])
+          if 'Up' in action:
+            if 'run' in action:
+              intendedMove = (state[0] + 2, state[0])
+              rightTurn = (state[0], state[1] + 2)
+              leftTurn = (state[0], state[1] - 2)
 
-        elif 'Right' in action:
-          if 'run' in action:
-            intendedMove = (state[0], state[1] + 2)
-            rightTurn = (state[0] + 2, state[1])
-            leftTurn = (state[0] - 2, state[1])
-          elif 'walk' in action:
-            intendedMove = (state[0], state[1] + 1)
-            rightTurn = (state[0] + 1, state[1])
-            leftTurn = (state[0] - 1, state[1])
+            elif 'walk' in action:
+              intendedMove = (state[0] + 1, state[1])
+              rightTurn = (state[0], state[1] + 1)
+              leftTurn = (state[0], state[1] - 1)
 
-        if (rightTurn[0] < maxRow) and (rightTurn[1] < maxCol) and (rightTurn[0] >= 0) and (rightTurn[1] >= 0):
-          transitionMatrix[state][action] = (unreliableProb, rightTurn)
-        if (leftTurn[0] < maxRow) and (rightTurn[1] < maxCol) and (rightTurn[0] >= 0) and (rightTurn[1] >= 0):
-          transitionMatrix[state][action] = (unreliableProb, leftTurn)
-        if (intendedMove[0] < maxRow) and (intendedMove[1] < maxCol) and (intendedMove[0] >= 0) and (intendedMove[1] >= 0):
-          transitionMatrix[state][action] = (trueActionProb, intendedMove)
-        else:
-          transitionMatrix[state][action] = None
+          elif 'Down' in action:
+            if 'run' in action:
+              intendedMove = (state[0] - 2, state[1])
+              rightTurn = (state[0], state[1] - 2)
+              leftTurn = (state[0], state[1] + 2)
+            elif 'walk' in action:
+              intendedMove = (state[0] -1, state[1])
+              rightTurn = (state[0], state[1] - 1)
+              leftTurn = (state[0], state[1] + 1)
+
+          elif 'Left' in action:
+            if 'run' in action:
+              intendedMove = (state[0], state[1] - 2)
+              rightTurn = (state[0] - 2, state[1])
+              leftTurn = (state[0] + 2, state[1])
+            elif 'walk' in action:
+              intendedMove = (state[0], state[1] - 1)
+              rightTurn = (state[0] - 1, state[1])
+              leftTurn = (state[0] + 1, state[1])
+
+          elif 'Right' in action:
+            if 'run' in action:
+              intendedMove = (state[0], state[1] + 2)
+              rightTurn = (state[0] + 2, state[1])
+              leftTurn = (state[0] - 2, state[1])
+            elif 'walk' in action:
+              intendedMove = (state[0], state[1] + 1)
+              rightTurn = (state[0] + 1, state[1])
+              leftTurn = (state[0] - 1, state[1])
+
+          if (rightTurn[0] < maxRow) and (rightTurn[1] < maxCol) and (rightTurn[0] >= 0) and (rightTurn[1] >= 0):
+
+            if (self.grid[::-1][rightTurn[0]][rightTurn[1]]):
+
+              if 'walk' in action:
+                move = 'walk_Right'
+                moves.append(move)
+
+              if 'run' in action:
+                move = 'run_Right'
+                moves.append(move)
+              self.transitionMatrix[state][action] = (unreliableProb, rightTurn)
+
+          elif (leftTurn[0] < maxRow) and (leftTurn[1] < maxCol) and (leftTurn[0] >= 0) and (leftTurn[1] >= 0):
+
+            if (self.grid[::-1][leftTurn[0]][leftTurn[1]]):
+
+              if 'walk' in action:
+                move = 'walk_Left'
+                moves.append(move)
+
+              if 'run' in action:
+                move = 'run_Left'
+                moves.append(move)
+              self.transitionMatrix[state][action] = (unreliableProb, leftTurn)
+
+          elif (intendedMove[0] < maxRow) and (intendedMove[1] < maxCol) and (intendedMove[0] >= 0) and (intendedMove[1] >= 0):
+
+            if (self.grid[::-1][intendedMove[0]][intendedMove[1]]):
+              moves.append(action)
+              self.transitionMatrix[state][action] = (trueActionProb, intendedMove)
+        self.stateActions[state] = moves
+    print self.stateActions
+    #print self.grid[::-1][self.termStates[0][0]][self.termStates[0][1]]
+    #print self.grid[::-1][0][3]
 
 
-    for state in transitionMatrix.keys():
-      print("\n******************************")
-      print ("Current state: %s, %s" % (state[0], state[1]))
-      for action in transitionMatrix[state].keys():
-        print action, transitionMatrix[state][action]
 
-    print self.grid[::-1][0][3]
-    print self.grid
+
