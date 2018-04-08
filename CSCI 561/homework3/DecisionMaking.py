@@ -1,5 +1,5 @@
 import copy
-
+import numpy as np
 class DecisionMaking(object):
   def __init__(self, mdpobject, eps):
     self.mdp = mdpobject
@@ -22,21 +22,19 @@ class DecisionMaking(object):
 
       #Iterate and calculate new utilities values
       for state in self.mdp.stateActions.keys():
-        uToSum = []
-        for action in self.mdp.stateActions[state]:
-          if transitions[state][action]:
-            print type(transitions[state][action]), transitions[state][action]
-            for prob, new in transitions[state][action]:
-              print prob, new
-        #stateUtilies[state] = rewards[state] + discountFactor * max(sum(uToSum))
-
-        #stateUtilies[state] = rewards[state] + discountFactor * max(sum(probAction*dynamicUtilities[state] (probAction, probState) = transitions[state][action])
-        #                                            for action in self.mdp.stateActions[state])
-        #print stateUtilies[state], rewards[state], discountFactor
-        #error = max(error, abs(stateUtilies[state] - dynamicUtilities[state]))
-
+        stateUtilies[state] = rewards[state] + discountFactor * max(sum(probAction*dynamicUtilities[stateProb] for (probAction, stateProb) in transitions[state][action])
+                                                    for action in self.mdp.stateActions[state])
+        error = max(error, abs(stateUtilies[state] - dynamicUtilities[state]))
       if error < self.eps * (1 - discountFactor)/discountFactor:
         return dynamicUtilities
 
-    #print self.board
-    #print self.board[0][3]
+  def BestPolicy(self, utilities):
+    optimalPolicy = {}
+    transitions = self.mdp.transitionMatrix
+    for state in self.mdp.stateActions.keys():
+      optimalPolicy[state] = max(self.mdp.stateActions[state], key=lambda action: self.GetUpdatedUtility(action, state, utilities, transitions))
+    return optimalPolicy
+
+  def GetUpdatedUtility(self, action, state, utilities, transitions):
+    updatedUtility = sum(probAction * utilities[probState] for (probAction, probState) in transitions[state][action])
+    return updatedUtility

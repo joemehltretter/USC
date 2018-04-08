@@ -17,7 +17,6 @@ def main():
   gridHold = np.zeros((gridRow, gridColumn), dtype=object)
   grid = gridHold[::-1]
   count = count + 1
-
   #Number of walls
   numOfWalls = int(gridInfo[count])
 
@@ -80,24 +79,28 @@ def main():
   #Create reward dictionary and states set for easy reference
   dct_reward = {}
   gridStates = set()
+
   for (row, column), value in np.ndenumerate(gridHold):
-    gridStates.add((row,column))
     if value == 0:
       gridHold[row][column] = -0.5
     dct_reward[(row,column)] = gridHold[row,column]
+
+  for rowX in range(gridRow):
+    for columnX in range(gridColumn):
+      if gridHold[rowX][columnX]:
+        gridStates.add((rowX, columnX))
 
   #Create Markov Decision Process object with grid info
   ls_terminalStates = list(dct_terminalStatePos.keys())
   startState = (0,0)
   mdp_Object = mdp.MDPInfo(grid, gridStates, ls_terminalStates, startState, flt_dscntNum, dct_actions, dct_reward, dct_transitionProbs)
-
   #Modified policy iteration for efficiency?
   #Set episolon for value iteration to identify change, set to .001 as in book
   eps = .001
   solver = DecisionMaking.DecisionMaking(mdp_Object, eps)
-  solved = solver.ModPolicyIteration()
-  print solved
-
+  utilities = solver.ModPolicyIteration()
+  solved = solver.BestPolicy(utilities)
+  print solved[0,1]
 
 
 if __name__ == '__main__':

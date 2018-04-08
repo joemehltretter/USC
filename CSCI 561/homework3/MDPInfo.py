@@ -24,6 +24,7 @@ class MDPInfo(object):
         self.stateActions[state] = collections.defaultdict(list)
         self.transitionMatrix[state] = collections.defaultdict(list)
         moves = []
+        transitions = []
         for action, coordMove in self.actions.iteritems():
           if 'run' in action:
             trueActionProb = float(self.actionProbability['Run'])
@@ -89,9 +90,9 @@ class MDPInfo(object):
               if 'run' in action:
                 move = 'run_Right'
                 moves.append(move)
-              self.transitionMatrix[state][action] = (unreliableProb, rightTurn)
+              self.transitionMatrix[state][action].append((unreliableProb, rightTurn))
 
-          elif (leftTurn[0] < maxRow) and (leftTurn[1] < maxCol) and (leftTurn[0] >= 0) and (leftTurn[1] >= 0):
+          if (leftTurn[0] < maxRow) and (leftTurn[1] < maxCol) and (leftTurn[0] >= 0) and (leftTurn[1] >= 0):
 
             if (self.grid[::-1][leftTurn[0]][leftTurn[1]]):
 
@@ -102,15 +103,13 @@ class MDPInfo(object):
               if 'run' in action:
                 move = 'run_Left'
                 moves.append(move)
-              self.transitionMatrix[state][action] = (unreliableProb, leftTurn)
+              self.transitionMatrix[state][action].append((unreliableProb, leftTurn))
 
-          elif (intendedMove[0] < maxRow) and (intendedMove[1] < maxCol) and (intendedMove[0] >= 0) and (intendedMove[1] >= 0):
-
+          if (intendedMove[0] < maxRow) and (intendedMove[1] < maxCol) and (intendedMove[0] >= 0) and (intendedMove[1] >= 0):
             if (self.grid[::-1][intendedMove[0]][intendedMove[1]]):
               moves.append(action)
-              self.transitionMatrix[state][action] = (trueActionProb, intendedMove)
+              self.transitionMatrix[state][action].append((trueActionProb, intendedMove))
         self.stateActions[state] = moves
-    print self.stateActions
     #print self.grid[::-1][self.termStates[0][0]][self.termStates[0][1]]
     #print self.grid[::-1][0][3]
 
