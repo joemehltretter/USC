@@ -100,7 +100,11 @@ def main():
   solver = DecisionMaking.DecisionMaking(mdp_Object, eps)
   utilities = solver.ModPolicyIteration()
   solved = solver.BestPolicy(utilities)
-  print solved[0,1]
+  for row in range(gridRow):
+    for column in range(gridColumn):
+      if gridHold[row][column]:
+        gridHold[row][column] = solved[row,column]
+  print grid
 
 
 if __name__ == '__main__':
