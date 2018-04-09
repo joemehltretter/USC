@@ -62,8 +62,8 @@ def main():
   flt_dscntNum = float(gridInfo[count])
 
   #Create action list
-  dct_actions = {'walk_Up': (1,0), 'walk_Down':(-1,0), 'walk_Right':(0,1), 'walk_Left':(0,-1), 'run_Up':(2,0),
-                 'run_Down':(-2,0), 'run_Right':(0,2), 'run_Left':(0,-2)}
+  dct_actions = {'Walk Up': (1,0), 'Walk Down':(-1,0), 'Walk Right':(0,1), 'Walk Left':(0,-1), 'Run Up':(2,0),
+                 'Run Down':(-2,0), 'Run Right':(0,2), 'Run Left':(0,-2)}
 
   #Board Assignment
   for position in range(len(ls_wallPosition)):
@@ -94,6 +94,7 @@ def main():
   ls_terminalStates = list(dct_terminalStatePos.keys())
   startState = (0,0)
   mdp_Object = mdp.MDPInfo(grid, gridStates, ls_terminalStates, startState, flt_dscntNum, dct_actions, dct_reward, dct_transitionProbs)
+
   #Modified policy iteration for efficiency?
   #Set episolon for value iteration to identify change, set to .001 as in book
   eps = .001
@@ -105,7 +106,6 @@ def main():
       if gridHold[row][column]:
         gridHold[row][column] = solved[row,column]
   print grid
-
 
 if __name__ == '__main__':
   main()
