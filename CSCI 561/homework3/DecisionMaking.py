@@ -37,4 +37,5 @@ class DecisionMaking(object):
 
   def GetUpdatedUtility(self, action, state, utilities, transitions):
     updatedUtility = sum(probAction * utilities[probState] for (probAction, probState) in transitions[state][action])
+    print updatedUtility
     return updatedUtility
