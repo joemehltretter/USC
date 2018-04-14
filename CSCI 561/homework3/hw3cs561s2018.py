@@ -3,7 +3,7 @@ import numpy as np
 import MDPInfo as mdp
 
 def main():
-  testPath = 'Sample_test_cases/input2.txt'
+  testPath = 'Sample_test_cases/input1.txt'
   with open(testPath, 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()

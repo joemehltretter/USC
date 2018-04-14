@@ -95,10 +95,10 @@ class DecisionMaking(object):
             maxToBeat = toMax[maxAction]
             maxCount = + 1
           else:
-            if toMax[maxAction][0] > maxToBeat[0]:
+            if round(toMax[maxAction][0][0],10) > round(maxToBeat[0][0],10):
               maxToBeat = toMax[maxAction]
               currentMax = maxAction
-            elif toMax[maxAction] == maxToBeat:
+            elif round(toMax[maxAction][0][0],10) == round(maxToBeat[0][0],10):
               currentMax = self.BreakTie(currentMax, maxAction)
               maxToBeat = toMax[currentMax]
             elif toMax[maxAction] < maxToBeat:
