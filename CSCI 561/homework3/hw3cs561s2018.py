@@ -3,7 +3,7 @@ import numpy as np
 import MDPInfo as mdp
 
 def main():
-  testPath = 'Sample_test_cases/input1.txt'
+  testPath = 'Sample_test_cases/input2.txt'
   with open(testPath, 'r') as openFile:
     fileData = openFile.readlines()
   openFile.close()
@@ -15,7 +15,6 @@ def main():
   gridRow = int(gridNums[0])
   gridColumn = int(gridNums[1])
   gridHold = np.zeros((gridRow, gridColumn), dtype=object)
-  print gridHold.shape
   grid = gridHold[::-1]
   count = count + 1
   #Number of walls
@@ -99,17 +98,24 @@ def main():
 
   #Modified policy iteration for efficiency?
   #Set episolon for value iteration to identify change, set to .001 as in book
-  eps = .0000000001
+  eps = 0.0
   solver = DecisionMaking.DecisionMaking(mdp_Object, eps)
   utilities = solver.ModPolicyIteration()
   solved = solver.BestPolicy(utilities)
-  print '\n'
   for row in range(gridRow):
     for column in range(gridColumn):
       if gridHold[row][column]:
         gridHold[row][column] = solved[row,column]
-  for row in reversed(gridHold):
-    print row
+      else:
+        gridHold[row][column] = 'None'
+  with open("output.txt", 'w') as openFile:
+    count = 0
+    for row in reversed(gridHold):
+      if count == 0:
+        openFile.write(','.join(row))
+        count =+ 1
+      else:
+        openFile.write('\n' + ','.join(row))
 
 if __name__ == '__main__':
   main()

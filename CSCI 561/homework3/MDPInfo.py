@@ -19,7 +19,6 @@ class MDPInfo(object):
     self.transitionMatrix = {}
     self.maxRow = len(self.grid)-1
     self.maxCol = len(self.grid[0])-1
-    print self.maxRow, self.maxCol
     for state in sorted(self.states):
       self.stateActions[state] = collections.defaultdict(list)
       self.transitionMatrix[state] = collections.defaultdict(list)
@@ -36,15 +35,7 @@ class MDPInfo(object):
           elif 'Walk' in action:
             intededProb = float(self.actionProbability['Walk'])
             unintendedProb = float(0.5 * (1.0 - intededProb))
-          #if state in self.termStates:
-            #rew = self.termRewards[state]
-            #self.stateActions[state][action] = 'Exit'
-            #continue
-          #else:
           self.transitionMatrix[state][action] = self.GetTransitions(state, action, intededProb, unintendedProb)
-          print state, action, self.transitionMatrix[state][action]
-          for (probAction, stateProb) in self.transitionMatrix[state][action]:
-            print probAction, stateProb[0], stateProb[1]
 
   def GetTransitions(self, state, action, intendProb, unintendProb):
     if state in self.termStates:
@@ -68,37 +59,29 @@ class MDPInfo(object):
       if self.grid[::-1][state[0] + 2][state[1]] and self.grid[::-1][state[0]+1][state[1]]:
         if (state[0]+2, state[1]) in self.termStates:
           reward = self.termRewards[(state[0]+2, state[1])]
-        #self.stateActions[state][action].append('Run Up')
         return ((state[0]+2, state[1]), reward)
       else:
-        #self.stateActions[state][action].append('Run Up')
         return (state, reward)
     elif 'Down' in action and state[0] - 2 >= 0:
       if self.grid[::-1][state[0] - 2][state[1]] and self.grid[::-1][state[0]-1][state[1]]:
         if (state[0]-2, state[1]) in self.termStates:
           reward = self.termRewards[(state[0]-2, state[1])]
-        #self.stateActions[state][action].append('Run Down')
         return ((state[0] - 2, state[1]), reward)
       else:
-        #self.stateActions[state][action].append('Run Down')
         return (state, reward)
     elif 'Right' in action and ((state[1] + 2) <= self.maxCol):
       if self.grid[::-1][state[0]][state[1]+2] and self.grid[::-1][state[0]][state[1]+1]:
         if (state[0], state[1]+2) in self.termStates:
           reward = self.termRewards[(state[0], state[1]+2)]
-        #self.stateActions[state][action].append('Run Right')
         return ((state[0], state[1]+2), reward)
       else:
-        #self.stateActions[state][action].append('Run Right')
         return (state, reward)
     elif 'Left' in action and state[1] - 2 >= 0:
       if self.grid[::-1][state[0]][state[1]-2] and self.grid[::-1][state[0]][state[1]-1]:
         if (state[0], state[1] - 2) in self.termStates:
           reward = self.termRewards[(state[0], state[1]-2)]
-        #self.stateActions[state][action].append('Run Left')
         return ((state[0], state[1]-2), reward)
       else:
-        #self.stateActions[state][action].append('Run Left')
         return (state, reward)
     else:
       return (state, reward)
