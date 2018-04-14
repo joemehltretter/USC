@@ -15,6 +15,7 @@ def main():
   gridRow = int(gridNums[0])
   gridColumn = int(gridNums[1])
   gridHold = np.zeros((gridRow, gridColumn), dtype=object)
+  print gridHold.shape
   grid = gridHold[::-1]
   count = count + 1
   #Number of walls
@@ -64,6 +65,8 @@ def main():
   #Create action list
   dct_actions = {'Walk Up': (1,0), 'Walk Down':(-1,0), 'Walk Right':(0,1), 'Walk Left':(0,-1), 'Run Up':(2,0),
                  'Run Down':(-2,0), 'Run Right':(0,2), 'Run Left':(0,-2)}
+  ls_action = ['Walk Up', 'Walk Down', 'Walk Right', 'Walk Left', 'Run Up',
+                 'Run Down', 'Run Right', 'Run Left']
 
   #Board Assignment
   for position in range(len(ls_wallPosition)):
@@ -82,30 +85,31 @@ def main():
 
   for (row, column), value in np.ndenumerate(gridHold):
     if value == 0:
-      gridHold[row][column] = -0.5
-    dct_reward[(row,column)] = gridHold[row,column]
+      gridHold[row][column] = -0.4
 
   for rowX in range(gridRow):
     for columnX in range(gridColumn):
       if gridHold[rowX][columnX]:
         gridStates.add((rowX, columnX))
-
+        dct_reward[(rowX, columnX)] = gridHold[rowX][columnX]
   #Create Markov Decision Process object with grid info
   ls_terminalStates = list(dct_terminalStatePos.keys())
   startState = (0,0)
-  mdp_Object = mdp.MDPInfo(grid, gridStates, ls_terminalStates, startState, flt_dscntNum, dct_actions, dct_reward, dct_transitionProbs)
+  mdp_Object = mdp.MDPInfo(grid, gridStates, ls_terminalStates, startState, flt_dscntNum, dct_actions, dct_reward, dct_rewardNums, dct_transitionProbs, dct_terminalStatePos)
 
   #Modified policy iteration for efficiency?
   #Set episolon for value iteration to identify change, set to .001 as in book
-  eps = .001
+  eps = .0000000001
   solver = DecisionMaking.DecisionMaking(mdp_Object, eps)
   utilities = solver.ModPolicyIteration()
   solved = solver.BestPolicy(utilities)
+  print '\n'
   for row in range(gridRow):
     for column in range(gridColumn):
       if gridHold[row][column]:
         gridHold[row][column] = solved[row,column]
-  print grid
+  for row in reversed(gridHold):
+    print row
 
 if __name__ == '__main__':
   main()

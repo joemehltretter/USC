@@ -1,7 +1,7 @@
 import collections
 
 class MDPInfo(object):
-  def __init__(self, grid, states, terminalStates, startState, disctFactor, actions, rewards, actionProbs):
+  def __init__(self, grid, states, terminalStates, startState, disctFactor, actions, testRew, rewardNums, actionProbs, termRewards):
     self.grid = grid
     self.states = states
     self.termStates = terminalStates
@@ -9,156 +9,297 @@ class MDPInfo(object):
     self.gamma = disctFactor
     self.actions = actions
     self.stateActions = {}
-    self.rewards = rewards
+    self.rewardNums = rewardNums
+    self.rewards = {}
+    self.rewardsTest = testRew
     self.actionProbability = actionProbs
+    self.termRewards = termRewards
 
     #Create transition matrix based on mdp info
     self.transitionMatrix = {}
-    maxRow = self.grid.shape[0]
-    maxCol = self.grid.shape[1]
-    for state in self.states:
+    self.maxRow = len(self.grid)-1
+    self.maxCol = len(self.grid[0])-1
+    print self.maxRow, self.maxCol
+    for state in sorted(self.states):
       self.stateActions[state] = collections.defaultdict(list)
       self.transitionMatrix[state] = collections.defaultdict(list)
+      self.rewards[state] = collections.defaultdict(list)
       moves = []
       if not self.grid[::-1][state[0]][state[1]]:
         continue
 
       else:
         for action, coordMove in self.actions.iteritems():
-          if state in self.termStates:
-            moves.append('Exit')
-            continue
-
           if 'Run' in action:
-            trueActionProb = float(self.actionProbability['Run'])
-            unreliableProb = float(0.5 * (1.0-trueActionProb))
-
+            intededProb = float(self.actionProbability['Run'])
+            unintendedProb = float(0.5*(1.0-intededProb))
           elif 'Walk' in action:
-            trueActionProb = float(self.actionProbability['Walk'])
-            unreliableProb = float(0.5 * (1.0 - trueActionProb))
+            intededProb = float(self.actionProbability['Walk'])
+            unintendedProb = float(0.5 * (1.0 - intededProb))
+          #if state in self.termStates:
+            #rew = self.termRewards[state]
+            #self.stateActions[state][action] = 'Exit'
+            #continue
+          #else:
+          self.transitionMatrix[state][action] = self.GetTransitions(state, action, intededProb, unintendedProb)
+          print state, action, self.transitionMatrix[state][action]
+          for (probAction, stateProb) in self.transitionMatrix[state][action]:
+            print probAction, stateProb[0], stateProb[1]
 
-          else:
-            trueActionProb = None
-            unreliableProb = None
+  def GetTransitions(self, state, action, intendProb, unintendProb):
+    if state in self.termStates:
+      reward = self.termRewards[state]
+      return [(intendProb, (state, reward)),
+              (unintendProb, (state, reward)),
+              (unintendProb, (state, reward))]
+    else:
+      if 'Run' in action:
+        return [(intendProb, self.makeIntendedRunMove(state, action)),
+                (unintendProb, self.makeUnintendedRunRight(state, action)),
+                (unintendProb, self.makeUnintendedRunLeft(state, action))]
+      elif 'Walk' in action:
+        return [(intendProb, self.makeIntendedWalkMove(state, action)),
+                (unintendProb, self.makeUnintendedWalkRight(state, action)),
+                (unintendProb, self.makeUnintendedWalkLeft(state, action))]
 
-          if 'Up' in action:
-            if 'Run' in action:
-              intendedMove = (state[0] + 2, state[0])
-              rightTurn = (state[0], state[1] + 2)
-              leftTurn = (state[0], state[1] - 2)
+  def makeIntendedRunMove(self, state, action):
+    reward = self.rewardNums['Run']
+    if 'Up' in action and state[0] + 2 <= self.maxRow:
+      if self.grid[::-1][state[0] + 2][state[1]] and self.grid[::-1][state[0]+1][state[1]]:
+        if (state[0]+2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+2, state[1])]
+        #self.stateActions[state][action].append('Run Up')
+        return ((state[0]+2, state[1]), reward)
+      else:
+        #self.stateActions[state][action].append('Run Up')
+        return (state, reward)
+    elif 'Down' in action and state[0] - 2 >= 0:
+      if self.grid[::-1][state[0] - 2][state[1]] and self.grid[::-1][state[0]-1][state[1]]:
+        if (state[0]-2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-2, state[1])]
+        #self.stateActions[state][action].append('Run Down')
+        return ((state[0] - 2, state[1]), reward)
+      else:
+        #self.stateActions[state][action].append('Run Down')
+        return (state, reward)
+    elif 'Right' in action and ((state[1] + 2) <= self.maxCol):
+      if self.grid[::-1][state[0]][state[1]+2] and self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+2)]
+        #self.stateActions[state][action].append('Run Right')
+        return ((state[0], state[1]+2), reward)
+      else:
+        #self.stateActions[state][action].append('Run Right')
+        return (state, reward)
+    elif 'Left' in action and state[1] - 2 >= 0:
+      if self.grid[::-1][state[0]][state[1]-2] and self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1] - 2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]-2)]
+        #self.stateActions[state][action].append('Run Left')
+        return ((state[0], state[1]-2), reward)
+      else:
+        #self.stateActions[state][action].append('Run Left')
+        return (state, reward)
+    else:
+      return (state, reward)
 
-            if 'Walk' in action:
-              intendedMove = (state[0] + 1, state[1])
-              rightTurn = (state[0], state[1] + 1)
-              leftTurn = (state[0], state[1] - 1)
-
-          elif 'Down' in action:
-            if 'Run' in action:
-              intendedMove = (state[0] - 2, state[1])
-              rightTurn = (state[0], state[1] - 2)
-              leftTurn = (state[0], state[1] + 2)
-            if 'Walk' in action:
-              intendedMove = (state[0] -1, state[1])
-              rightTurn = (state[0], state[1] - 1)
-              leftTurn = (state[0], state[1] + 1)
-
-          elif 'Left' in action:
-            if 'Run' in action:
-              intendedMove = (state[0], state[1] - 2)
-              rightTurn = (state[0] + 2, state[1])
-              leftTurn = (state[0] - 2, state[1])
-            if 'Walk' in action:
-              intendedMove = (state[0], state[1] - 1)
-              rightTurn = (state[0] + 1, state[1])
-              leftTurn = (state[0] - 1, state[1])
-
-          elif 'Right' in action:
-            if 'Run' in action:
-              intendedMove = (state[0], state[1] + 2)
-              rightTurn = (state[0] - 2, state[1])
-              leftTurn = (state[0] + 2, state[1])
-            if 'Walk' in action:
-              intendedMove = (state[0], state[1] + 1)
-              rightTurn = (state[0] - 1, state[1])
-              leftTurn = (state[0] + 1, state[1])
-
-          if (rightTurn[0] < maxRow) and (rightTurn[1] < maxCol) and (rightTurn[0] >= 0) and (rightTurn[1] >= 0):
-            if (self.grid[::-1][rightTurn[0]][rightTurn[1]]):
-              if action == 'Walk Right':
-                move = 'Walk Down'
-                moves.append(move)
-              elif action == 'Walk Left':
-                move = 'Walk Up'
-                moves.append(move)
-              elif action == 'Walk Up':
-                move = 'Walk Right'
-                moves.append(move)
-              elif action == 'Walk Down':
-                move = 'Walk Left'
-                moves.append(move)
-
-              if action == 'Run Right':
-                move = 'Run Down'
-                moves.append(move)
-              elif action == 'Run Left':
-                move = 'Run Up'
-                moves.append(move)
-              elif action == 'Run Up':
-                move = 'Run Right'
-                moves.append(move)
-              elif action == 'Run Down':
-                move = 'Run Left'
-                moves.append(move)
-
-              self.transitionMatrix[state][action].append((unreliableProb, rightTurn))
-            else:
-              move = 'Stay'
-              moves.append(move)
-              self.transitionMatrix[state][action].append((0.0, state))
-
-          if (leftTurn[0] < maxRow) and (leftTurn[1] < maxCol) and (leftTurn[0] >= 0) and (leftTurn[1] >= 0):
-
-            if (self.grid[::-1][leftTurn[0]][leftTurn[1]]):
-              if action == 'Walk Right':
-                move = 'Walk Up'
-                moves.append(move)
-
-              elif action == 'Walk Left':
-                move = 'Walk Down'
-                moves.append(move)
-              elif action == 'Walk Up':
-                move = 'Walk Left'
-                moves.append(move)
-              elif action == 'Walk Down':
-                move = 'Walk Right'
-                moves.append(move)
-
-              if action == 'Run Right':
-                move = 'Run Up'
-                moves.append(move)
-              elif action == 'Run Left':
-                move = 'Run Down'
-                moves.append(move)
-              elif action == 'Run Up':
-                move = 'Run Left'
-                moves.append(move)
-              elif action == 'Run Down':
-                move = 'Run Right'
-                moves.append(move)
-              self.transitionMatrix[state][action].append((unreliableProb, leftTurn))
-            else:
-              move = 'Stay'
-              moves.append(move)
-              self.transitionMatrix[state][action].append((unreliableProb, state))
-
-          if (intendedMove[0] < maxRow) and (intendedMove[1] < maxCol) and (intendedMove[0] >= 0) and (intendedMove[1] >= 0):
-            if (self.grid[::-1][intendedMove[0]][intendedMove[1]]):
-              moves.append(action)
-              self.transitionMatrix[state][action].append((trueActionProb, intendedMove))
-          else:
-            moves.append('Stay')
-            self.transitionMatrix[state][action].append((trueActionProb, state))
-        self.stateActions[state] = moves
-
-
+  def makeIntendedWalkMove(self, state, action):
+    reward = self.rewardNums['Walk']
+    if 'Up' in action and state[0] + 1 <= self.maxRow:
+      if self.grid[::-1][state[0] + 1][state[1]]:
+        if (state[0]+1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+1, state[1])]
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0] + 1, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0], state[1]), reward)
+    elif 'Down' in action and state[0] - 1 >= 0:
+      if self.grid[::-1][state[0] - 1][state[1]]:
+        if (state[0]-1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-1, state[1])]
+        self.stateActions[state][action].append('Walk Down')
+        return ((state[0] - 1, state[1]), reward)
+      else:
+        return ((state[0], state[1]), reward)
+    elif 'Right' in action and state[1] + 1 <= self.maxCol:
+      if self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+1) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+1)]
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]+1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]), reward)
+    elif 'Left' in action and state[1] - 1 >= 0:
+      if self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1]-1) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]-1)]
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]-1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]), reward)
+    else:
+      return ((state[0], state[1]), reward)
+  def makeUnintendedRunRight(self, state, action):
+    reward = self.rewardNums['Run']
+    if 'Up' in action and state[1] + 2 <= self.maxCol:
+      if self.grid[::-1][state[0]][state[1]+2] and self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+2)]
+        self.stateActions[state][action].append('Run Right')
+        return ((state[0], state[1]+2), reward)
+      else:
+        self.stateActions[state][action].append('Run Right')
+        return ((state[0], state[1]), reward)
+    elif 'Down' in action and state[1] -2 >= 0:
+      if self.grid[::-1][state[0]][state[1]-2] and self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1]-2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]-2)]
+        self.stateActions[state][action].append('Run Left')
+        return ((state[0], state[1]-2), reward)
+      else:
+        self.stateActions[state][action].append('Run Left')
+        return ((state[0], state[1]), reward)
+    elif 'Right' in action and state[0] - 2 >= 0:
+      if self.grid[::-1][state[0]-2][state[1]] and self.grid[::-1][state[0]-1][state[1]]:
+        if (state[0]-2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-2, state[1])]
+        self.stateActions[state][action].append('Run Down')
+        return ((state[0]-2, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Run Down')
+        return ((state[0], state[1]), reward)
+    elif 'Left' in action and state[0] + 2 <= self.maxRow:
+      if self.grid[::-1][state[0]+2][state[1]] and self.grid[::-1][state[0]+1][state[1]]:
+        if (state[0]+2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+2, state[1])]
+        self.stateActions[state][action].append('Run Up')
+        return ((state[0]+2, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Run Up')
+        return ((state[0], state[1]), reward)
+    else:
+      return ((state[0], state[1]), reward)
+  def makeUnintendedWalkRight(self, state, action):
+    reward = self.rewardNums['Walk']
+    if 'Up' in action and state[1] + 1 <= self.maxCol:
+      if self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+1) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+1)]
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]+1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]), reward)
+    elif 'Down' in action and state[1] - 1 >= 0:
+      if self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1]-1) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]-1)]
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]-1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]), reward)
+    elif 'Right' in action and state[0] -1 >= 0:
+      if self.grid[::-1][state[0]-1][state[1]]:
+        if (state[0]-1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-1, state[1])]
+        self.stateActions[state][action].append('Walk Down')
+        return ((state[0]-1, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Walk Down')
+        return ((state[0], state[1]), reward)
+    elif 'Left' in action and state[0] + 1 <= self.maxRow:
+      if self.grid[::-1][state[0]+1][state[1]]:
+        if (state[0]+1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+1, state[1])]
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0]+1, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0], state[1]), reward)
+    else:
+      return ((state[0], state[1]), reward)
+  def makeUnintendedRunLeft(self, state, action):
+    reward = self.rewardNums['Run']
+    if 'Up' in action and state[1] - 2 >= 0:
+      if self.grid[::-1][state[0]][state[1]-2] and self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1]-2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]-2)]
+        self.stateActions[state][action].append('Run Left')
+        return ((state[0], state[1]-2), reward)
+      else:
+        self.stateActions[state][action].append('Run Left')
+        return ((state[0], state[1]), reward)
+    elif 'Down' in action and state[1] + 2 <= self.maxCol:
+      if self.grid[::-1][state[0]][state[1]+2] and self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+2) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+2)]
+        self.stateActions[state][action].append('Run Right')
+        return ((state[0], state[1]+2), reward)
+      else:
+        self.stateActions[state][action].append('Run Right')
+        return ((state[0], state[1]), reward)
+    elif 'Right' in action and state[0] + 2 <= self.maxRow:
+      if self.grid[::-1][state[0]+2][state[1]] and self.grid[::-1][state[0]+1][state[1]]:
+        if (state[0]+2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+2, state[1])]
+        self.stateActions[state][action].append('Run Up')
+        return ((state[0]+2, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Run Up')
+        return ((state[0], state[1]),reward)
+    elif 'Left' in action and state[0] - 2 >= 0:
+      if self.grid[::-1][state[0]-2][state[1]] and self.grid[::-1][state[0]-1][state[1]]:
+        if (state[0]-2, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-2, state[1])]
+        self.stateActions[state][action].append('Run Down')
+        return ((state[0]-2, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Run Down')
+        return ((state[0], state[1]), reward)
+    else:
+      return ((state[0], state[1]), reward)
+  def makeUnintendedWalkLeft(self,state, action):
+    reward = self.rewardNums['Walk']
+    if 'Up' in action and state[1] - 1 >= 0:
+      if self.grid[::-1][state[0]][state[1]-1]:
+        if (state[0], state[1]-1) in self.termStates:
+          reward = self.termRewards[state[0], state[1]-1]
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]-1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]), reward)
+    elif 'Down' in action and state[1] + 1 <= self.maxCol:
+      if self.grid[::-1][state[0]][state[1]+1]:
+        if (state[0], state[1]+1) in self.termStates:
+          reward = self.termRewards[(state[0], state[1]+1)]
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]+1), reward)
+      else:
+        self.stateActions[state][action].append('Walk Right')
+        return ((state[0], state[1]), reward)
+    elif 'Right' in action and state[0] + 1 <= self.maxRow:
+      if self.grid[::-1][state[0]+1][state[1]]:
+        if (state[0] + 1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]+1, state[1])]
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0]+1,state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Walk Up')
+        return ((state[0], state[1]), reward)
+    elif 'Left' in action and state[0] - 1 >= 0:
+      if self.grid[::-1][state[0]-1][state[1]]:
+        if (state[0]-1, state[1]) in self.termStates:
+          reward = self.termRewards[(state[0]-1, state[1])]
+        self.stateActions[state][action].append('Walk Down')
+        return ((state[0]-1, state[1]), reward)
+      else:
+        self.stateActions[state][action].append('Walk Left')
+        return ((state[0], state[1]), reward)
+    else:
+      return ((state[0], state[1]), reward)
 
